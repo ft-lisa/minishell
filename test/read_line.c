@@ -5,6 +5,8 @@
 # include <stdlib.h>
 #include <signal.h>
 
+// compile avec gcc test.c -o test -lreadline -lncurses
+
 char    *get_line()
 {
     char *line;
