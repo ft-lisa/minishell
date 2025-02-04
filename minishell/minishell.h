@@ -19,4 +19,23 @@
 # include <term.h>
 # include <curses.h>
 
+typedef struct s_list
+{
+	char		*cmd;
+    int     index;
+    int     exe1;
+    int     exe2;
+    char    *if_file1;
+    char    *if_file2;
+    struct s_list	*next;
+}					t_list;
+
+                /* creat_list.c */
+
+int count_node(char* line);
+t_list creat_list(char* line);
+
+char	**ft_split(char const *s);
+
+
 #endif

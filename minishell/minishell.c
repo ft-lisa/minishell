@@ -8,5 +8,6 @@ int main(void)
     {
         str = readline("minishell>");
         add_history(str);
+        creat_list(str);
     }
 }
