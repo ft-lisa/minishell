@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/02/05 10:30:52 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:21:08 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char	*t2f(char const *s, int start_s)
 	return (t2);
 }
 
-char	**ft_split(char const *s)
+char	**ft_split_txt(char const *s)
 {
 	char	**t1;
 	int		i;

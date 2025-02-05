@@ -217,7 +217,7 @@ t_list creat_list(char* line)
 
     
     count = count_node(line);
-    content_node = ft_split(line);
+    content_node = ft_split_txt(line);
     free(line);
     //erreur_operater(content_node);
     // while(content_node[i] != NULL)
@@ -230,6 +230,6 @@ t_list creat_list(char* line)
     fill_ope_list(command, content_node);
     fill_com_list(command, content_node);
     fill_file_list(command, content_node);
-    //print_list(command);
+    print_list(command);
     //fill_list(&command, content_node);
 }

@@ -35,7 +35,7 @@ typedef struct s_list
 int count_node(char* line);
 t_list creat_list(char* line);
 
-char	**ft_split(char const *s);
+char	**ft_split_txt(char const *s);
 
 
 #endif
