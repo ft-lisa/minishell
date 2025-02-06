@@ -1,12 +1,14 @@
 #include "../minishell.h"
 
-void	free_pip(t_pipex *pip)
+void	free_pip(t_list *pip)
 {
-	ft_close_all(pip->fd);
-	cleanexit_int(pip->fd);
-	cleanexit(pip->path);
-	free(pip->pid);
-	free(pip);
+	ft_close_all(pip->data->fd);
+	cleanexit_int(pip->data->fd);
+	cleanexit(pip->data->path);
+	cleanexit(pip->data->content);
+	free(pip->data->pid);
+	free(pip->data);
+	free_list(pip);
 }
 
 char	**get_path(char *envp[])
@@ -48,25 +50,26 @@ int	**ft_add_fd(int **fd, int len)
 		new_fd[i] = fd[i];
 		i++;
 	}
-	new_fd[i++] = malloc(2 * sizeof(int));
-	if (len == 0)
-	{
-		new_fd[0][0] = -1;
-		new_fd[0][1] = -1;
-	}
-	new_fd[i] = NULL;
-	return (free(fd), new_fd);
+	new_fd[i] = malloc(2 * sizeof(int));
+	if (!new_fd[i])
+		return (NULL);
+	new_fd[i][0] = -1;
+	new_fd[i][1] = -1;
+	new_fd[i + 1] = NULL;
+	if (fd)
+		free(fd);
+	return (new_fd);
 }
 
-t_list	*init_pipex(t_list *pipex, char **envp, char **argv, int argc)
+t_data	*init_exe(char **envp, char **argv, int argc)
 {
-	pipex = malloc(sizeof(t_pipex));
-	if (!pipex)
-		return (NULL);
+	t_data *pipex;
+
+	pipex = malloc(sizeof(t_data));
 	pipex->envp = envp;
 	pipex->v = argv;
-	pipex->fd = NULL;
-	pipex->fd = ft_add_fd(pipex->fd, 0);
+	pipex->fd = ft_add_fd(NULL, 0);
+	pipex->n_cmd = 0;
 	if (!pipex->fd)
 	{
 		free(pipex);
@@ -76,6 +79,7 @@ t_list	*init_pipex(t_list *pipex, char **envp, char **argv, int argc)
 	pipex->pid = malloc((argc) * sizeof(int));
 	if (!pipex->pid)
 		return (free(pipex), NULL);
+	pipex->pid[0] = 0;
 	pipex->path = ft_split_exe("error env", ' ');
 	if (pipex->envp[0] && pipex->envp[0][0] != 'V')
 	{
@@ -94,6 +98,8 @@ int	wait_all(int *pid, int len)
 	i = 0;
 	k = 0;
 	rn = 0;
+	if (!pid | !pid[0])
+		return (0);
 	while (i < len)
 	{
 		waitpid(pid[i], &k, 0);

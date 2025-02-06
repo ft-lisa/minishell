@@ -6,6 +6,8 @@ void	ft_close_all(int **fd)
 	int	j;
 
 	i = 0;
+	if (!fd || !fd[0])
+		return;
 	if (fd[0][0] < 0)
 		return;
 	while (fd[i])

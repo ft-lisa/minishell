@@ -144,15 +144,20 @@ void fill_ope_list(t_list *list, char** content)
         new = new->next;
     }     
 }
+
 t_list* init_list(int count, char **envp, char **argv, int argc)
 {
     t_list *first;
     t_list *list;
+    t_data  *data;
 
     first = malloc(sizeof(t_list));
     if(!first)
         exit(1); // on a malloc split, history, readline
-    first = init_pipex(first, envp, argv, argc);
+
+    data = init_exe(envp, argv, argc);
+    data->n_cmd = count;
+    first->data = data;
     list = first;
     while (count--)
     {
@@ -162,13 +167,14 @@ t_list* init_list(int count, char **envp, char **argv, int argc)
         list->exe2 = -1;
         list->if_file1 = NULL;
         list->if_file2 = NULL;
+        list->data = data;
         if (count > 0)
         {
             list->next = malloc(sizeof(t_list));
             if(list->next == NULL)
                 exit(1); // on a malloc split, history, readline, des node de la list
             list = list->next;    
-        }    
+        }
     }
     list->next = NULL;
     return(first);
@@ -226,7 +232,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
 
     count = count_node(line);
     content_node = ft_split_txt(line);
-    free(line);
+    // free(line);
     //erreur_operater(content_node);
     // while(content_node[i] != NULL)
     // {
@@ -238,6 +244,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     fill_ope_list(command, content_node);
     fill_com_list(command, content_node);
     fill_file_list(command, content_node);
+    command->data->content = content_node;
     print_list(command);
     //fill_list(&command, content_node);
     return (command);

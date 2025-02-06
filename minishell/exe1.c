@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:57:04 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/06 13:24:57 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:48:16 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,69 +67,69 @@ char	*no_args_cmd(char *cmd)
 }
 
 
-void type6(t_pipex *pip, int i)
+void type6(t_list *pip, int i)
 {
         int		open_fd;
 
-        if (access(pip->v[i + 1], R_OK) == -1)
+        if (access(pip->data->v[i + 1], R_OK) == -1)
         {
-                ft_printf_fd(2, "zsh: permission denied: %s\n", pip->v[i + 1]);
+                ft_printf_fd(2, "zsh: permission denied: %s\n", pip->data->v[i + 1]);
                 (free_pip(pip), exit(EXIT_FAILURE));
         }
-        open_fd = open(pip->v[i + 1], O_RDONLY);
+        open_fd = open(pip->data->v[i + 1], O_RDONLY);
         if (dup2(open_fd, STDIN_FILENO) == -1)
                 (perror("dup2"), exit(EXIT_FAILURE));
         close(open_fd);
 }
 
-void type5(t_pipex *pip, int i)
+void type5(t_list *pip, int i)
 {
-        i = lvl2_len(pip->fd);
-	if (dup2(pip->fd[i - 1][0], STDIN_FILENO) == -1)
+        i = lvl2_len(pip->data->fd);
+	if (dup2(pip->data->fd[i - 1][0], STDIN_FILENO) == -1)
 		(perror("dup2 2"), exit(EXIT_FAILURE));
 }
 
-void type1(t_pipex *pip, int *out)
+void type1(t_list *pip, int *out)
 {
         int		fd_out;
 
-        if (access(pip->v[*out], F_OK) == 0 && access(pip->v[*out], W_OK) == -1)
+        if (access(pip->data->v[*out], F_OK) == 0 && access(pip->data->v[*out], W_OK) == -1)
 	{
-		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->v[*out]);
+		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->data->v[*out]);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
-        fd_out = open(pip->v[*out], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	(dup2(fd_out, STDOUT_FILENO), close(fd_out), ft_close_all(pip->fd));
+        fd_out = open(pip->data->v[*out], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	(dup2(fd_out, STDOUT_FILENO), close(fd_out), ft_close_all(pip->data->fd));
         // *out = *out - 2;
 }
 
-void type2(t_pipex *pip)
+void type2(t_list *pip)
 {
-        if (dup2(pip->fd[0][1], STDOUT_FILENO) == -1)
+        if (dup2(pip->data->fd[0][1], STDOUT_FILENO) == -1)
 		(perror("dup2 1"), exit(EXIT_FAILURE));
-	ft_close_all(pip->fd);
+	ft_close_all(pip->data->fd);
 }
 
-void type3(t_pipex *pip, int *out)
+void type3(t_list *pip, int *out)
 {
         int		fd_out;
 
-        if (access(pip->v[*out], F_OK) == 0 && access(pip->v[*out], W_OK) == -1)
+        if (access(pip->data->v[*out], F_OK) == 0 && access(pip->data->v[*out], W_OK) == -1)
 	{
-		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->v[*out]);
+		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->data->v[*out]);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
-        fd_out = open(pip->v[*out], O_APPEND | O_WRONLY | O_CREAT, 0644);
-	(dup2(fd_out, STDOUT_FILENO), close(fd_out), ft_close_all(pip->fd));
+        fd_out = open(pip->data->v[*out], O_APPEND | O_WRONLY | O_CREAT, 0644);
+	(dup2(fd_out, STDOUT_FILENO), close(fd_out), ft_close_all(pip->data->fd));
         *out = *out - 2;
 }
 
-void type0(t_pipex *pip, int *out)
+void type0(t_list *pip, int *out)
 {
         *out = *out - 1;
 }
 
-// void type_inout(t_pipex *pip, int *i, int t1, int t2)
+// void type_inout(t_list *pip, int *i, int t1, int t2)
 // {
 // 	if (t1 == 6) 
 //                 type6(pip, &i);
@@ -146,7 +146,7 @@ void type0(t_pipex *pip, int *out)
 // }
 
 
-void	exe_isolate(t_pipex *pip, int i, int t1, int t2)
+void	exe_isolate(t_list *pip, int i, int t1, int t2)
 {
 	char	**temp2;
 	char	*no_a;
@@ -165,15 +165,15 @@ void	exe_isolate(t_pipex *pip, int i, int t1, int t2)
                 type2(pip);
 	else if (t2 == 3)
                 type3(pip, &i);
-	temp2 = ft_split_exe(pip->v[i + 1], ' ');
-	no_a = no_args_cmd(pip->v[i + 1]);
-	get_p = get_path_command(pip->path, no_a);
-	execve(get_p, temp2, pip->envp);
+	temp2 = ft_split_exe(pip->data->v[i + 1], ' ');
+	no_a = no_args_cmd(pip->data->v[i + 1]);
+	get_p = get_path_command(pip->data->path, no_a);
+	execve(get_p, temp2, pip->data->envp);
 	ft_printf_fd(2, "zsh: command not found: %s\n", temp2[0]);
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
 }
 
-void	exe_multiple(t_pipex *pip, int i, int t1, int t2)
+void	exe_multiple(t_list *pip, int i, int t1, int t2)
 {
 	char	**temp2;
 	char	*no_a;
@@ -192,10 +192,10 @@ void	exe_multiple(t_pipex *pip, int i, int t1, int t2)
                 type2(pip);
 	else if (t2 == 3)
                 type3(pip, &i);
-	temp2 = ft_split_exe(pip->v[i + 1], ' ');
-	no_a = no_args_cmd(pip->v[i + 1]);
-	get_p = get_path_command(pip->path, no_a);
-	execve(get_p, temp2, pip->envp);
+	temp2 = ft_split_exe(pip->data->v[i + 1], ' ');
+	no_a = no_args_cmd(pip->data->v[i + 1]);
+	get_p = get_path_command(pip->data->path, no_a);
+	execve(get_p, temp2, pip->data->envp);
 	ft_printf_fd(2, "zsh: command not found: %s\n", temp2[0]);
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
 }
@@ -207,15 +207,15 @@ int	main(int argc, char *argv[], char *envp[])
 
 	i = 0;
 	pip = creat_list(argv[1], envp, argv, argc);
-        if (pipe(pip->fd[0]) == -1)
-		return (perror("pipe1"), 1);
-	pip->pid[i] = fork();
-	if (pip->pid[0] == 0)
-		(exe_isolate(pip, i, 6, 1));
+        // if (pipe(pip->data->fd[0]) == -1)
+	// 	return (perror("pipe1"), 1);
+/* 	// pip->data->pid[i] = fork();
+	// if (pip->data->pid[0] == 0)
+	// 	(exe_isolate(pip, i, pip->exe1, pip->exe2)); */
         // pip->pid[i + 1] = fork();
 	// if (pip->pid[1] == 0)
         //         exe_isolate(pip, argc - 1, 5, 0);
-        ft_close_all(pip->fd);
-	i = wait_all(pip->pid, i + 1);
+        ft_close_all(pip->data->fd);
+	i = wait_all(pip->data->pid, i + 1);
 	return (free_pip(pip), i);
 }
