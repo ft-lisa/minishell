@@ -9,7 +9,6 @@ void exit_minishell()
 int main(void)
 {
     char* str;
-
     
     while(1)
     {

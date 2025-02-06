@@ -58,10 +58,8 @@ int	**ft_add_fd(int **fd, int len)
 	return (free(fd), new_fd);
 }
 
-t_pipex	*init_pipex(char **envp, char **argv, int argc)
+t_list	*init_pipex(t_list *pipex, char **envp, char **argv, int argc)
 {
-	t_pipex	*pipex;
-
 	pipex = malloc(sizeof(t_pipex));
 	if (!pipex)
 		return (NULL);

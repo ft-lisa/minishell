@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exe1.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/06 11:57:04 by smendez-          #+#    #+#             */
+/*   Updated: 2025/02/06 13:24:57 by smendez-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "minishell.h"
 
 char	*get_path_command(char **paths, char *command)
@@ -189,11 +202,11 @@ void	exe_multiple(t_pipex *pip, int i, int t1, int t2)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_pipex	*pip;
+	t_list	*pip;
 	int		i;
 
 	i = 0;
-	pip = init_pipex(envp, argv, argc);
+	pip = creat_list(argv[1], envp, argv, argc);
         if (pipe(pip->fd[0]) == -1)
 		return (perror("pipe1"), 1);
 	pip->pid[i] = fork();

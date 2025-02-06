@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/06 11:50:06 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:26:34 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,15 @@ typedef struct s_list
     int     exe2;
     char    *if_file1;
     char    *if_file2;
+    char			**envp;
+	char			**path;
+	int				**fd;
+	int				*pid;
+	char			**v;
     struct s_list	*next;
 }					t_list;
 
-t_pipex	*init_pipex(char **envp, char **argv, int argc);
+t_list	*init_pipex(t_list *pipex, char **envp, char **argv, int argc);
 void	free_pip(t_pipex *pip);
 int	**ft_add_fd(int **fd, int len);
 int	wait_all(int *pid, int len);
@@ -95,7 +100,7 @@ int					isformat(const char c);
 // lisa
 char	**ft_split_txt(char const *s);
 int count_node(char* line);
-t_list creat_list(char* line);
+t_list *creat_list(char* line, char **envp, char **argv, int argc);
 
 
 #endif //FT_H

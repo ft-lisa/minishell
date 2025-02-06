@@ -144,7 +144,7 @@ void fill_ope_list(t_list *list, char** content)
         new = new->next;
     }     
 }
-t_list* init_list(int count)
+t_list* init_list(int count, char **envp, char **argv, int argc)
 {
     t_list *first;
     t_list *list;
@@ -152,6 +152,7 @@ t_list* init_list(int count)
     first = malloc(sizeof(t_list));
     if(!first)
         exit(1); // on a malloc split, history, readline
+    first = init_pipex(first, envp, argv, argc);
     list = first;
     while (count--)
     {
@@ -216,7 +217,7 @@ int count_node(char* line)
 //     }
 // }
 
-t_list creat_list(char* line)
+t_list *creat_list(char* line, char **envp, char **argv, int argc)
 {
     int count;
     char** content_node;
@@ -233,10 +234,11 @@ t_list creat_list(char* line)
     //     i++;
     // }
     //printf("count = %d\n", count);
-    command = init_list(count);
+    command = init_list(count, envp, argv, argc);
     fill_ope_list(command, content_node);
     fill_com_list(command, content_node);
     fill_file_list(command, content_node);
     print_list(command);
     //fill_list(&command, content_node);
+    return (command);
 }
