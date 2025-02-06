@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_txt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/02/06 08:59:14 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:48:49 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static int	splitlen(char const *s1)
 {
@@ -31,20 +31,6 @@ static int	splitlen(char const *s1)
 			i++;
 	}
 	return (k);
-}
-
-static char	**cleanexit(char **a)
-{
-	int	i;
-
-	i = 0;
-	while (a[i])
-	{
-		free(a[i]);
-		i++;
-	}
-	free(a);
-	return (NULL);
 }
 
 static char	*t2f(char const *s, int start_s)
@@ -103,16 +89,3 @@ char	**ft_split_txt(char const *s)
 	}
 	return (t1[j] = NULL, t1);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	char	**toto;
-// 	int		i;
-
-// 	toto = ft_split_txt(argv[1]);
-// 	while (toto[i] != NULL)
-// 	{
-// 		printf("%s\n", toto[i]);
-// 		i++;
-// 	}
-// }

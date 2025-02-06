@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 static int	splitlen(char const *s1, char c1)
 {
@@ -19,19 +19,6 @@ static int	splitlen(char const *s1, char c1)
 	return (k);
 }
 
-static char	**cleanexit(char **a)
-{
-	int	i;
-
-	i = 0;
-	while (a[i])
-	{
-		free(a[i]);
-		i++;
-	}
-	free(a);
-	return (NULL);
-}
 
 static char	*t2f(char const *s, int start_s, char c)
 {

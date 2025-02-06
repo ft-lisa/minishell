@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 int operator (char* txt)
 {
@@ -30,27 +30,6 @@ void print_list(t_list *lst)
         printf("--------------------\n");
         lst = lst->next;
     }
-}
-
-
-char	*ft_strdup(const char *source)
-{
-	char	*dest;
-	int		len;
-	int		i;
-
-	i = 0;
-	len = strlen(source);
-	dest = malloc(len * sizeof(char) + 1);
-	if (dest == NULL)
-		return (NULL);
-	while (source[i] != '\0')
-	{
-		dest[i] = source[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
 }
 
 void fill_file_list(t_list *list, char** content)
