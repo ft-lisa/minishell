@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/02/05 17:21:08 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/06 08:59:14 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	**ft_split_txt(char const *s)
 // 	char	**toto;
 // 	int		i;
 
-// 	toto = ft_split(argv[1]);
+// 	toto = ft_split_txt(argv[1]);
 // 	while (toto[i] != NULL)
 // 	{
 // 		printf("%s\n", toto[i]);

@@ -37,5 +37,7 @@ t_list creat_list(char* line);
 
 char	**ft_split_txt(char const *s);
 
+char	**ft_split(char const *s, char c);
+
 
 #endif

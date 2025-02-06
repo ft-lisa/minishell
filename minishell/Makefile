@@ -1,6 +1,7 @@
 SRC =  creat_list.c\
 		minishell.c\
 		split_txt.c\
+		ft_split.c\
 		
 
 OBJS = $(SRC:.c=.o)

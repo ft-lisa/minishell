@@ -73,18 +73,49 @@ void fill_file_list(t_list *list, char** content)
         }                    
         new = new->next;
     }
+}
 
+int fill_com_list2(t_list *new, char** content, int j)
+{
+    int i;
+    char** str;
+
+    i = 0;
+    if(new->exe1 == 6 && operator(content[0]) == 6)
+    {
+        str = ft_split(content[1], ' ');
+        new->cmd = str[0];
+        new->if_file1 = str[1];
+        j = 4;
+        while (str[i])
+        {
+            free(str[i]);
+            i++;
+        }
+        free(str);
+    }
+    if(new->exe1 == 6 && operator(content[1]) == 6)
+    {
+        new->cmd = content[0];
+        new->if_file1 = content[2];
+        j = 4;
+    }
+    return(j);
 }
 
 void fill_com_list(t_list *list, char** content)
 {
     t_list *new;
     int     j;
+    char** str;
+    int i;
 
     new = list;
     j = 0;
+    i = 1;
     while (new != NULL)
     {
+        new->index = i++;
         if (new->exe1 == 4)
         {
             new->cmd = content[j];
@@ -95,14 +126,7 @@ void fill_com_list(t_list *list, char** content)
             new->cmd = content[j];
             j = j + 2;
         }
-        // if(new->exe1 == 6 && j == 0)
-        //     j = 3;
-        if(new->exe1 == 6 && operator(content[1]) == 6)
-        {
-            new->cmd = content[0];
-            new->if_file1 = content[2];
-            j = 4;
-        }
+        j = fill_com_list2(new, content, j);
         new = new->next;
     }
 }
@@ -144,24 +168,28 @@ t_list* init_list(int count)
 {
     t_list *first;
     t_list *list;
+    int i;
 
     first = malloc(sizeof(t_list));
     if(!first)
         exit(1); // on a malloc split, history, readline
     list = first;
-    count = count - 1;
     while (count--)
     {
         list->cmd = NULL;
         list->index = -1;
+        i++;
         list->exe1 = -1;
         list->exe2 = -1;
         list->if_file1 = NULL;
         list->if_file2 = NULL;
-        list->next = malloc(sizeof(t_list));
-        if(list->next == NULL)
-            exit(1); // on a malloc split, history, readline, des node de la list
-        list = list->next;
+        if (count != 1)
+        {
+            list->next = malloc(sizeof(t_list));
+            if(list->next == NULL)
+                exit(1); // on a malloc split, history, readline, des node de la list
+            list = list->next;    
+        }    
     }
     list->next = NULL;
     return(first);
