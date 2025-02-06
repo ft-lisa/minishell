@@ -1,0 +1,12 @@
+total 72
+-rw-r--r-- 1 smendez- 2024_paris     0 Feb  6 16:32 dasd
+-rwxr-xr-x 1 smendez- 2024_paris 52352 Feb  6 18:30 exe
+-rw-r--r-- 1 smendez- 2024_paris  5918 Feb  6 18:30 exe1.c
+-rw-r--r-- 1 smendez- 2024_paris     0 Feb  6 18:31  file
+drwxr-xr-x 2 smendez- 2024_paris    80 Feb  6 11:28 lib
+-rw-r--r-- 1 smendez- 2024_paris  3216 Feb  6 11:47 Makefile
+-rw-r--r-- 1 smendez- 2024_paris   298 Feb  6 13:25 minishell.c
+-rw-r--r-- 1 smendez- 2024_paris  3187 Feb  6 17:46 minishell.h
+drwxr-xr-x 2 smendez- 2024_paris    98 Feb  6 11:27 printf_fd
+drwxr-xr-x 2 smendez- 2024_paris    46 Feb  6 11:29 txt
+drwxr-xr-x 2 smendez- 2024_paris    83 Feb  6 11:31 utils

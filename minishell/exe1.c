@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:57:04 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/06 17:48:16 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:37:05 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ void type1(t_list *pip, int *out)
 {
         int		fd_out;
 
-        if (access(pip->data->v[*out], F_OK) == 0 && access(pip->data->v[*out], W_OK) == -1)
+        if (access(pip->if_file2, F_OK) == 0 && access(pip->if_file2, W_OK) == -1)
 	{
-		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->data->v[*out]);
+		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->if_file2);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
-        fd_out = open(pip->data->v[*out], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	(dup2(fd_out, STDOUT_FILENO), close(fd_out), ft_close_all(pip->data->fd));
         // *out = *out - 2;
 }
@@ -165,8 +165,8 @@ void	exe_isolate(t_list *pip, int i, int t1, int t2)
                 type2(pip);
 	else if (t2 == 3)
                 type3(pip, &i);
-	temp2 = ft_split_exe(pip->data->v[i + 1], ' ');
-	no_a = no_args_cmd(pip->data->v[i + 1]);
+	temp2 = ft_split_exe(pip->cmd, ' ');
+	no_a = no_args_cmd(pip->cmd);
 	get_p = get_path_command(pip->data->path, no_a);
 	execve(get_p, temp2, pip->data->envp);
 	ft_printf_fd(2, "zsh: command not found: %s\n", temp2[0]);
@@ -206,12 +206,13 @@ int	main(int argc, char *argv[], char *envp[])
 	int		i;
 
 	i = 0;
+	printf("THIS IS: %s\n\n\\n", argv[1]);
 	pip = creat_list(argv[1], envp, argv, argc);
         // if (pipe(pip->data->fd[0]) == -1)
 	// 	return (perror("pipe1"), 1);
-/* 	// pip->data->pid[i] = fork();
-	// if (pip->data->pid[0] == 0)
-	// 	(exe_isolate(pip, i, pip->exe1, pip->exe2)); */
+	pip->data->pid[i] = fork();
+	if (pip->data->pid[0] == 0)
+		(exe_isolate(pip, i, pip->exe1, pip->exe2));
         // pip->pid[i + 1] = fork();
 	// if (pip->pid[1] == 0)
         //         exe_isolate(pip, argc - 1, 5, 0);

@@ -66,6 +66,8 @@ t_data	*init_exe(char **envp, char **argv, int argc)
 	t_data *pipex;
 
 	pipex = malloc(sizeof(t_data));
+	if (!pipex)
+		return (NULL);
 	pipex->envp = envp;
 	pipex->v = argv;
 	pipex->fd = ft_add_fd(NULL, 0);
