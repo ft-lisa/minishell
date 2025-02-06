@@ -158,9 +158,10 @@ void fill_ope_list(t_list *list, char** content)
         {
             if (new->next != NULL)
             new->next->exe1 = 5;
-            if (new->exe1 == -1)
-                new->exe1 = 4;
+            
         }
+        if (new->exe1 == -1)
+                new->exe1 = 4;
         new = new->next;
     }     
 }
@@ -168,7 +169,6 @@ t_list* init_list(int count)
 {
     t_list *first;
     t_list *list;
-    int i;
 
     first = malloc(sizeof(t_list));
     if(!first)
@@ -178,12 +178,11 @@ t_list* init_list(int count)
     {
         list->cmd = NULL;
         list->index = -1;
-        i++;
         list->exe1 = -1;
         list->exe2 = -1;
         list->if_file1 = NULL;
         list->if_file2 = NULL;
-        if (count != 1)
+        if (count > 0)
         {
             list->next = malloc(sizeof(t_list));
             if(list->next == NULL)
@@ -202,6 +201,8 @@ int count_node(char* line)
 
     i = 0;
     count = 0;
+    if (line == NULL)
+        exit(0);
     while(line[i] != '\0')
     {
         if(line[i] == '|')
@@ -243,7 +244,6 @@ t_list creat_list(char* line)
     t_list *command;
     int i = 0;
 
-    
     count = count_node(line);
     content_node = ft_split_txt(line);
     free(line);
