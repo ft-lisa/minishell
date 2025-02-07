@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:57:04 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/07 11:41:49 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:39:48 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void type1(t_list *pip)
 		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->if_file2);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
-        fd_out = open(pip->if_file2 + 1, O_WRONLY | O_CREAT | O_TRUNC, 0644); // delete
+        fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	ft_printf_fd(2, "fd: %d, file: |%s|", fd_out, pip->if_file2 + 1);
 	(dup2(fd_out, STDOUT_FILENO), close(fd_out), ft_close_all(pip->data->fd));
 }
@@ -118,7 +118,7 @@ void type3(t_list *pip)
 		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->if_file2);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
-        fd_out = open(pip->if_file2 + 1, O_APPEND | O_WRONLY | O_CREAT, 0644); // delete
+        fd_out = open(pip->if_file2, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	(dup2(fd_out, STDOUT_FILENO), close(fd_out), ft_close_all(pip->data->fd));
 }
 
