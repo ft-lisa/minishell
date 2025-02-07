@@ -21,12 +21,12 @@ void print_list(t_list *lst)
 {
     while (lst)
     {
-        printf("Command: %s\n", lst->cmd ? lst->cmd : "(null)");
+        printf("Command: |%s|\n", lst->cmd ? lst->cmd : "(null)");
         printf("Index: %d\n", lst->index);
         printf("Exe1: %d\n", lst->exe1);
         printf("Exe2: %d\n", lst->exe2);
-        printf("If File1: %s\n", lst->if_file1 ? lst->if_file1 : "(null)");
-        printf("If File2: %s\n", lst->if_file2 ? lst->if_file2 : "(null)");
+        printf("If File1: |%s|\n", lst->if_file1 ? lst->if_file1 : "(null)");
+        printf("If File2: |%s|\n", lst->if_file2 ? lst->if_file2 : "(null)");
         printf("--------------------\n");
         lst = lst->next;
     }
@@ -52,6 +52,13 @@ void fill_file_list(t_list *list, char** content)
         }                    
         new = new->next;
     }
+}
+
+int pass_quote(char quote, char* str, int i)
+{
+    while(str[i] != quote && str[i] != '\0')
+        i++;
+    return(i + 1);
 }
 
 int fill_com_list2(t_list *new, char** content, int j)
@@ -191,6 +198,9 @@ int count_node(char* line)
         exit(0);
     while(line[i] != '\0')
     {
+        if(line[i] == '"' || line[i] == '\'' )
+            i = pass_quote(line[i], line, i + 1);
+        printf("%c\n", line[i]);
         if(line[i] == '|')
         {
             while((line[i] == '|' || line[i] == '<' || line[i] == '>') && line[i] != '\0')
@@ -222,6 +232,19 @@ int count_node(char* line)
 //         i++;
 //     }
 // }
+void del_space(t_list *command)
+{
+    t_list *new;
+
+    new = command;
+    while(new)
+    {
+        new->cmd = ft_strtrim(new->cmd, ' ');
+        new->if_file1 = ft_strtrim(new->if_file1, ' ');
+        new->if_file2 = ft_strtrim(new->if_file2, ' ');
+        new = new->next;
+    }
+}
 
 t_list *creat_list(char* line, char **envp, char **argv, int argc)
 {
@@ -231,6 +254,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     int i = 0;
 
     count = count_node(line);
+    printf("%d", count);
     content_node = ft_split_txt(line);
     // free(line);
     //erreur_operater(content_node);
@@ -244,6 +268,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     fill_ope_list(command, content_node);
     fill_com_list(command, content_node);
     fill_file_list(command, content_node);
+    del_space(command);
     command->data->content = content_node;
     print_list(command);
     //fill_list(&command, content_node);
