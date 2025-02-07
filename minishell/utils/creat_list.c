@@ -200,7 +200,7 @@ int count_node(char* line)
     {
         if(line[i] == '"' || line[i] == '\'' )
             i = pass_quote(line[i], line, i + 1);
-        printf("%c\n", line[i]);
+        //printf("%c\n", line[i]);
         if(line[i] == '|')
         {
             while((line[i] == '|' || line[i] == '<' || line[i] == '>') && line[i] != '\0')
@@ -235,13 +235,16 @@ int count_node(char* line)
 void del_space(t_list *command)
 {
     t_list *new;
+    
 
     new = command;
     while(new)
     {
-        new->cmd = ft_strtrim(new->cmd, ' ');
-        new->if_file1 = ft_strtrim(new->if_file1, ' ');
-        new->if_file2 = ft_strtrim(new->if_file2, ' ');
+        new->cmd = ft_strtrim(new->cmd, " ");
+        if (new->if_file1)
+            new->if_file1 = ft_strtrim(new->if_file1, " ");
+        if (new->if_file2)
+            new->if_file2 = ft_strtrim(new->if_file2, " ");
         new = new->next;
     }
 }
@@ -254,7 +257,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     int i = 0;
 
     count = count_node(line);
-    printf("%d", count);
+    //printf("%d", count);
     content_node = ft_split_txt(line);
     // free(line);
     //erreur_operater(content_node);
