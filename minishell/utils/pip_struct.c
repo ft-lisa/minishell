@@ -64,7 +64,9 @@ int	**ft_add_fd(int **fd, int len)
 t_data	*init_exe(char **envp, char **argv, int argc)
 {
 	t_data *pipex;
-
+	int	i;
+	
+	i = 1;
 	pipex = malloc(sizeof(t_data));
 	if (!pipex)
 		return (NULL);
@@ -73,9 +75,13 @@ t_data	*init_exe(char **envp, char **argv, int argc)
 	pipex->fd = ft_add_fd(NULL, 0);
 	pipex->n_cmd = 0;
 	if (!pipex->fd)
+		return (free(pipex), NULL);
+	while(i < pipex->n_cmd)
 	{
-		free(pipex);
-		return (NULL);
+		pipex->fd = ft_add_fd(pipex->fd, i);
+		if (pipe(pipex->fd[i - 1]) == -1)
+			perror("pipe1");
+		i++;
 	}
 	pipex->path = NULL;
 	pipex->pid = malloc((argc) * sizeof(int));

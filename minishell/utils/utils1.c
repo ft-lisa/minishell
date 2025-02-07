@@ -59,6 +59,7 @@ char	*free_list(t_list *list)
 	{
 		tmp = list;
 		list = list->next;
+		free(tmp->cmd);
 		free(tmp);
 	}
 	return (NULL);
