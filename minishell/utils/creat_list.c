@@ -161,8 +161,7 @@ t_list* init_list(int count, char **envp, char **argv, int argc)
     first = malloc(sizeof(t_list));
     if(!first)
         exit(1); // on a malloc split, history, readline
-    data = init_exe(envp, argv, argc);
-    data->n_cmd = count;
+    data = init_exe(envp, argv, argc, count);
     first->data = data;
     list = first;
     while (count--)

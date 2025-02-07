@@ -1,24 +1,3 @@
-dasd
-exe
-exe1.c
- file
-lib
-Makefile
-minishell
 minishell.c
-minishell.h
-printf_fd
-txt
-utils
-dasd
-exe
-exe1.c
- file
-lib
-Makefile
-minishell
 minishell.c
-minishell.h
-printf_fd
-txt
-utils
+minishell.c

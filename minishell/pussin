@@ -1,0 +1,30 @@
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      1       1      12
+      3       3      34
+minishell
+minishell.c
+minishell.h
+total 136
+-rw-r--r-- 1 smendez- 2024_paris    74 Feb  7 18:43 a
+-rwxr-xr-x 1 smendez- 2024_paris 53872 Feb  7 18:43 exe
+-rw-r--r-- 1 smendez- 2024_paris  4701 Feb  7 19:19 exe1.c
+drwxr-xr-x 2 smendez- 2024_paris    94 Feb  7 16:35 lib
+-rw-r--r-- 1 smendez- 2024_paris  3216 Feb  7 16:35 Makefile
+-rwxr-xr-x 1 smendez- 2024_paris 51728 Feb  7 18:43 minishell
+-rw-r--r-- 1 smendez- 2024_paris   379 Feb  7 16:35 minishell.c
+-rw-r--r-- 1 smendez- 2024_paris  3301 Feb  7 18:02 minishell.h
+drwxr-xr-x 2 smendez- 2024_paris    98 Feb  7 16:35 printf_fd
+-rw-r--r-- 1 smendez- 2024_paris   370 Feb  7 19:48 pussin
+drwxr-xr-x 2 smendez- 2024_paris    46 Feb  7 16:35 txt
+drwxr-xr-x 2 smendez- 2024_paris    83 Feb  7 16:36 utils
