@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   split_txt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/02/06 11:48:49 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:30:16 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int pass_quote(char quote, const char* str, int i)
+{
+    while(str[i] != quote && str[i] != '\0')
+        i++;
+	i++;
+	while(str[i] == ' ')
+		i++;
+    return(i);
+}
 
 static int	splitlen(char const *s1)
 {
@@ -23,12 +33,16 @@ static int	splitlen(char const *s1)
 	{
 		if (s1[i] == '|' || s1[i] == '<' || s1[i] == '>')
 			k++;
-		while ((s1[i] == '|' || s1[i] == '<' || s1[i] == '>') && s1[i])
+		while ((s1[i] == '|' || s1[i] == '<' || s1[i] == '>') && s1[i] != '"' && s1[i] != '\'' && s1[i])
 			i++;
 		if (s1[i])
 			k++;
-		while ((s1[i] != '|' && s1[i] != '<' && s1[i] != '>') && s1[i])
+		if(s1[i] == '"' || s1[i] == '\'')
+				i = pass_quote(s1[i], s1, i + 1);
+		while ((s1[i] != '|' && s1[i] != '<' && s1[i] != '>') && s1[i] != '"' && s1[i] != '\'' && s1[i])
 			i++;
+		if(s1[i] == '"' || s1[i] == '\'')
+				i = pass_quote(s1[i], s1, i + 1);
 	}
 	return (k);
 }
@@ -40,12 +54,16 @@ static char	*t2f(char const *s, int start_s)
 	char	*t2;
 
 	i = start_s;
-	while ((s[i] == '|' || s[i] == '<' || s[i] == '>') && s[i])
+	while ((s[i] == '|' || s[i] == '<' || s[i] == '>') && s[i] != '"' && s[i] != '\'' && s[i])
 		i++;
+	if(s[i] == '"' || s[i] == '\'')
+				i = pass_quote(s[i], s, i + 1);
 	if (i == start_s)
 	{
-		while ((s[i] != '|' && s[i] != '<' && s[i] != '>') && s[i])
+		while ((s[i] != '|' && s[i] != '<' && s[i] != '>') && s[i] != '"' && s[i] != '\''&& s[i])
 			i++;
+		if(s[i] == '"' || s[i] == '\'')
+				i = pass_quote(s[i], s, i + 1);
 	}
 	len_s = i - start_s;
 	i = 0;
@@ -77,15 +95,36 @@ char	**ft_split_txt(char const *s)
 	{
 		t1[j] = t2f(s, i);
 		if (t1[j++] == NULL)
-			return (cleanexit(t1));
+			return (NULL);//cleanexit(t1)
 		check = i;
-		while ((s[i] != '|' && s[i] != '<' && s[i] != '>') && s[i])
+		while ((s[i] != '|' && s[i] != '<' && s[i] != '>') && s[i] != '"' && s[i] != '\''&& s[i])
 			i++;
+		if(s[i] == '"' || s[i] == '\'')
+				i = pass_quote(s[i], s, i + 1);
 		if (i == check)
 		{
-			while ((s[i] == '|' || s[i] == '<' || s[i] == '>') && s[i])
+			while ((s[i] == '|' || s[i] == '<' || s[i] == '>') && s[i] != '"' && s[i] != '\'' && s[i])
 				i++;
+			if(s[i] == '"' || s[i] == '\'')
+				i = pass_quote(s[i], s, i + 1);
 		}
 	}
 	return (t1[j] = NULL, t1);
 }
+
+// int	main(int c, char *v[])
+// {
+// 	int		i;
+// 	char	**a;
+
+// 	(void)c;
+// 	i = 0;
+// 	a = ft_split_txt(v[1]);
+// 	while (a[i])
+// 	{
+// 		printf("%s\n", a[i]);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	return (0);
+// }

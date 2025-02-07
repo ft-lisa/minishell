@@ -54,12 +54,12 @@ void fill_file_list(t_list *list, char** content)
     }
 }
 
-int pass_quote(char quote, char* str, int i)
-{
-    while(str[i] != quote && str[i] != '\0')
-        i++;
-    return(i + 1);
-}
+// int pass_quote(char quote, char* str, int i)
+// {
+//     while(str[i] != quote && str[i] != '\0')
+//         i++;
+//     return(i + 1);
+// }
 
 int fill_com_list2(t_list *new, char** content, int j)
 {
