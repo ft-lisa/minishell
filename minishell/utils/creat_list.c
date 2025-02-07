@@ -12,6 +12,8 @@ int operator (char* txt)
         return(3);
     if (txt[i] == '>')
         return(1);
+    if (txt[i] == '<' && txt[i + 1] == '<')
+        return(7);
     if (txt[i] == '<')
       return(6);
     return(0);
@@ -27,6 +29,7 @@ void print_list(t_list *lst)
         printf("Exe2: %d\n", lst->exe2);
         printf("If File1: |%s|\n", lst->if_file1 ? lst->if_file1 : "(null)");
         printf("If File2: |%s|\n", lst->if_file2 ? lst->if_file2 : "(null)");
+        printf("If delim: |%s|\n", lst->delim ? lst->delim : "(null)");
         printf("--------------------\n");
         lst = lst->next;
     }
@@ -41,7 +44,7 @@ void fill_file_list(t_list *list, char** content)
     j = 0;
     while (new != NULL)
     {
-        if(new->exe1 == 6)
+        if(new->exe1 == 6 || new->exe1 == 7)
             j = 4;
         if(new->exe1 == 4 || new->exe1 == 5)
             j = j + 2;
@@ -54,12 +57,12 @@ void fill_file_list(t_list *list, char** content)
     }
 }
 
-// int pass_quote(char quote, char* str, int i)
-// {
-//     while(str[i] != quote && str[i] != '\0')
-//         i++;
-//     return(i + 1);
-// }
+int pass_quote(char quote, char* str, int i)
+{
+    while(str[i] != quote && str[i] != '\0')
+        i++;
+    return(i + 1);
+}
 
 int fill_com_list2(t_list *new, char** content, int j)
 {
@@ -67,23 +70,30 @@ int fill_com_list2(t_list *new, char** content, int j)
     char** str;
 
     i = 0;
-    if(new->exe1 == 6 && operator(content[0]) == 6)
+    if(new->exe1 == 6 && operator(content[0]) == 6  || (new->exe1 == 7 && operator(content[0]) == 7))
     {
         str = ft_split(content[1], ' ');
-        new->cmd = str[0];
-        new->if_file1 = str[1];
+        if (str[1])
+            new->cmd = str[1];
+        if (new->exe1 == 6)
+            new->if_file1 = str[0];
+        else
+            new->delim = str[0];
         j = 4;
-        while (str[i])
-        {
-            free(str[i]);
-            i++;
-        }
-        free(str);
+        // while (str[i])
+        // {
+        //     free(str[i]);
+        //     i++;
+        // }
+        // free(str);
     }
-    if(new->exe1 == 6 && operator(content[1]) == 6)
+    if((new->exe1 == 6 && operator(content[1]) == 6) || (new->exe1 == 7 && operator(content[1]) == 7))
     {
         new->cmd = content[0];
-        new->if_file1 = content[2];
+        if (new->exe1 == 6)
+            new->if_file1 = content[2];
+        else
+            new->delim = content[2];
         j = 4;
     }
     return(j);
@@ -132,7 +142,7 @@ void fill_ope_list(t_list *list, char** content)
             ope = operator(content[j++]);    
         if (ope > 3)
             new->exe1 = ope;
-        if (ope == 6)
+        if (ope == 6 || ope == 7)
         {
             ope = 0;
             while(ope == 0 && content[j] != NULL)
@@ -240,11 +250,14 @@ void del_space(t_list *command)
     new = command;
     while(new)
     {
-        new->cmd = ft_strtrim(new->cmd, " ");
+        if (new->cmd)
+            new->cmd = ft_strtrim(new->cmd, " ");
         if (new->if_file1)
             new->if_file1 = ft_strtrim(new->if_file1, " ");
         if (new->if_file2)
             new->if_file2 = ft_strtrim(new->if_file2, " ");
+        if (new->delim)
+            new->delim = ft_strtrim(new->delim, " ");
         new = new->next;
     }
 }

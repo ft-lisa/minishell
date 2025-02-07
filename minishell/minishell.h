@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/07 14:30:49 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:05:40 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_list
     int     exe2;
     char    *if_file1;
     char    *if_file2;
+    char    *delim;
     t_data *data;
     struct s_list	*next;
 }					t_list;
@@ -77,7 +78,7 @@ size_t	ft_strlen(const char *c);
 char	*cleanexit_int(int **a);
 char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, const char *set);
-int pass_quote(char quote, const char* str, int i);
+// int pass_quote(char quote, const char* str, int i);
 
 // various
 int	isin(char *s, char c);
