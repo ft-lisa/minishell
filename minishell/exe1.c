@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:57:04 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/07 19:19:59 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:20:46 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,45 @@ char	*no_args_cmd(char *cmd)
 	return (first_cmd);
 }
 
+void type7(t_list *pip)
+{
+	int *mini_pipe;
+	int stdout1;
+
+	mini_pipe = malloc(sizeof(int *) * 2);
+	if (!mini_pipe)
+		return;
+	if (pipe(mini_pipe) == -1)
+			perror("minipipe");
+	stdout1 = dup(STDOUT_FILENO);
+	if (stdout1 == -1)
+		(perror("dup minipipe"), exit(EXIT_FAILURE));
+	if (dup2(mini_pipe[1], STDOUT_FILENO) == -1)
+		(perror("dup2 minipipe"), exit(EXIT_FAILURE));
+	ft_until_limiter(pip->delim);	
+	if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
+                (perror("dup2 minipipe"), exit(EXIT_FAILURE));
+	if (dup2(stdout1, STDOUT_FILENO) == -1)
+                (perror("dup2 minipipe"), exit(EXIT_FAILURE));
+	close(mini_pipe[0]);
+	close(mini_pipe[1]);
+	free(mini_pipe);
+	
+	
+}
 
 void type6(t_list *pip)
 {
         int		open_fd;
 
+	if (access(pip->if_file1, F_OK) == -1)
+        {
+                ft_printf_fd(2, "bash: %s: No such file or directory\n", pip->if_file1);
+                (free_pip(pip), exit(EXIT_FAILURE));
+        }
         if (access(pip->if_file1, R_OK) == -1)
         {
-                ft_printf_fd(2, "zsh: permission denied: %s\n", pip->if_file1);
+                ft_printf_fd(2, "bash: permission denied: %s\n", pip->if_file1);
                 (free_pip(pip), exit(EXIT_FAILURE));
         }
         open_fd = open(pip->if_file1, O_RDONLY);
@@ -95,7 +126,7 @@ void type1(t_list *pip)
 
         if (access(pip->if_file2, F_OK) == 0 && access(pip->if_file2, W_OK) == -1)
 	{
-		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->if_file2);
+		ft_printf_fd(2, "bash: permission denied: %s\n", pip->if_file2);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
         fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -116,7 +147,7 @@ void type3(t_list *pip)
 	
         if (access(pip->if_file2, F_OK) == 0 && access(pip->if_file2, W_OK) == -1)
 	{
-		ft_printf_fd(2, "zsh: permission denied: %s\n", pip->if_file2);
+		ft_printf_fd(2, "bash: permission denied: %s\n", pip->if_file2);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
         fd_out = open(pip->if_file2, O_APPEND | O_WRONLY | O_CREAT, 0644);
@@ -130,10 +161,12 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	char	*no_a;
 	char	*get_p;
 
-        if (t1 == 6) 
-                type6(pip);
-        else if (t1 == 5)
+	if (t1 == 5) 
                 type5(pip);
+        else if (t1 == 6) 
+                type6(pip);
+        else if (t1 == 7)
+                type7(pip);
         if (t2 == 1)
                 type1(pip);
 	else if (t2 == 2)
@@ -145,7 +178,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	no_a = no_args_cmd(pip->cmd);
 	get_p = get_path_command(pip->data->path, no_a);
 	execve(get_p, temp2, pip->data->envp);
-	ft_printf_fd(2, "zsh: command not found: %s\n", temp2[0]);
+	ft_printf_fd(2, "%s: command not found\n", temp2[0]);
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
 }
 
@@ -171,6 +204,7 @@ int	main(int argc, char *argv[], char *envp[])
 			(exe_isolate(pip, pip->exe1, pip->exe2));
 		i++;
 	}
+	// ft_until_limiter(pip->delim);
         ft_close_all(pip->data->fd);
 	i = wait_all(pip->data->pid, pip->data->n_cmd);
 	return (free_pip(head), i);

@@ -57,7 +57,7 @@ void fill_file_list(t_list *list, char** content)
     }
 }
 
-int pass_quote(char quote, char* str, int i)
+int pass_quote1(char quote, char* str, int i)
 {
     while(str[i] != quote && str[i] != '\0')
         i++;
@@ -208,7 +208,7 @@ int count_node(char* line)
     while(line[i] != '\0')
     {
         if(line[i] == '"' || line[i] == '\'' )
-            i = pass_quote(line[i], line, i + 1);
+            i = pass_quote1(line[i], line, i + 1);
         //printf("%c\n", line[i]);
         if(line[i] == '|')
         {

@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-static int	isin1(const char *set, const char c)
+static int	isin2(const char *set, const char c)
 {
 	size_t	i;
 
@@ -23,9 +23,9 @@ static int	ft_strlentrim(const char *c, const char *set)
 	k = 0;
 	while (c[k])
 		k++;
-	while (isin1(set, c[i]) == 1)
+	while (isin2(set, c[i]) == 1)
 		i++;
-	while (isin1(set, c[k - 1]) == 1)
+	while (isin2(set, c[k - 1]) == 1)
 		k--;
 	if (k < i)
 		return (0);
@@ -45,7 +45,7 @@ char	*ft_strtrim(char const *s1, const char *set)
 	t = malloc(sizetrim * sizeof(char) + 1);
 	if (t == NULL)
 		return (NULL);
-	while (isin1(set, s1[i]) == 1)
+	while (isin2(set, s1[i]) == 1)
 		i++;
 	while (j < sizetrim)
 	{

@@ -22,7 +22,7 @@ TRASH   := .trash
 # Source files in different folders (wildcards)
 ROOT_SRC    := $(wildcard *.c)
 LIB_SRC     := $(wildcard lib/*.c)
-PRINTF_SRC  := $(wildcard printf_fd/*.c)
+PRINTF_SRC  := $(wildcard printf_fd-gnl/*.c)
 UTILS_SRC   := $(wildcard utils/*.c)
 
 # ------------------------------------------------------------------------------
@@ -44,7 +44,6 @@ animate:
 	@echo -n "$(YELLOW)Building"
 	@for i in 1 2 3 4 5; do \
 		echo -n "."; \
-		sleep 0.3; \
 	done; \
 	echo -e " $(GREEN)Done!$(NC)"
 

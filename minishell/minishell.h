@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/10 10:46:48 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:16:58 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_list
     struct s_list	*next;
 }					t_list;
 
+// exe
 
 void	free_pip(t_list *pip);
 int	**ft_add_fd(int **fd, int len);
@@ -99,6 +100,18 @@ int					ft_print_adress(void *ptr);
 int					ft_putstr_fd(char *s, int fd, int size);
 char				*ft_adresschar(void *ptr, char *mainmalloc, int index);
 int					isformat(const char c);
+
+// get next line modified
+char				*ft_straddend(char *malloc1, char *toadd, int buffersize);
+char				*ft_resetsc(char *base);
+char				*ft_strdup2(const char *s, int line);
+char				*get_next_line(int fd);
+size_t				sl(const char *c);
+void				*ft_calloc2(size_t nitems, size_t size);
+char				*ft_realloc(char *oldlloc, size_t buffersize);
+void				ft_until_limiter(char *argv);
+int					isin1(const char *set, const char c, int buffersize);
+int					ft_strcmp(char *s1, char *s2);
 
 // list creation
 char	**ft_split_txt(char const *s);
