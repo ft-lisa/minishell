@@ -13,10 +13,12 @@ int main(int argc, char** argv, char** envp)
         return(1);
     while(1)
     {
-        str = readline("minishell>");
-        if (str == NULL)
+        str = readline("minishell> ");
+        if (str == NULL || ft_strcmp(str, "exit") == 0)
             exit_minishell();   
         add_history(str);
-        creat_list(str, envp, argv, argc);
+        ft_printf_fd(1," str: |%s|\n\n", str);
+        //creat_list(str, envp, argv, argc);
+        exe1(argc, argv, envp);
     }
 }

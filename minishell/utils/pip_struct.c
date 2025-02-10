@@ -7,6 +7,8 @@ void	free_pip(t_list *pip)
 	cleanexit(pip->data->path);
 	cleanexit(pip->data->content);
 	free(pip->data->pid);
+	if(pip->delim)
+		free(pip->delim);
 	free(pip->data);
 	free_list(pip);
 }

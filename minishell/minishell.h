@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/10 14:56:46 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:56:02 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,21 @@ typedef struct s_list
 
 // exe
 
+int exe1(int argc, char *argv[], char *envp[]);
 void	free_pip(t_list *pip);
 int	**ft_add_fd(int **fd, int len);
 int	wait_all(int *pid, int len);
 void	ft_close_all(int **fd);
+char	*get_path_command(char **paths, char *command);
+char	*no_args_cmd(char *cmd);
+void type1(t_list *pip);
+void type2(t_list *pip);
+void type3(t_list *pip);
+void type5(t_list *pip);
+void type6(t_list *pip);
+void type7(t_list *pip);
+void	exe_isolate(t_list *pip, int t1, int t2);
+
 
 // libft
 char	*ft_strjoin(char const *s1, const char *s2);

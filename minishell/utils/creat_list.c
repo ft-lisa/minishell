@@ -277,7 +277,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     int i = 0;
 
     count = count_node(line);
-    //printf("%d", count);
+    // printf("||||count||||%d\n\n", count); // print_info
     content_node = ft_split_txt(line);
     // free(line);
     //erreur_operater(content_node);
@@ -292,9 +292,10 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     fill_com_list(command, content_node);
     fill_file_list(command, content_node);
     del_space(command);
+    // printf("delim |%s| \n\n", command->delim); // print_info
     del_quotes(&command->delim);
     command->data->content = content_node;
-    print_list(command);
+    // print_list(command); // print_info
     //fill_list(&command, content_node);
     return (command);
 }

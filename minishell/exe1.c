@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:57:04 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/10 13:20:46 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:57:48 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ void type7(t_list *pip)
 	close(mini_pipe[0]);
 	close(mini_pipe[1]);
 	free(mini_pipe);
-	
-	
 }
 
 void type6(t_list *pip)
@@ -115,7 +113,7 @@ void type6(t_list *pip)
 
 void type5(t_list *pip)
 {
-	ft_printf_fd(2, "cmd1: fd: %d\n\n", pip->index - 2);
+	// ft_printf_fd(2, "cmd1: fd: %d\n\n", pip->index - 2); // print_info
 	if (dup2(pip->data->fd[pip->index - 2][0], STDIN_FILENO) == -1)
 		(perror("dup2 2"), exit(EXIT_FAILURE));
 }
@@ -136,7 +134,7 @@ void type1(t_list *pip)
 
 void type2(t_list *pip)
 {
-	ft_printf_fd(2, "cmd1: fd: %d\n\n", pip->index - 1);
+	// ft_printf_fd(2, "cmd1: fd: %d\n\n", pip->index - 1); // print_info
         if (dup2(pip->data->fd[pip->index - 1][1], STDOUT_FILENO) == -1)
 		(perror("dup2 1"), exit(EXIT_FAILURE));
 }
@@ -182,6 +180,34 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
 }
 
+int exe1(int argc, char *argv[], char *envp[])
+{
+	t_list	*pip;
+	t_list	*head;
+	int		i;
+
+	i = 1;
+	// printf("THIS IS: %s\n\n\\n", argv[1]); // print_info
+	pip = creat_list(argv[1], envp, argv, argc);
+	head = pip;
+	// printf("N cmds: %d \n\n", pip->data->n_cmd); // print_info
+	pip->data->pid[0] = fork();
+	if (pip->data->pid[0] == 0)
+		(exe_isolate(pip, pip->exe1, pip->exe2));
+	while(i < pip->data->n_cmd)
+	{
+		pip = pip->next;
+		waitpid(pip->data->pid[pip->index - 2], NULL, 0);
+		pip->data->pid[i] = fork();
+		if (pip->data->pid[i] == 0)
+			(exe_isolate(pip, pip->exe1, pip->exe2));
+		i++;
+	}
+        ft_close_all(pip->data->fd);
+	i = wait_all(pip->data->pid, pip->data->n_cmd);
+	return (free_pip(head), i);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_list	*pip;
@@ -189,22 +215,22 @@ int	main(int argc, char *argv[], char *envp[])
 	int		i;
 
 	i = 1;
-	printf("THIS IS: %s\n\n\\n", argv[1]);
+	// printf("THIS IS: %s\n\n\\n", argv[1]); // print_info
 	pip = creat_list(argv[1], envp, argv, argc);
 	head = pip;
-	printf("N cmds: %d \n\n", pip->data->n_cmd);
+	// printf("N cmds: %d \n\n", pip->data->n_cmd); // print_info
 	pip->data->pid[0] = fork();
 	if (pip->data->pid[0] == 0)
 		(exe_isolate(pip, pip->exe1, pip->exe2));
 	while(i < pip->data->n_cmd)
 	{
 		pip = pip->next;
+		waitpid(pip->data->pid[pip->index - 2], NULL, 0);
 		pip->data->pid[i] = fork();
 		if (pip->data->pid[i] == 0)
 			(exe_isolate(pip, pip->exe1, pip->exe2));
 		i++;
 	}
-	// ft_until_limiter(pip->delim);
         ft_close_all(pip->data->fd);
 	i = wait_all(pip->data->pid, pip->data->n_cmd);
 	return (free_pip(head), i);
