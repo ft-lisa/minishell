@@ -61,7 +61,7 @@ int	**ft_add_fd(int **fd, int len)
 	return (new_fd);
 }
 
-t_data	*init_exe(char **envp, char **argv, int argc)
+t_data	*init_exe(char **envp, char **argv, int argc, int count)
 {
 	t_data *pipex;
 	int	i;
@@ -73,7 +73,7 @@ t_data	*init_exe(char **envp, char **argv, int argc)
 	pipex->envp = envp;
 	pipex->v = argv;
 	pipex->fd = ft_add_fd(NULL, 0);
-	pipex->n_cmd = 0;
+	pipex->n_cmd = count;
 	if (!pipex->fd)
 		return (free(pipex), NULL);
 	while(i < pipex->n_cmd)
@@ -106,7 +106,7 @@ int	wait_all(int *pid, int len)
 	i = 0;
 	k = 0;
 	rn = 0;
-	if (!pid | !pid[0])
+	if (!pid || !pid[0])
 		return (0);
 	while (i < len)
 	{
