@@ -260,6 +260,14 @@ void del_space(t_list *command)
         new = new->next;
     }
 }
+void del_quotes(char **str)
+{
+    if (!str || !*str)
+        return;
+    *str = del_c(*str, '"');
+    *str = del_c(*str, '\'');
+}
+
 
 t_list *creat_list(char* line, char **envp, char **argv, int argc)
 {
@@ -284,6 +292,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     fill_com_list(command, content_node);
     fill_file_list(command, content_node);
     del_space(command);
+    del_quotes(&command->delim);
     command->data->content = content_node;
     print_list(command);
     //fill_list(&command, content_node);

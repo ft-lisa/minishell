@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/10 11:16:58 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:56:46 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char	**ft_split_exe(char *s, char c);
 char	**cleanexit(char **a);
 int	lvl2_len(int **fd);
 char	*free_list(t_list *list);
+char *del_c(char *str, char c);
 
 
 // printf_fd
