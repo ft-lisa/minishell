@@ -46,16 +46,100 @@ int is_other(char **str, t_list *pip)
         else if (ft_strcmp(str[0], "pwd") == 0)
                 return (1);
         else if (ft_strcmp(str[0], "env") == 0 && is_cmd_2d(pip) == 0)
-                return (printf("HEEEEERE\n\n\n"),1);
+                return (1);
+        else if (ft_strcmp(str[0], "echo") == 0 && ft_strncmp(str[1], "$", 1) == 0 && ft_strlen(str[1]) > 1)
+                return (1);
         return (0);
+}
+
+int	echo_var(char *envp[], char *p1)
+{
+	int		i;
+	int		j;
+        int             k;
+        int             len_p1;
+
+	i = 0;
+        k = 0;
+        len_p1 = ft_strlen(p1);
+        while (len_p1 > -1)
+        {
+                if(isalnum(p1[len_p1 - 1]) == 0)
+                {
+                        len_p1--;
+                        k++;
+                }
+                else
+                        break;
+        }
+	while (envp[i])
+	{
+		j = 0;
+		while (envp[i][j] == p1[j])
+			j++;
+		if (j == len_p1)
+		{
+			printf("%s",envp[i] + j + 1);
+                        printf("%s", p1 + len_p1);
+                        return (1);
+		}
+		i++;
+	}
+        printf("%s", p1);
+        return (0);
+}
+
+char	*get_path_var(char *envp[], char *p1)
+{
+	int		i;
+	int		j;
+        int             len_p1;
+
+	i = 0;
+        len_p1 = ft_strlen(p1);
+	while (envp[i])
+	{
+		j = 0;
+		while (envp[i][j] == p1[j])
+			j++;
+		if (j == len_p1)
+		{
+			return (envp[i] + j + 1);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+void exe_other2(char **str, char **envp, t_list *pip)
+{
+        char *var;
+        char **temp;
+        int     i;
+        int     j;
+
+        j = 1;
+        if (ft_strcmp(str[0], "echo") == 0)
+        {
+                while(str[j])
+                {
+                        temp = ft_split(str[j], '$');
+                        i = 0;
+                        while (temp[i])
+                        {
+                                echo_var(envp ,temp[i++]);
+                        }
+                        j++;
+                        cleanexit(temp);
+                }
+                printf("\n");
+        }
 }
 
 void exe_other(char **str, char **envp, t_list *pip)
 {
         char *buf;
         int     i;
-
-
 
         if (ft_strcmp(str[0], "cd") == 0)
         {
@@ -77,4 +161,6 @@ void exe_other(char **str, char **envp, t_list *pip)
         }
         else if (ft_strcmp(str[0], "env") == 0)
                 ft_printf_fd(2, "env: ʻ%s’: No such file or directory\n", str[1]);
+        else
+                exe_other2(str, envp, pip);
 }

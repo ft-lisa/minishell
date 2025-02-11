@@ -23,11 +23,10 @@ int main(int argc, char** argv, char** envp)
         str2 = ft_split(str, ' ');
         if (is_other(str2, exe) == 1)
             {
-                return (printf("HEEEEERE 2222222\n\n\n"),1);
                 exe_other(str2, envp, exe);
             }
         else
-            exe1(exe);
+            exe->data->exit1 = exe1(exe);
         cleanexit(str2);
     }
 }

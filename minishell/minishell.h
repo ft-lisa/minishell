@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/10 18:58:33 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:19:46 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_pipex
 	char			**v;
     int             n_cmd;
     char            **content;
+    int             exit1;
 }					t_data;
 
 typedef struct s_list
@@ -94,6 +95,7 @@ size_t	ft_strlen(const char *c);
 char	*cleanexit_int(int **a);
 char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, const char *set);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 // int pass_quote(char quote, const char* str, int i);
 
 // various
