@@ -39,17 +39,23 @@ int     is_cmd_2d(t_list *pip)
         return (r);
 }
 
-int is_other(char **str, t_list *pip)
+int is_other(t_list *pip)
 {
+        int     ret;
+        char **str;
+
+        ret = 0;
+        str = ft_split(pip->cmd, ' ');
         if (ft_strcmp(str[0], "cd") == 0)
-                return (1);
+                ret = 1;
         else if (ft_strcmp(str[0], "pwd") == 0)
-                return (1);
+                ret = 1;
         else if (ft_strcmp(str[0], "env") == 0 && is_cmd_2d(pip) == 0)
-                return (1);
+                ret = 1;
         else if (ft_strcmp(str[0], "echo") == 0 && ft_strncmp(str[1], "$", 1) == 0 && ft_strlen(str[1]) > 1)
-                return (1);
-        return (0);
+                ret = 1;
+        cleanexit(str);
+        return (ret);
 }
 
 int	echo_var(char *envp[], char *p1)
@@ -133,34 +139,36 @@ void exe_other2(char **str, char **envp, t_list *pip)
                         cleanexit(temp);
                 }
                 printf("\n");
+                (free_pip(pip), cleanexit(str), exit(0));
         }
 }
 
-void exe_other(char **str, char **envp, t_list *pip)
+void exe_other(t_list *pip)
 {
         char *buf;
         int     i;
+        char **str;
 
-        if (ft_strcmp(str[0], "cd") == 0)
-        {
-            printf("here! \n");
-            chdir(str[1]);
-        }
+        str = ft_split(pip->cmd, ' ');
+        if (ft_strcmp(str[0], "cd") == 0 || str[1])
+            (chdir(str[1]), cleanexit(str), free_pip(pip), exit(0));
         else if (ft_strcmp(str[0], "pwd") == 0)
         {
             buf = malloc(4097 * sizeof(char));
             getcwd(buf, 4096);
             printf("%s\n", buf);
             free(buf);
+            (free_pip(pip), cleanexit(str), exit(0));
         }
         else if (ft_strcmp(str[0], "env") == 0 && str[1] == NULL)
         {
                 i = 0;
-                while (envp[i])
-                        printf("%s\n", envp[i++]);
+                while (pip->data->envp[i])
+                        printf("%s\n", pip->data->envp[i++]);
+                (free_pip(pip), cleanexit(str), exit(0));
         }
         else if (ft_strcmp(str[0], "env") == 0)
                 ft_printf_fd(2, "env: ʻ%s’: No such file or directory\n", str[1]);
         else
-                exe_other2(str, envp, pip);
+                exe_other2(str, pip->data->envp, pip);
 }

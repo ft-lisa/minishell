@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/11 11:19:46 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:57:01 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void type5(t_list *pip);
 void type6(t_list *pip);
 void type7(t_list *pip);
 void	exe_isolate(t_list *pip, int t1, int t2);
-int is_other(char **str, t_list *pip);
+int is_other(t_list *pip);
 int     is_cmd(t_list *pip);
-void exe_other(char **str, char **envp, t_list *pip);
+void exe_other(t_list *pip);
 
 
 

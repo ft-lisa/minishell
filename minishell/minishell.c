@@ -9,7 +9,6 @@ void exit_minishell()
 int main(int argc, char** argv, char** envp)
 {
     char *str;
-    char **str2;
     t_list *exe;
     if (argc != 1)
         return(1);
@@ -20,13 +19,6 @@ int main(int argc, char** argv, char** envp)
             exit_minishell();
         add_history(str);
         exe = creat_list(str, envp, argv, argc);
-        str2 = ft_split(str, ' ');
-        if (is_other(str2, exe) == 1)
-            {
-                exe_other(str2, envp, exe);
-            }
-        else
-            exe->data->exit1 = exe1(exe);
-        cleanexit(str2);
+        exe->data->exit1 = exe1(exe);
     }
 }

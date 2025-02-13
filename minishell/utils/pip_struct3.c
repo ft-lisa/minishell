@@ -53,14 +53,14 @@ void type5(t_list *pip)
 }
 
 
-
-
 void	exe_isolate(t_list *pip, int t1, int t2)
 {
 	char	**temp2;
 	char	*no_a;
 	char	*get_p;
 
+	if (is_other(pip) == 1)
+                exe_other(pip);
 	if (t1 == 5) 
                 type5(pip);
         else if (t1 == 6) 
