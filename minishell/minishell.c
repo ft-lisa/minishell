@@ -15,10 +15,11 @@ int main(int argc, char** argv, char** envp)
     while(1)
     {
         str = readline("minishell> ");
-        if (str == NULL || ft_strcmp(str, "exit") == 0)
+        if (str == NULL)
             exit_minishell();
         add_history(str);
         exe = creat_list(str, envp, argv, argc);
+        // print_list(exe);
         exe->data->exit1 = exe1(exe);
     }
 }

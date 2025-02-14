@@ -54,6 +54,8 @@ int is_other(t_list *pip)
                 ret = 1;
         else if (ft_strcmp(str[0], "echo") == 0 && ft_strncmp(str[1], "$", 1) == 0 && ft_strlen(str[1]) > 1)
                 ret = 1;
+        else if (ft_strcmp(str[0], "exit") == 0)
+                ret = 1;
         cleanexit(str);
         return (ret);
 }
@@ -141,6 +143,8 @@ void exe_other2(char **str, char **envp, t_list *pip)
                 printf("\n");
                 (free_pip(pip), cleanexit(str), exit(0));
         }
+        else if (ft_strcmp(str[0], "exit") == 0)
+                (free_pip(pip), cleanexit(str), exit(0));
 }
 
 void exe_other(t_list *pip)
@@ -151,7 +155,9 @@ void exe_other(t_list *pip)
 
         str = ft_split(pip->cmd, ' ');
         if (ft_strcmp(str[0], "cd") == 0 || str[1])
-            (chdir(str[1]), cleanexit(str), free_pip(pip), exit(0));
+        {
+                (chdir(str[1]), cleanexit(str), free_pip(pip), exit(0));
+        }
         else if (ft_strcmp(str[0], "pwd") == 0)
         {
             buf = malloc(4097 * sizeof(char));
@@ -168,7 +174,76 @@ void exe_other(t_list *pip)
                 (free_pip(pip), cleanexit(str), exit(0));
         }
         else if (ft_strcmp(str[0], "env") == 0)
+        {
                 ft_printf_fd(2, "env: ʻ%s’: No such file or directory\n", str[1]);
+                (free_pip(pip), cleanexit(str), exit(0));
+        }
         else
                 exe_other2(str, pip->data->envp, pip);
+}
+
+void exe_other2_isolate(char **str, char **envp, t_list *pip)
+{
+        char *var;
+        char **temp;
+        int     i;
+        int     j;
+
+        j = 1;
+        if (ft_strcmp(str[0], "echo") == 0)
+        {
+                while(str[j])
+                {
+                        temp = ft_split(str[j], '$');
+                        i = 0;
+                        while (temp[i])
+                        {
+                                echo_var(envp ,temp[i++]);
+                        }
+                        j++;
+                        cleanexit(temp);
+                }
+                cleanexit(str);
+                printf("\n");
+        }
+        else if (ft_strcmp(str[0], "exit") == 0)
+                (free_pip(pip), cleanexit(str), exit(0));
+}
+
+void exe_other_isolate(t_list *pip)
+{
+        char *buf;
+        int     i;
+        char **str;
+
+        str = ft_split(pip->cmd, ' ');
+        if (ft_strcmp(str[0], "cd") == 0 && str[1])
+        {
+                (chdir(str[1]));
+                cleanexit(str);
+        }
+        else if (ft_strcmp(str[0], "pwd") == 0)
+        {
+            buf = malloc(4097 * sizeof(char));
+            getcwd(buf, 4096);
+            printf("%s\n", buf);
+            free(buf);
+            cleanexit(str);
+        }
+        else if (ft_strcmp(str[0], "env") == 0 && str[1] == NULL)
+        {
+                i = 0;
+                while (pip->data->envp[i])
+                        printf("%s\n", pip->data->envp[i++]);
+                cleanexit(str);
+        }
+        else if (ft_strcmp(str[0], "env") == 0)
+        {
+                ft_printf_fd(2, "env: ʻ%s’: No such file or directory\n", str[1]);
+                cleanexit(str);
+        }
+        else
+        {
+                exe_other2_isolate(str, pip->data->envp, pip);
+        }
 }

@@ -60,8 +60,8 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	char	*get_p;
 
 	if (is_other(pip) == 1)
-                exe_other(pip);
-	if (t1 == 5) 
+                ;
+	else if (t1 == 5) 
                 type5(pip);
         else if (t1 == 6) 
                 type6(pip);
@@ -77,9 +77,17 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	temp2 = ft_split_exe(pip->cmd, ' ');
 	no_a = no_args_cmd(pip->cmd);
 	get_p = get_path_command(pip->data->path, no_a);
-	execve(get_p, temp2, pip->data->envp);
+	if (is_other(pip) == 1)
+        {
+		exe_other(pip);
+		(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
+	}
+	else
+	{
+		execve(get_p, temp2, pip->data->envp);
 	ft_printf_fd(2, "%s: command not found\n", temp2[0]);
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
+	}
 }
 
 int exe1(t_list *pip)
@@ -89,9 +97,16 @@ int exe1(t_list *pip)
 
 	i = 1;
 	head = pip;
-	pip->data->pid[0] = fork();
-	if (pip->data->pid[0] == 0)
-		(exe_isolate(pip, pip->exe1, pip->exe2));
+	if (is_other(pip) == 1 && pip->data->n_cmd == 1)
+        {
+		exe_other_isolate(pip);
+	}
+	else
+	{
+		pip->data->pid[0] = fork();
+		if (pip->data->pid[0] == 0)
+			(exe_isolate(pip, pip->exe1, pip->exe2));
+	}
 	while(i < pip->data->n_cmd)
 	{
 		pip = pip->next;

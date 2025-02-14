@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/13 14:57:01 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/14 10:50:30 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	exe_isolate(t_list *pip, int t1, int t2);
 int is_other(t_list *pip);
 int     is_cmd(t_list *pip);
 void exe_other(t_list *pip);
+void exe_other_isolate(t_list *pip);
 
 
 
@@ -138,5 +139,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc);
 t_list* init_list(int count, char **envp, char **argv, int argc);
 t_data	*init_exe(char **envp, char **argv, int argc, int count);
 
+// temp
+void print_list(t_list *lst);
 
 #endif //FT_H

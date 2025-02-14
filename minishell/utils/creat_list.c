@@ -24,6 +24,7 @@ void print_list(t_list *lst)
     while (lst)
     {
         printf("Command: |%s|\n", lst->cmd ? lst->cmd : "(null)");
+        printf("Nbr commands: |%d|\n", lst->data->n_cmd);
         printf("Index: %d\n", lst->index);
         printf("Exe1: %d\n", lst->exe1);
         printf("Exe2: %d\n", lst->exe2);
@@ -182,6 +183,7 @@ t_list* init_list(int count, char **envp, char **argv, int argc)
         list->exe2 = -1;
         list->if_file1 = NULL;
         list->if_file2 = NULL;
+        list->delim = NULL;
         list->data = data;
         if (count > 0)
         {

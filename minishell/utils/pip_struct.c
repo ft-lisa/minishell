@@ -2,6 +2,8 @@
 
 void	free_pip(t_list *pip)
 {
+	if (!pip)
+		return ;
 	ft_close_all(pip->data->fd);
 	cleanexit_int(pip->data->fd);
 	cleanexit(pip->data->path);
@@ -9,7 +11,7 @@ void	free_pip(t_list *pip)
 	free(pip->data->pid);
 	if(pip->delim)
 		free(pip->delim);
-	free(pip->data);
+	//free(pip->data);
 	free_list(pip);
 }
 
@@ -87,7 +89,7 @@ t_data	*init_exe(char **envp, char **argv, int argc, int count)
 	}
 	pipex->path = NULL;
 	pipex->exit1 = 0;
-	pipex->pid = malloc((argc) * sizeof(int));
+	pipex->pid = malloc(count * sizeof(int));
 	if (!pipex->pid)
 		return (free(pipex), NULL);
 	pipex->pid[0] = 0;
