@@ -39,6 +39,11 @@ int     is_cmd_2d(t_list *pip)
         return (r);
 }
 
+void export1(t_list *pip, )
+{
+        
+}
+
 int is_other(t_list *pip)
 {
         int     ret;
