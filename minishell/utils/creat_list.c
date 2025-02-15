@@ -262,12 +262,21 @@ void del_space(t_list *command)
         new = new->next;
     }
 }
-void del_quotes(char **str)
+void del_quotes(t_list *command)
 {
-    if (!str || !*str)
-        return;
-    *str = del_c(*str, '"');
-    *str = del_c(*str, '\'');
+    t_list *new;
+
+    new = command;
+    while (new)
+    {
+        new->if_file1 = del_c(new->if_file1, '"');
+        new->if_file1 = del_c(new->if_file1, '\'');
+        new->if_file2 = del_c(new->if_file2, '"');
+        new->if_file2 = del_c(new->if_file2, '\'');
+        new->delim = del_c(new->delim, '"');
+        new->delim = del_c(new->delim, '\'');
+        new = new->next;
+    }
 }
 
 
@@ -279,7 +288,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     int i = 0;
 
     count = count_node(line);
-    // printf("||||count||||%d\n\n", count); // print_info
+    //printf("||||count||||%d\n\n", count); // print_info
     content_node = ft_split_txt(line);
     // free(line);
     //erreur_operater(content_node);
@@ -295,7 +304,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     fill_file_list(command, content_node);
     del_space(command);
     // printf("delim |%s| \n\n", command->delim); // print_info
-    del_quotes(&command->delim);
+    del_quotes(command);
     command->data->content = content_node;
     // print_list(command); // print_info
     //fill_list(&command, content_node);

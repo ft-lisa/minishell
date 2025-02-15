@@ -39,19 +39,19 @@ int     is_cmd_2d(t_list *pip)
         return (r);
 }
 
-void export1(t_list *pip, char **str)
-{
-        int     i;
+// void export1(t_list *pip, char **str)
+// {
+//         int     i;
 
-        i = 0;
-        if (!str[1])
-                while (pip->data->envp[i])
-                        printf("%s\n", pip->data->envp[i++]);
-        else
-        {
+//         i = 0;
+//         if (!str[1])
+//                 while (pip->data->envp[i])
+//                         printf("%s\n", pip->data->envp[i++]);
+//         else
+//         {
                 
-        }
-}
+//         }
+// }
 
 int is_other(t_list *pip)
 {
@@ -214,6 +214,7 @@ void exe_other2_isolate(char **str, char **envp, t_list *pip)
                         i = 0;
                         while (temp[i])
                         {
+                                //printf("R:%s", temp[i]);
                                 echo_var(envp ,temp[i++]);
                         }
                         j++;
@@ -232,7 +233,7 @@ void exe_other_isolate(t_list *pip)
         int     i;
         char **str;
 
-        str = ft_split(pip->cmd, ' ');
+        str = ft_split_exe(pip->cmd, ' ');
         if (ft_strcmp(str[0], "cd") == 0 && str[1])
         {
                 (chdir(str[1]));
