@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/14 10:50:30 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:14:04 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ char	*cleanexit_int(int **a);
 char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, const char *set);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	str_len_2d(char **str);
+char	**strdup_2d(char **s);
+char	**add_last_2d(char **str2, char *add);
+char	**rmv_str_2d(char **str2, char *rmv);
 // int pass_quote(char quote, const char* str, int i);
 
 // various

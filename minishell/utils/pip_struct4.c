@@ -49,7 +49,11 @@ void export1(t_list *pip, char **str)
                         printf("%s\n", pip->data->envp[i++]);
         else
         {
-                
+                while(str[i])
+                {
+                        
+                        add_last_2d(pip->data->envp, str[1]);
+                }
         }
 }
 
