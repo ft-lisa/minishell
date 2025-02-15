@@ -39,9 +39,18 @@ int     is_cmd_2d(t_list *pip)
         return (r);
 }
 
-void export1(t_list *pip, )
+void export1(t_list *pip, char **str)
 {
-        
+        int     i;
+
+        i = 0;
+        if (!str[1])
+                while (pip->data->envp[i])
+                        printf("%s\n", pip->data->envp[i++]);
+        else
+        {
+                
+        }
 }
 
 int is_other(t_list *pip)
@@ -60,6 +69,8 @@ int is_other(t_list *pip)
         else if (ft_strcmp(str[0], "echo") == 0 && ft_strncmp(str[1], "$", 1) == 0 && ft_strlen(str[1]) > 1)
                 ret = 1;
         else if (ft_strcmp(str[0], "exit") == 0)
+                ret = 1;
+        else if (ft_strcmp(str[0], "export") == 0)
                 ret = 1;
         cleanexit(str);
         return (ret);
