@@ -84,7 +84,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	}
 	else
 	{
-		execve(get_p, temp2, pip->data->envp);
+		execve(get_p, temp2, *(pip->data->envp));
 	ft_printf_fd(2, "%s: command not found\n", temp2[0]);
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
 	}

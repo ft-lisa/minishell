@@ -39,23 +39,6 @@ int     is_cmd_2d(t_list *pip)
         return (r);
 }
 
-void export1(t_list *pip, char **str)
-{
-        int     i;
-
-        i = 0;
-        if (!str[1])
-                while (pip->data->envp[i])
-                        printf("%s\n", pip->data->envp[i++]);
-        else
-        {
-                while(str[i])
-                {
-                        
-                        add_last_2d(pip->data->envp, str[1]);
-                }
-        }
-}
 
 int is_other(t_list *pip)
 {
@@ -189,8 +172,8 @@ void exe_other(t_list *pip)
         else if (ft_strcmp(str[0], "env") == 0 && str[1] == NULL)
         {
                 i = 0;
-                while (pip->data->envp[i])
-                        printf("%s\n", pip->data->envp[i++]);
+                while ((*(pip->data->envp))[i])
+                        printf("%s\n", (*(pip->data->envp))[i++]);
                 (free_pip(pip), cleanexit(str), exit(0));
         }
         else if (ft_strcmp(str[0], "env") == 0)
@@ -199,7 +182,7 @@ void exe_other(t_list *pip)
                 (free_pip(pip), cleanexit(str), exit(0));
         }
         else
-                exe_other2(str, pip->data->envp, pip);
+                exe_other2(str, *(pip->data->envp), pip);
 }
 
 void exe_other2_isolate(char **str, char **envp, t_list *pip)
@@ -228,8 +211,10 @@ void exe_other2_isolate(char **str, char **envp, t_list *pip)
         }
         else if (ft_strcmp(str[0], "exit") == 0)
                 (free_pip(pip), cleanexit(str), exit(0));
+        else if (ft_strcmp(str[0], "export") == 0)
+                export1(pip, str);
 }
-
+ 
 void exe_other_isolate(t_list *pip)
 {
         char *buf;
@@ -250,11 +235,11 @@ void exe_other_isolate(t_list *pip)
             free(buf);
             cleanexit(str);
         }
-        else if (ft_strcmp(str[0], "env") == 0 && str[1] == NULL)
+        else if ((ft_strcmp(str[0], "env") == 0 && str[1] == NULL ))
         {
                 i = 0;
-                while (pip->data->envp[i])
-                        printf("%s\n", pip->data->envp[i++]);
+                while ((*(pip->data->envp))[i])
+                        printf("%s\n", (*(pip->data->envp))[i++]);
                 cleanexit(str);
         }
         else if (ft_strcmp(str[0], "env") == 0)
@@ -264,6 +249,6 @@ void exe_other_isolate(t_list *pip)
         }
         else
         {
-                exe_other2_isolate(str, pip->data->envp, pip);
+                exe_other2_isolate(str, *(pip->data->envp), pip);
         }
 }

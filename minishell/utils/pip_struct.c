@@ -65,7 +65,7 @@ int	**ft_add_fd(int **fd, int len)
 	return (new_fd);
 }
 
-t_data	*init_exe(char **envp, char **argv, int argc, int count)
+t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 {
 	t_data *pipex;
 	int	i;
@@ -94,10 +94,10 @@ t_data	*init_exe(char **envp, char **argv, int argc, int count)
 		return (free(pipex), NULL);
 	pipex->pid[0] = 0;
 	pipex->path = ft_split_exe("error env", ' ');
-	if (pipex->envp[0] && pipex->envp[0][0] != 'V')
+	if (pipex->envp[0] && *(pipex->envp)[0][0] != 'V')
 	{
 		cleanexit(pipex->path);
-		pipex->path = get_path(pipex->envp);
+		pipex->path = get_path(*(pipex->envp));
 	}
 	return (pipex);
 }

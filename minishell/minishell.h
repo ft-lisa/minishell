@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/15 15:14:04 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:11:35 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 typedef struct s_pipex
 {
-	char			**envp;
+	char			***envp;
 	char			**path;
 	int				**fd;
 	int				*pid;
@@ -85,6 +85,7 @@ int is_other(t_list *pip);
 int     is_cmd(t_list *pip);
 void exe_other(t_list *pip);
 void exe_other_isolate(t_list *pip);
+void export1(t_list *pip, char **str);
 
 
 
@@ -99,8 +100,15 @@ char	*ft_strtrim(char const *s1, const char *set);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int	str_len_2d(char **str);
 char	**strdup_2d(char **s);
-char	**add_last_2d(char **str2, char *add);
+int     add_last_2d(char ***str2, char *add);
 char	**rmv_str_2d(char **str2, char *rmv);
+char	*ft_strchr(const char *str, int search_str);
+int	ft_isalnum_under_plus(char *str);
+char	*ft_strcpy(char *dest, char *src);
+char	*ft_strcat(char *dest, const char *src);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char	*ft_strstr(char *str, char *to_find);
+void	*ft_memcpy(void *dest_str, const void *src_str, size_t n);
 // int pass_quote(char quote, const char* str, int i);
 
 // various
@@ -139,10 +147,12 @@ int					ft_strcmp(char *s1, char *s2);
 // list creation
 char	**ft_split_txt(char const *s);
 int count_node(char* line);
-t_list *creat_list(char* line, char **envp, char **argv, int argc);
-t_list* init_list(int count, char **envp, char **argv, int argc);
-t_data	*init_exe(char **envp, char **argv, int argc, int count);
+t_list *creat_list(char* line, char ***envp, char **argv, int argc);
+t_list* init_list(int count, char ***envp, char **argv, int argc);
+t_data	*init_exe(char ***envp, char **argv, int argc, int count);
 
+// parcing
+char	*parcing_export(char *str);
 // temp
 void print_list(t_list *lst);
 

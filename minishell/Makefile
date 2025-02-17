@@ -1,3 +1,6 @@
+# Disable built-in implicit rules
+.SUFFIXES:
+
 #===============================================================================
 # Color variables
 RED     := \033[0;31m
@@ -19,27 +22,22 @@ LIBS    := -lreadline -lncurses
 TRASH   := .trash
 
 #===============================================================================
-# Source files in different folders (wildcards)
+# Source files (wildcards)
 ROOT_SRC    := $(wildcard *.c)
 LIB_SRC     := $(wildcard lib/*.c)
 PRINTF_SRC  := $(wildcard printf_fd-gnl/*.c)
 UTILS_SRC   := $(wildcard utils/*.c)
 
-# ------------------------------------------------------------------------------
-# For the exe version: use exe1.c as main, so exclude minishell.c from the root
-SRC_EXE    := $(filter-out minishell.c, $(ROOT_SRC)) $(LIB_SRC) $(PRINTF_SRC) $(UTILS_SRC)
-OBJS_EXE   := $(patsubst %.c, $(TRASH)/%.o, $(SRC_EXE))
+# Use minishell.c as the main file (ignore exe1.c if present)
+SRC       := $(filter-out exe1.c, $(ROOT_SRC)) $(LIB_SRC) $(PRINTF_SRC) $(UTILS_SRC)
+OBJS      := $(patsubst %.c, $(TRASH)/%.o, $(SRC))
 
-# For the mini version: use minishell.c as main, so exclude exe1.c from the root
-SRC_MINI   := $(filter-out exe1.c, $(ROOT_SRC)) $(LIB_SRC) $(PRINTF_SRC) $(UTILS_SRC)
-OBJS_MINI  := $(patsubst %.c, $(TRASH)/%.o, $(SRC_MINI))
-
-# Executable names
-NAME_EXE   := exe
-NAME_MINI  := minishell
+# Executable name
+NAME      := minishell
 
 #===============================================================================
-# Animation: a quick dot animation during the build!
+# Animation target (phoney)
+.PHONY: animate
 animate:
 	@echo -n "$(YELLOW)Building"
 	@for i in 1 2 3 4 5; do \
@@ -48,32 +46,16 @@ animate:
 	echo -e " $(GREEN)Done!$(NC)"
 
 #===============================================================================
-# Targets
+# Default target builds the minishell executable
+all: $(NAME)
+	@echo -e "$(GREEN)Executable '$(NAME)' is ready!$(NC)"
 
-# Default target builds both versions
-all: mini exe
-
-#------------------------------------------------------------------------------
-# Build the exe version (uses exe1.c as main)
-exe: $(NAME_EXE)
-	@echo -e "$(GREEN)Executable '$(NAME_EXE)' is ready!$(NC)"
-
-$(NAME_EXE): $(OBJS_EXE)
-	@$(MAKE) animate
-	$(CC) $(OBJS_EXE) $(CFLAGS) $(LIBS) -o $(NAME_EXE)
-
-#------------------------------------------------------------------------------
-# Build the mini version (uses minishell.c as main)
-mini: $(NAME_MINI)
-	@echo -e "$(GREEN)Executable '$(NAME_MINI)' is ready!$(NC)"
-
-$(NAME_MINI): $(OBJS_MINI)
-	@$(MAKE) animate
-	$(CC) $(OBJS_MINI) $(CFLAGS) $(LIBS) -o $(NAME_MINI)
+# Build minishell (first run animate, then link object files)
+$(NAME): animate $(OBJS)
+	$(CC) $(OBJS) $(CFLAGS) $(LIBS) -o $(NAME)
 
 #===============================================================================
-# Pattern rule: Compile any .c file into its corresponding .o file inside .trash.
-# It creates the target directory if it doesn't exist.
+# Pattern rule: Compile any .c file into its corresponding .o file in .trash.
 $(TRASH)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@echo -e "$(BLUE)Compiling $< into $@...$(NC)"
@@ -87,9 +69,9 @@ clean:
 
 fclean: clean
 	@echo -e "$(MAGENTA)Removing executables...$(NC)"
-	rm -f $(NAME_EXE) $(NAME_MINI)
+	rm -f $(NAME)
 
 re: fclean all
 
 #===============================================================================
-.PHONY: all animate clean fclean re exe mini
+.PHONY: all clean fclean re

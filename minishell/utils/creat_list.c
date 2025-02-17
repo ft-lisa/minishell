@@ -163,7 +163,7 @@ void fill_ope_list(t_list *list, char** content)
     }     
 }
 
-t_list* init_list(int count, char **envp, char **argv, int argc)
+t_list* init_list(int count, char ***envp, char **argv, int argc)
 {
     t_list *first;
     t_list *list;
@@ -271,7 +271,7 @@ void del_quotes(char **str)
 }
 
 
-t_list *creat_list(char* line, char **envp, char **argv, int argc)
+t_list *creat_list(char* line, char ***envp, char **argv, int argc)
 {
     int count;
     char** content_node;

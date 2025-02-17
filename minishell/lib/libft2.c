@@ -44,25 +44,25 @@ char	**strdup_2d(char **s)
 
 int add_last_2d(char ***str2, char *add)
 {
-    char    **t;
-    int     i;
-    int     nitems;
+	char    **t;
+	int     i;
+	int     nitems;
 
-    i = 0;
-    nitems = str_len_2d(*str2);
-    t = malloc((nitems + 2) * sizeof(char *));
-    if (t == NULL)
-        return (1);
-    while (nitems > i)
-    {
-        t[i] = ft_strdup((*str2)[i]);
-        i++;
-    }
-    t[i++] = ft_strdup(add);
-    t[i] = NULL;
-    cleanexit(*str2);
-    *str2 = t;
-    return (0);
+	i = 0;
+	nitems = str_len_2d(*str2);
+	t = malloc((nitems + 2) * sizeof(char *));
+	if (t == NULL)
+		return (1);
+	while (nitems > i)
+	{
+		t[i] = ft_strdup((*str2)[i]);
+		i++;
+	}
+	t[i++] = ft_strdup(add);
+	t[i] = NULL;
+	cleanexit(*str2);
+	*str2 = t;
+	return (0);
 }
 
 char	**rmv_str_2d(char **str2, char *rmv)
@@ -99,3 +99,4 @@ char	**rmv_str_2d(char **str2, char *rmv)
 	cleanexit(str2);
 	return (t);
 }
+
