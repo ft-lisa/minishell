@@ -199,7 +199,18 @@ void exe_other(t_list *pip)
         else
                 exe_other2(str, pip->data->envp, pip);
 }
+int check_exit(char** str)
+{
+        int j;
 
+        j = 0;
+        while (str[j])
+        {
+                printf("%s\n", str[j]);
+                j++;
+        }
+        return(0);
+}
 void exe_other2_isolate(char **str, char **envp, t_list *pip)
 {
         char *var;
@@ -218,8 +229,9 @@ void exe_other2_isolate(char **str, char **envp, t_list *pip)
                         i = 0;
                         while (temp[i])
                         {
-                                //printf("R:%s", temp[i]);
+                                
                                 echo_var(envp ,temp[i++]);
+                                printf(" ");
                         }
                         j++;
                         cleanexit(temp);
@@ -229,7 +241,12 @@ void exe_other2_isolate(char **str, char **envp, t_list *pip)
                 printf("\n");
         }
         else if (ft_strcmp(str[0], "exit") == 0)
-                (free_pip(pip), cleanexit(str), exit(0));
+        {
+                if(check_exit(str) == 0)
+                        (cleanexit(str));
+                else
+                        (free_pip(pip), cleanexit(str), exit(0));
+        }
 }
 
 void exe_other_isolate(t_list *pip)
@@ -238,7 +255,7 @@ void exe_other_isolate(t_list *pip)
         int     i;
         char **str;
 
-        str = ft_split_exe(pip->cmd, ' ');
+        str = ft_split(pip->cmd, ' ');
         if (ft_strcmp(str[0], "cd") == 0 && str[1])
         {
                 (chdir(str[1]));

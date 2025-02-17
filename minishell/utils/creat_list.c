@@ -212,6 +212,8 @@ int count_node(char* line)
         if(line[i] == '"' || line[i] == '\'' )
             i = pass_quote1(line[i], line, i + 1);
         //printf("%c\n", line[i]);
+        if(!line[i])
+            return(count + 1);
         if(line[i] == '|')
         {
             while((line[i] == '|' || line[i] == '<' || line[i] == '>') && line[i] != '\0')

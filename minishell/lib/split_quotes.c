@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/17 13:36:49 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:42:11 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int last_quotes(char* str, char quotes)
     int j;
 
     i = 0;
+    j = -1;
     while(str[i])
     {
         if (str[i] == quotes)
@@ -26,8 +27,19 @@ int last_quotes(char* str, char quotes)
     }
     return(j);
 }
+int pass_quote_plus(char quote, const char* str, int i)
+{
+    int j;
+    
+    j = i;
+    while(str[i] != quote && str[i] != '\0')
+        i++;
+    if (str[i] == '\0')
+        return(j);
+    return(i);
+}
 
-char *del_quo(char *str, char c)
+char *del_quo(char *str, char c, char lettre)
 {
         int i;
         int k;
@@ -42,13 +54,22 @@ char *del_quo(char *str, char c)
         while(str[i])
         {
             if(str[i] == c)
-                num_quotes++;
-            if (str[i++] != c || num_quotes % 2 == 0)
+            {
+                k = k + pass_quote_plus(c, str, i) - i;
+                i = pass_quote_plus(c, str, i);
+            }
+            if(str[i] == lettre)
+            {
+                k = k + pass_quote_plus(lettre, str, i) - i;
+                i = pass_quote_plus(lettre, str, i);
+            }
+            if (str[i] != c && str[i++] != lettre)
             {
                 if(num_quotes % 2 == 0)
                     num_quotes = 0;
                 k++;
-            }          
+            } 
+            i++;         
         }  
         // printf("num %d", num_quotes); 
         // printf("               num %d\n", k);     
@@ -61,9 +82,19 @@ char *del_quo(char *str, char c)
         i = 0;
         while(str[i])
         {
-            if (str[i] == c && num_quotes == 1 && i == last_quotes(str, c))
-                new_s[k++] = str[i];
-            if (str[i] != c) 
+            if(str[i] == c && last_quotes(str, c) != -1)
+            {
+                i++;
+                while(str[i] && str[i] != c)
+                    new_s[k++] = str[i++];
+            }
+            else if(str[i] == lettre && last_quotes(str, c) != -1)
+            {
+                i++;
+                while(str[i] && str[i] != lettre)
+                    new_s[k++] = str[i++];
+            }
+            else
                 new_s[k++] = str[i];
             i++;
         }
@@ -71,7 +102,7 @@ char *del_quo(char *str, char c)
         free(str);
         return (new_s);
 }
-
+// echo dfasg       sdfdsf "|dfadfa     ''  |" dsfdsf
 void del(char **command)
 {
     int i;
@@ -79,23 +110,12 @@ void del(char **command)
     i = 0;
     while (command[i])
     {
-        command[i] = del_quo(command[i], '"');
-        command[i] = del_quo(command[i], '\'');
+        command[i] = del_quo(command[i], '"', '\'');
         i++;
     }
 }
 
-int pass_quote_plus(char quote, const char* str, int i)
-{
-    int j;
-    
-    j = i;
-    while(str[i] != quote && str[i] != '\0')
-        i++;
-    if (str[i] == '\0')
-        return(j);
-    return(i);
-}
+
 
 static int	splitlen(char const *s1, char c1)
 {

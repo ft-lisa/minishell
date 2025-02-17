@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/02/15 17:22:01 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:44:04 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	**ft_split_txt(char const *s)
 		return (NULL);
 	i = 0;
 	j = 0;
-	printf("taille %d\n",splitlen(s));
+	//printf("taille %d\n",splitlen(s));
 	while (s[i])
 	{
 		t1[j] = t2f(s, i);
