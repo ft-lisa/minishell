@@ -6,25 +6,52 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/17 11:55:09 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:36:49 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *del_c(char *str, char c)
+int last_quotes(char* str, char quotes)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while(str[i])
+    {
+        if (str[i] == quotes)
+            j = i;
+        i++;
+    }
+    return(j);
+}
+
+char *del_quo(char *str, char c)
 {
         int i;
         int k;
         char *new_s;
+        int num_quotes;
 
         i = 0;
         k = 0;
+        num_quotes = 0;
         if (!str || str == NULL)
                 return (NULL);
         while(str[i])
-                if (str[i++] != c)
-                        k++;
+        {
+            if(str[i] == c)
+                num_quotes++;
+            if (str[i++] != c || num_quotes % 2 == 0)
+            {
+                if(num_quotes % 2 == 0)
+                    num_quotes = 0;
+                k++;
+            }          
+        }  
+        // printf("num %d", num_quotes); 
+        // printf("               num %d\n", k);     
         if (k == 0)
                 return (str);
         new_s = malloc((k + 1) * sizeof(char));
@@ -34,9 +61,11 @@ char *del_c(char *str, char c)
         i = 0;
         while(str[i])
         {
-        if (str[i] != c) 
+            if (str[i] == c && num_quotes == 1 && i == last_quotes(str, c))
                 new_s[k++] = str[i];
-        i++;
+            if (str[i] != c) 
+                new_s[k++] = str[i];
+            i++;
         }
         new_s[k] = '\0';
         free(str);
@@ -50,24 +79,22 @@ void del(char **command)
     i = 0;
     while (command[i])
     {
-        command[i] = del_c(command[i], '"');
-        command[i] = del_c(command[i], '\'');
-        command[i] = del_c(command[i], '"');
-        command[i] = del_c(command[i], '\'');
-        command[i] = del_c(command[i], '"');
-        command[i] = del_c(command[i], '\'');
+        command[i] = del_quo(command[i], '"');
+        command[i] = del_quo(command[i], '\'');
         i++;
     }
 }
 
-int pass_quote(char quote, const char* str, int i)
+int pass_quote_plus(char quote, const char* str, int i)
 {
+    int j;
+    
+    j = i;
     while(str[i] != quote && str[i] != '\0')
         i++;
-	i++;
-	while(str[i] == ' ')
-		i++;
-    return(i - 1);
+    if (str[i] == '\0')
+        return(j);
+    return(i);
 }
 
 static int	splitlen(char const *s1, char c1)
@@ -82,7 +109,7 @@ static int	splitlen(char const *s1, char c1)
 		while (s1[i] == c1 && s1[i])
 		{
 			if(s1[i] == '"' || s1[i] == '\'')
-				i = pass_quote(s1[i], s1, i + 1);
+				i = pass_quote_plus(s1[i], s1, i + 1);
 			i++;						
 		}
 		if (s1[i])
@@ -90,7 +117,7 @@ static int	splitlen(char const *s1, char c1)
 		while (s1[i] != c1 && s1[i])
 		{
 			if(s1[i] == '"' || s1[i] == '\'')
-				i = pass_quote(s1[i], s1, i + 1);
+				i = pass_quote_plus(s1[i], s1, i + 1);
 			i++;	
 		}
 	}
@@ -107,7 +134,7 @@ static char	*t2f(char const *s, int start_s, char c)
 	while (s[i] != c && s[i])
 	{
 		if(s[i] == '"' || s[i] == '\'')
-			i = pass_quote(s[i], s, i + 1);	
+			i = pass_quote_plus(s[i], s, i + 1);	
 		i++;			
 	}
 	len_s = i - start_s;
@@ -124,7 +151,7 @@ static char	*t2f(char const *s, int start_s, char c)
 	return (t2);
 }
 
-char	**split_quotes(char const *s, char c)
+char	**ft_split_quotes(char const *s, char c)
 {
 	char	**t1;
 	int		i;
@@ -140,7 +167,7 @@ char	**split_quotes(char const *s, char c)
 		while (s[i] == c && s[i])
 		{
 			if(s[i] == '"' || s[i] == '\'')
-				i = pass_quote(s[i], s, i + 1);	
+				i = pass_quote_plus(s[i], s, i + 1);	
 			i++;	
 		}
 		if (!s[i])
@@ -151,7 +178,7 @@ char	**split_quotes(char const *s, char c)
 		while (s[i] != c && s[i])
 		{
 			if(s[i] == '"' || s[i] == '\'')
-				i = pass_quote(s[i], s, i + 1);	
+				i = pass_quote_plus(s[i], s, i + 1);	
 			i++;	
 		}
 	}
@@ -161,21 +188,21 @@ char	**split_quotes(char const *s, char c)
 	return (t1);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(int c, char *v[])
-{
-	int		i;
-	char	**a;
+// int	main(int c, char *v[])
+// {
+// 	int		i;
+// 	char	**a;
 
-	(void)c;
-	i = 0;
-	a = split_quotes(v[1], v[2][0]);
-	while (a[i])
-	{
-		printf("%s\n", a[i]);
-		i++;
-	}
-	i = 0;
-	return (0);
-}
+// 	(void)c;
+// 	i = 0;
+// 	a = split_quotes(v[1], v[2][0]);
+// 	while (a[i])
+// 	{
+// 		printf("%s\n", a[i]);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	return (0);
+// }

@@ -66,7 +66,7 @@ int is_other(t_list *pip)
                 ret = 1;
         else if (ft_strcmp(str[0], "env") == 0 && is_cmd_2d(pip) == 0)
                 ret = 1;
-        else if (ft_strcmp(str[0], "echo") == 0 && ft_strncmp(str[1], "$", 1) == 0 && ft_strlen(str[1]) > 1)
+        else if (ft_strcmp(str[0], "echo") == 0)
                 ret = 1;
         else if (ft_strcmp(str[0], "exit") == 0)
                 ret = 1;
@@ -139,6 +139,7 @@ void exe_other2(char **str, char **envp, t_list *pip)
 {
         char *var;
         char **temp;
+        char **temp2;
         int     i;
         int     j;
 
@@ -147,7 +148,8 @@ void exe_other2(char **str, char **envp, t_list *pip)
         {
                 while(str[j])
                 {
-                        temp = ft_split(str[j], '$');
+                        // temp2 = ft_split(pip->cmd, ' ');
+                        temp = ft_split_quotes(str[j], '$');
                         i = 0;
                         while (temp[i])
                         {
@@ -202,15 +204,17 @@ void exe_other2_isolate(char **str, char **envp, t_list *pip)
 {
         char *var;
         char **temp;
+        char **temp2;
         int     i;
         int     j;
 
         j = 1;
         if (ft_strcmp(str[0], "echo") == 0)
         {
-                while(str[j])
+                temp2 = ft_split_quotes(pip->cmd, ' ');
+                while(temp2[j])
                 {
-                        temp = ft_split(str[j], '$');
+                        temp = ft_split_quotes(temp2[j], '$');
                         i = 0;
                         while (temp[i])
                         {
@@ -220,6 +224,7 @@ void exe_other2_isolate(char **str, char **envp, t_list *pip)
                         j++;
                         cleanexit(temp);
                 }
+                cleanexit(temp2);
                 cleanexit(str);
                 printf("\n");
         }

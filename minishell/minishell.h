@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/14 10:50:30 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:33:43 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int					ft_strcmp(char *s1, char *s2);
 
 // list creation
 char	**ft_split_txt(char const *s);
+char	**ft_split_quotes(char const *s, char c);
 int count_node(char* line);
 t_list *creat_list(char* line, char **envp, char **argv, int argc);
 t_list* init_list(int count, char **envp, char **argv, int argc);
