@@ -115,7 +115,8 @@ void fill_com_list(t_list *list, char** content)
         new->index = i++;
         if (new->exe1 == 4)
         {
-            new->cmd = content[j];
+            if(operator(content[j]) == 0 )
+                new->cmd = content[j];
             j = j + 2;
         }
         if (new->exe1 == 5)
@@ -293,6 +294,53 @@ int all_space(char* line)
     }
     return(1);
 }
+int count_pipes (char* str)
+{
+    int i;
+
+    i = 0;
+    if (str == NULL)
+        return(i);
+    while (str[i])
+    {
+        if(str[i] != '|')
+            return(i);
+        i++;
+    }
+    return(i);
+}
+
+int check_pipes(char** content_nodes, t_list* command)
+{
+    int i;
+    int num_pipes;
+    t_list* new;
+
+    i = 1;
+    new = command;
+    while(new)
+    {
+        if(new->exe2 == 2)
+        {
+            if(new->cmd == NULL)
+            {
+                num_pipes = count_pipes(content_nodes[i - 1]);
+            }
+            else
+            {   
+                num_pipes = count_pipes(content_nodes[i]) - 2;
+            }
+            if(num_pipes == 1)
+                return(printf("bash: syntax error near unexpected token `|'\n"), 0);
+            if(num_pipes > 1)
+                return(printf("bash: syntax error near unexpected token `||'\n"), 0);
+              
+        }
+        i = i + 2;
+        new = new->next;  
+    }
+    return(1);
+}
 
 t_list *creat_list(char* line, char **envp, char **argv, int argc)
 {
@@ -319,6 +367,8 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     fill_ope_list(command, content_node);
     fill_com_list(command, content_node);
     fill_file_list(command, content_node);
+    if(check_pipes(content_node, command) == 0)
+        return(NULL);
     del_space(command);
     // printf("delim |%s| \n\n", command->delim); // print_info
     del_quotes(command);

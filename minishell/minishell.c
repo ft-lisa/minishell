@@ -19,7 +19,7 @@ int main(int argc, char** argv, char** envp)
             exit_minishell();
         add_history(str);
         exe = creat_list(str, envp, argv, argc);
-        //print_list(exe);
+        print_list(exe);
         if (exe)
             exe->data->exit1 = exe1(exe);
     }
