@@ -11,9 +11,12 @@ int main(int argc, char** argv, char** envp)
     char *str;
     char **env;
     t_list *exe;
+    int error;
+
     if (argc != 1)
         return(1);
     env = strdup_2d(envp);
+    error = 0;
     while(1)
     {
         str = readline("minishell> ");
@@ -21,7 +24,9 @@ int main(int argc, char** argv, char** envp)
             exit_minishell();
         add_history(str);
         exe = creat_list(str, &env, argv, argc);
+        exe->data->exit1 = error;
         // print_list(exe);
-        exe->data->exit1 = exe1(exe);
+        error = exe1(exe);
     }
 }
+

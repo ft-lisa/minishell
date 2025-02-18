@@ -74,20 +74,14 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	else if (t2 == 3)
                 type3(pip);
 	ft_close_all(pip->data->fd);
+	if (is_other(pip) == 1)
+		exe_other(pip);
 	temp2 = ft_split_exe(pip->cmd, ' ');
 	no_a = no_args_cmd(pip->cmd);
 	get_p = get_path_command(pip->data->path, no_a);
-	if (is_other(pip) == 1)
-        {
-		exe_other(pip);
-		(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
-	}
-	else
-	{
-		execve(get_p, temp2, *(pip->data->envp));
+	execve(get_p, temp2, *(pip->data->envp));
 	ft_printf_fd(2, "%s: command not found\n", temp2[0]);
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
-	}
 }
 
 int exe1(t_list *pip)
@@ -99,7 +93,7 @@ int exe1(t_list *pip)
 	head = pip;
 	if (is_other(pip) == 1 && pip->data->n_cmd == 1)
         {
-		exe_other_isolate(pip);
+		exe_other(pip);
 	}
 	else
 	{

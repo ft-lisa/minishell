@@ -11,7 +11,7 @@ void	free_pip(t_list *pip)
 	free(pip->data->pid);
 	if(pip->delim)
 		free(pip->delim);
-	//free(pip->data);
+	free(pip->data);
 	free_list(pip);
 }
 

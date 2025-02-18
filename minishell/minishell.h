@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/17 17:11:35 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/18 11:28:18 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	**ft_add_fd(int **fd, int len);
 int	wait_all(int *pid, int len);
 void	ft_close_all(int **fd);
 char	*get_path_command(char **paths, char *command);
+char	*get_path_var(char *envp[], char *p1);
 char	*no_args_cmd(char *cmd);
 void type1(t_list *pip);
 void type2(t_list *pip);
