@@ -108,15 +108,16 @@ char	*parcing_export(char *str)
 int     export_valid(char *str)
 {
         char **temp;
+	int r;
 
         if (ft_strchr(str, '=') == NULL)
                 return (0);
         temp = ft_split(str, '=');
         if (!temp)
                 return (-1);
-        if (ft_isalnum_under_plus(temp[0]) == 0)
-                return (cleanexit(temp), 0);
-        return (1);
+        r = ft_isalnum_under_plus(temp[0]);
+        cleanexit(temp);
+        return (r);
 }
 
 static char	*extract_key(char *s)
@@ -233,9 +234,7 @@ void export1(t_list *pip, char **str)
                 {
                         temp = parcing_export(str[i]);
                         if (export_valid(str[i]) == 2)
-                        {
                                 add_plus(pip->data->envp, temp);
-                        }
                         if (export_valid(str[i]) == 1)
                                 add_last_2d(pip->data->envp, temp);
                         if (temp)

@@ -41,7 +41,7 @@ char	*get_path_command(char **paths, char *command)
 
 	i = 0;
 	j = -1;
-	if ((command == NULL) | (paths[0] == NULL))
+	if ((command == NULL) || (paths[0] == NULL))
 		return (ft_calloc(1, 1));
 	while (j != 0 && paths[i])
 	{
