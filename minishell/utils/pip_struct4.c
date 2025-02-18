@@ -203,10 +203,10 @@ int check_exit(char** str)
 {
         int j;
 
-        j = 0;
+        j = 2;
         while (str[j])
         {
-                printf("%s\n", str[j]);
+                
                 j++;
         }
         return(0);

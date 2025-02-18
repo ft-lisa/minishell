@@ -280,7 +280,19 @@ void del_quotes(t_list *command)
         new = new->next;
     }
 }
+int all_space(char* line)
+{
+    int i;
 
+    i = 0;
+    while(line[i])
+    {
+        if (line[i] != ' ')
+            return(0);
+        i++;
+    }
+    return(1);
+}
 
 t_list *creat_list(char* line, char **envp, char **argv, int argc)
 {
@@ -289,6 +301,9 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     t_list *command;
     int i = 0;
 
+
+    if (all_space(line) == 1)
+        return(NULL);
     count = count_node(line);
     //printf("||||count||||%d\n\n", count); // print_info
     content_node = ft_split_txt(line);
