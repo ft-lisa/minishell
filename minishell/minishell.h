@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/18 18:15:56 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:39:47 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,13 @@ int is_other(t_list *pip);
 int     is_cmd(t_list *pip);
 void exe_other(t_list *pip);
 void exe_other_isolate(t_list *pip);
-void export1(t_list *pip, char **str);
 int	isin_2d(char **str, char *check);
+void     ifexit(t_list *pip, char **str);
+
+// builtin
+int     cd1(t_list *pip);
+void export1(t_list *pip, char **str);
+int     pwd1(t_list *pip);
 
 
 

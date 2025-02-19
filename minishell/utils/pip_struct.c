@@ -89,7 +89,7 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 	}
 	pipex->path = NULL;
 	pipex->exit1 = 0;
-	pipex->pid = malloc(count * sizeof(int));
+	pipex->pid = malloc(count * sizeof(int));    
 	if (!pipex->pid)
 		return (free(pipex), NULL);
 	pipex->pid[0] = 0;

@@ -27,9 +27,10 @@ ROOT_SRC    := $(wildcard *.c)
 LIB_SRC     := $(wildcard lib/*.c)
 PRINTF_SRC  := $(wildcard printf_fd-gnl/*.c)
 UTILS_SRC   := $(wildcard utils/*.c)
+BUILTIN_SRC   := $(wildcard builtin/*.c)
 
 # Use minishell.c as the main file (ignore exe1.c if present)
-SRC       := $(filter-out exe1.c, $(ROOT_SRC)) $(LIB_SRC) $(PRINTF_SRC) $(UTILS_SRC)
+SRC       := $(filter-out exe1.c, $(ROOT_SRC)) $(LIB_SRC) $(PRINTF_SRC) $(UTILS_SRC) $(BUILTIN_SRC)
 OBJS      := $(patsubst %.c, $(TRASH)/%.o, $(SRC))
 
 # Executable name

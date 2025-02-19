@@ -174,24 +174,9 @@ void exe_other(t_list *pip)
 
         str = ft_split(pip->cmd, ' ');
         if (ft_strcmp(str[0], "cd") == 0 && str[1])
-        {
-                (chdir(str[1]));
-                ifexit(pip, str);
-        }
-        else if (ft_strcmp(str[0], "cd") == 0 && !str[1])
-        {
-                buf = get_path_var(*(pip->data->envp), "HOME");
-                chdir(buf);
-                ifexit(pip, str);
-        }
+                cd1(pip);
         else if (ft_strcmp(str[0], "pwd") == 0)
-        {
-            buf = malloc(4097 * sizeof(char));
-            getcwd(buf, 4096);
-            printf("%s\n", buf);
-            free(buf);
-            ifexit(pip, str);
-        }
+                pwd1(pip);
         else if ((ft_strcmp(str[0], "env") == 0 && str[1] == NULL ))
         {
                 i = 0;
