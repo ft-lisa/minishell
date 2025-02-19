@@ -6,6 +6,8 @@ int     pwd1(t_list *pip)
         char **str;
 
         str = ft_split(pip->cmd, ' ');
+        if (!str)
+                return (-1);
         if (str[1])
         {
                 if (str[1][0] == '-' && str[1][1])

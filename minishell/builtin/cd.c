@@ -22,6 +22,8 @@ int     cd1(t_list *pip)
         int     ret;
 
         str = ft_split(pip->cmd, ' ');
+        if (!str)
+                return (-1);
         if (str_len_2d(str) > 2)
         {
                 ft_printf_fd(2, "bash: cd: too many arguments");

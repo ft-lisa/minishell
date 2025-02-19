@@ -53,7 +53,7 @@ int is_other(t_list *pip)
                 ret = 1;
         else if (ft_strcmp(str[0], "env") == 0 && is_cmd_2d(pip) == 0)
                 ret = 1;
-        else if (ft_strcmp(str[0], "echo") == 0 && ft_strncmp(str[1], "$", 1) == 0 && ft_strlen(str[1]) > 1)
+        else if (ft_strcmp(str[0], "echo") == 0)
                 ret = 1;
         else if (ft_strcmp(str[0], "exit") == 0)
                 ret = 1;
@@ -65,42 +65,6 @@ int is_other(t_list *pip)
         return (ret);
 }
 
-int	echo_var(char *envp[], char *p1)
-{
-	int		i;
-	int		j;
-        int             k;
-        int             len_p1;
-
-	i = 0;
-        k = 0;
-        len_p1 = ft_strlen(p1);
-        while (len_p1 > -1)
-        {
-                if(isalnum(p1[len_p1 - 1]) == 0)
-                {
-                        len_p1--;
-                        k++;
-                }
-                else
-                        break;
-        }
-	while (envp[i])
-	{
-		j = 0;
-		while (envp[i][j] == p1[j])
-			j++;
-		if (j == len_p1)
-		{
-			printf("%s",envp[i] + j + 1);
-                        printf("%s", p1 + len_p1);
-                        return (1);
-		}
-		i++;
-	}
-        printf("%s", p1);
-        return (0);
-}
 
 char	*get_path_var(char *envp[], char *p1)
 {
@@ -133,38 +97,6 @@ void     ifexit(t_list *pip, char **str)
                 exit(0);
         }
 }
-
-void exe_other2(char **str, char **envp, t_list *pip)
-{
-        char *var;
-        char **temp;
-        int     i;
-        int     j;
-
-        j = 1;
-        if (ft_strcmp(str[0], "echo") == 0)
-        {
-                while(str[j])
-                {
-                        temp = ft_split(str[j], '$');
-                        i = 0;
-                        while (temp[i])
-                        {
-                                echo_var(envp ,temp[i++]);
-                        }
-                        j++;
-                        cleanexit(temp);
-                }
-                printf("\n");
-                ifexit(pip, str);
-        }
-        else if (ft_strcmp(str[0], "exit") == 0)
-                (free_pip(pip), cleanexit(str), exit(0));
-        else if (ft_strcmp(str[0], "export") == 0)
-                (export1(pip, str), ifexit(pip, str));
-        else if (ft_strcmp(str[0], "unset") == 0)
-                (rmv_str_2d(pip->data->envp, str[1]), ifexit(pip, str));
-}
  
 void exe_other(t_list *pip)
 {
@@ -174,23 +106,17 @@ void exe_other(t_list *pip)
 
         str = ft_split(pip->cmd, ' ');
         if (ft_strcmp(str[0], "cd") == 0 && str[1])
-                cd1(pip);
+                (cleanexit(str), cd1(pip));
         else if (ft_strcmp(str[0], "pwd") == 0)
-                pwd1(pip);
-        else if ((ft_strcmp(str[0], "env") == 0 && str[1] == NULL ))
-        {
-                i = 0;
-                while ((*(pip->data->envp))[i])
-                        printf("%s\n", (*(pip->data->envp))[i++]);
-                ifexit(pip, str);
-        }
+                (cleanexit(str), pwd1(pip));
         else if (ft_strcmp(str[0], "env") == 0)
-        {
-                ft_printf_fd(2, "env: ʻ%s’: No such file or directory\n", str[1]);
-                ifexit(pip, str);
-        }
-        else
-        {
-                exe_other2(str, *(pip->data->envp), pip);
-        }
+                (cleanexit(str), env1(pip));
+        else if (ft_strcmp(str[0], "echo") == 0)
+                (echo1(pip), ifexit(pip, str));
+        else if (ft_strcmp(str[0], "exit") == 0)
+                (free_pip(pip), cleanexit(str), exit(0));
+        else if (ft_strcmp(str[0], "export") == 0)
+                (export1(pip, str), ifexit(pip, str));
+        else if (ft_strcmp(str[0], "unset") == 0)
+                (rmv_str_2d(pip->data->envp, str[1]), ifexit(pip, str));
 }
