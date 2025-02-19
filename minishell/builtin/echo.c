@@ -43,13 +43,13 @@ int	echo_var2(char *envp[], char *p1)
                 if (p1[i] == '$')
                 {
                         k = echod(envp, p1 + i, &i);
-                        if (k == -1)
-                                return (-1);
                 }
-                else
+                else if (p1[i] != '\\')
                                 printf("%c", p1[i++]);
+                else
+                        i++;
         }
-        return (0);
+        return (k);
 }
 
 int     echo1(t_list *pip)
@@ -61,14 +61,15 @@ int     echo1(t_list *pip)
 
         str = ft_split(pip->cmd, ' ');
         j = 1;
+        error = 0;
         if (str[1] && ft_strcmp(str[1], "-n") == 0)
                 j++;
         while(str[j])
         {
                 error = echo_var2(*pip->data->envp, str[j]);
-                if (error == -1)
-                        break;
                 j++;
+                if (str[j] && error != -1)
+                        printf(" ");
         }
         if (!str[1] || ft_strcmp(str[1], "-n") != 0)
                 printf("\n");
