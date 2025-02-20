@@ -21,6 +21,8 @@ int	ft_isalnum_under_plus(char *str)
         char    c;
 
         i = 0;
+	if (!str)
+		return (0);
         while (str[i])
         {
                 c = str[i];

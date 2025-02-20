@@ -41,6 +41,8 @@ char	*get_path_command(char **paths, char *command)
 
 	i = 0;
 	j = -1;
+	if (isin(command, '/') == 1)
+		return(ft_strdup(command));
 	if ((command == NULL) || (paths == NULL))
 		return (ft_calloc(1, 1));
 	while (j != 0 && paths[i])

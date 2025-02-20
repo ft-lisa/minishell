@@ -110,8 +110,12 @@ int     export_valid(char *str)
         char **temp;
 	int r;
 
-        if (ft_strchr(str, '=') == NULL)
-                return (0);
+        // if (ft_strchr(str, '=') == NULL)
+        //         return (0);
+	if (str[0] >= '0' && str[0] <= '9')
+		return (0);
+	if (str[0] == '-' && str[1])
+		return (3);
         temp = ft_split(str, '=');
         if (!temp)
                 return (-1);
@@ -235,10 +239,16 @@ void export1(t_list *pip, char **str)
                         temp = parcing_export(str[i]);
                         if (export_valid(str[i]) == 2)
                                 add_plus(pip->data->envp, temp);
-                        if (export_valid(str[i]) == 1)
+                        else if (export_valid(str[i]) == 1)
                                 add_last_2d(pip->data->envp, temp);
+			else if (export_valid(str[i]) == 0)
+				ft_printf_fd(2, "bash: export: ʻ%s': not a valid identifier\n", str[i]);
+			else if (export_valid(str[i]) == 3)
+				ft_printf_fd(2, "bash: export: %c%c: invalid option\n", str[i][0], str[i][1]);
                         if (temp)
                                 free(temp);
+			// if (export_valid(str[i]) == 3 || export_valid(str[i]) == 0)
+			// 	break;
                         i++;
                 }
         }
