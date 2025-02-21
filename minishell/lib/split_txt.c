@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/02/17 14:44:04 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/20 09:59:29 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int	splitlen(char const *s1)
 	k = 0;
 	while (s1[i])
 	{
-		if (s1[i] == '|' || s1[i] == '<' || s1[i] == '>')
+		if (s1[i] == '|' || s1[i] == '<' || s1[i] == '>' || s1[i] == '&')
 			k++;
-		while ((s1[i] == '|' || s1[i] == '<' || s1[i] == '>') && s1[i])
+		while ((s1[i] == '|' || s1[i] == '<' || s1[i] == '>' || s1[i] == '&') && s1[i])
 		{
 			if(s1[i] == '"' || s1[i] == '\'')
 				i = pass_quote(s1[i], s1, i + 1);
@@ -41,7 +41,7 @@ static int	splitlen(char const *s1)
 		}
 		if (s1[i])
 			k++;
-		while ((s1[i] != '|' && s1[i] != '<' && s1[i] != '>') && s1[i])
+		while ((s1[i] != '|' && s1[i] != '<' && s1[i] != '>' && s1[i] != '&') && s1[i])
 		{
 			if(s1[i] == '"' || s1[i] == '\'')
 				i = pass_quote(s1[i], s1, i + 1);
@@ -58,7 +58,7 @@ static char	*t2f(char const *s, int start_s)
 	char	*t2;
 
 	i = start_s;
-	while ((s[i] == '|' || s[i] == '<' || s[i] == '>')&& s[i])
+	while ((s[i] == '|' || s[i] == '<' || s[i] == '>' || s[i] == '&' )&& s[i])
 	{
 		if(s[i] == '"' || s[i] == '\'')
 			i = pass_quote(s[i], s, i + 1);	
@@ -66,7 +66,7 @@ static char	*t2f(char const *s, int start_s)
 	}		
 	if (i == start_s)
 	{
-		while ((s[i] != '|' && s[i] != '<' && s[i] != '>') && s[i])
+		while ((s[i] != '|' && s[i] != '<' && s[i] != '>' && s[i] != '&') && s[i])
 		{
 			if(s[i] == '"' || s[i] == '\'')
 				i = pass_quote(s[i], s, i + 1);
@@ -106,7 +106,7 @@ char	**ft_split_txt(char const *s)
 		if (t1[j++] == NULL)
 			return (NULL);//cleanexit(t1)
 		check = i;
-		while ((s[i] != '|' && s[i] != '<' && s[i] != '>') && s[i])
+		while ((s[i] != '|' && s[i] != '<' && s[i] != '>' && s[i] != '&') && s[i])
 		{
 			if(s[i] == '"' || s[i] == '\'')
 				i = pass_quote(s[i], s, i + 1);	
@@ -114,7 +114,7 @@ char	**ft_split_txt(char const *s)
 		}
 		if (i == check)
 		{
-			while ((s[i] == '|' || s[i] == '<' || s[i] == '>') && s[i])
+			while ((s[i] == '|' || s[i] == '<' || s[i] == '>' || s[i] == '&') && s[i])
 			{
 				if(s[i] == '"' || s[i] == '\'')
 					i = pass_quote(s[i], s, i + 1);

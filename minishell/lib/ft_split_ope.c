@@ -12,19 +12,19 @@ static int	splitlen(char const *s1)
         if (s1[i] == '|')
         {
             k++;
-            while (s1[i] == '|' && s1)
+            while ((s1[i] == '|' || s1[i] == ' ' || s1[i] == 9) && s1)
                 i++;
         }
         if (s1[i] == '&')
         {
             k++;
-            while (s1[i] == '&' && s1)
+            while ((s1[i] == '&' || s1[i] == ' ' || s1[i] == 9) && s1)
                 i++;
         }
         if (s1[i] == '<' || s1[i] == '>')
         {
             k++;
-            while ((s1[i] == '<' || s1[i] == '>') && s1)
+            while ((s1[i] == '<' || s1[i] == '>' || s1[i] == ' ' || s1[i] == 9) && s1)
                 i++;
         }
 	}
@@ -37,13 +37,17 @@ static char	*t2f(char const *s, int start_s)
 	int		len_s;
 	char	*t2;
     char    lettre;
+    int space;
 
 	i = start_s;
+    space = 0;
     lettre = s[start_s];
     if (lettre == '<' || lettre == '>')
     {
-        while ((s[i] == '<' || s[i] == '>') && s[i])
+        while ((s[i] == '<' || s[i] == '>' || s[i] == ' ' || s[i] == 9 ) && s[i])
         {
+            if(s[i] == ' ')
+                space++;
             i++;	
         }
     }
@@ -51,17 +55,22 @@ static char	*t2f(char const *s, int start_s)
     {
         while (s[i] == lettre && s[i])
         {
+            if(s[i] == ' ')
+                space++;
             i++;			
         }
     }		
-	len_s = i - start_s;
+	len_s = i - start_s - space;
 	i = 0;
 	t2 = malloc((len_s + 1) * sizeof(char));
 	if (t2 == NULL)
 		return (NULL);
 	while (i < len_s)
 	{
-		t2[i] = s[start_s + i];
+        if(s[start_s + i] != ' ' && s[start_s + i] != 9)
+		    t2[i] = s[start_s + i];
+        else
+            start_s++;
 		i++;
 	}
 	t2[i] = '\0';
@@ -89,14 +98,14 @@ char	**ft_split_ope(char const *s)
         lettre = s[i];
         if (lettre == '<' || lettre == '>')
         {
-            while ((s[i] == '<' || s[i] == '>') && s[i])
+            while ((s[i] == '<' || s[i] == '>' || s[i] == ' ' || s[i] == 9) && s[i])
             {
                 i++;	
             }
         }
         else
         {
-            while (s[i] == lettre && s[i])
+            while ((s[i] == lettre  || s[i] == ' ' || s[i] == 9 )&& s[i])
             {
                 i++;	
             }
@@ -108,19 +117,19 @@ char	**ft_split_ope(char const *s)
 
 #include <stdio.h>
 
-int	main(int c, char *v[])
-{
-	int		i;
-	char	**a;
+// int	main(int c, char *v[])
+// {
+// 	int		i;
+// 	char	**a;
 
-	(void)c;
-	i = 0;
-	a = ft_split_ope(v[1]);
-	while (a[i])
-	{
-		printf("%s\n", a[i]);
-		i++;
-	}
-	i = 0;
-	return (0);
-}
+// 	(void)c;
+// 	i = 0;
+// 	a = ft_split_ope(v[1]);
+// 	while (a[i])
+// 	{
+// 		printf("%s\n", a[i]);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	return (0);
+// }
