@@ -42,7 +42,7 @@ char	**strdup_2d(char **s)
 	return (t);
 }
 
-int	isin_2d(char **str, char *check)
+int	isin_2d_equal(char **str, char *check)
 {
 	int	j;
 	int	count;
@@ -64,6 +64,29 @@ int	isin_2d(char **str, char *check)
 	return (1);
 }
 
+int	isin_2d_delim(char **str, char *check, char delim)
+{
+	int	j;
+	int	count;
+	char 	*temp;
+
+	j = 0;
+	count = 0;
+	while (str[j])
+	{
+		temp = copy_until(str[j], delim);
+		if (!temp)
+			return (1);
+		if(ft_strcmp(temp, check) == 0)
+			count++;
+		free (temp);
+		j++;
+	}
+	if (count == 0)
+		return (0);
+	return (1);
+}
+
 int add_last_2d(char ***str2, char *add)
 {
 	char    **t;
@@ -75,7 +98,7 @@ int add_last_2d(char ***str2, char *add)
 	temp = copy_until(add, '=');
 	if (!temp)
 		return (1);
-	if (isin_2d((*str2), temp) == 1)
+	if (isin_2d_equal((*str2), temp) == 1)
 		rmv_str_2d(str2, temp);
 	nitems = str_len_2d(*str2);
 	t = malloc((nitems + 2) * sizeof(char *));
@@ -119,38 +142,4 @@ char	*copy_until(char *str, char c)
 	return (new);
 }
 
-int	rmv_str_2d(char ***str2, char *rmv)
-{
-	char	**t;
-	char	*temp;
-	int		i;
-	int		j;
-	int		nitems;
-
-	j = 0;
-	nitems = str_len_2d(*str2);
-	if (!rmv)
-		return (0);
-	temp = ft_strjoin(rmv, "=");
-	if (!temp)
-		return (1);
-	if (isin_2d((*str2), rmv) == 0)
-		return (free(temp), 0);
-	t = malloc((nitems) * sizeof(char *));
-	if (t == NULL)
-		return (1);
-	j = 0;
-	i = 0;
-	while ((*str2)[j])
-	{
-		if(ft_strncmp((*str2)[j], temp, strlen(temp)) != 0)
-			t[i++] = ft_strdup((*str2)[j]);
-		j++;
-	}
-	t[i] = NULL;
-	cleanexit(*str2);
-	*str2 = t;
-	free(temp);
-	return (0);
-}
 

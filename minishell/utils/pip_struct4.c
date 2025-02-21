@@ -77,9 +77,9 @@ char	*get_path_var(char *envp[], char *p1)
 	while (envp[i])
 	{
 		j = 0;
-		while (envp[i][j] == p1[j])
+		while (envp[i][j] && envp[i][j] == p1[j])
 			j++;
-		if (j == len_p1)
+		if (j == len_p1 && envp[i][j] == '=')
 		{
 			return (envp[i] + j + 1);
 		}
@@ -105,7 +105,7 @@ void exe_other(t_list *pip)
         char **str;
 
         str = ft_split(pip->cmd, ' ');
-        if (ft_strcmp(str[0], "cd") == 0 && str[1])
+        if (ft_strcmp(str[0], "cd") == 0)
                 (cleanexit(str), cd1(pip));
         else if (ft_strcmp(str[0], "pwd") == 0)
                 (cleanexit(str), pwd1(pip));
@@ -118,5 +118,5 @@ void exe_other(t_list *pip)
         else if (ft_strcmp(str[0], "export") == 0)
                 (export1(pip, str), ifexit(pip, str));
         else if (ft_strcmp(str[0], "unset") == 0)
-                (rmv_str_2d(pip->data->envp, str[1]), ifexit(pip, str));
+                (unset1(pip, str), ifexit(pip, str));
 }

@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/19 14:02:25 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:52:11 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int is_other(t_list *pip);
 int     is_cmd(t_list *pip);
 void exe_other(t_list *pip);
 void exe_other_isolate(t_list *pip);
-int	isin_2d(char **str, char *check);
 void     ifexit(t_list *pip, char **str);
 
 // builtin
@@ -95,6 +94,7 @@ void export1(t_list *pip, char **str);
 int     pwd1(t_list *pip);
 int     env1(t_list *pip);
 int     echo1(t_list *pip);
+int     unset1(t_list *pip, char **str);
 
 
 
@@ -119,6 +119,8 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n);
 char	*ft_strstr(char *str, char *to_find);
 void	*ft_memcpy(void *dest_str, const void *src_str, size_t n);
 char	*copy_until(char *str, char c);
+int	isin_2d_delim(char **str, char *check, char delim);
+int	isin_2d_equal(char **str, char *check);
 // int pass_quote(char quote, const char* str, int i);
 
 // various

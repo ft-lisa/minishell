@@ -3,6 +3,7 @@
 int     pwd1(t_list *pip)
 {
         char *buf;
+        char *err;
         char **str;
 
         str = ft_split(pip->cmd, ' ');
@@ -18,8 +19,11 @@ int     pwd1(t_list *pip)
                 }
         }
         buf = malloc(4097 * sizeof(char));
-        getcwd(buf, 4096);
-        printf("%s\n", buf);
+        err = getcwd(buf, 4096);
+        if (err)
+                printf("%s\n", buf);
+        else
+                ft_printf_fd(2, "pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
         free(buf);
         ifexit(pip, str);
         return (0);

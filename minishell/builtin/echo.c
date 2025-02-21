@@ -14,7 +14,7 @@ int     echod(char *envp[], char *p1, int *i)
 	if (!temp)
 		return (-2);
         *i += ft_strlen(copy) + 1;
-        if (isin_2d(envp, copy) == 0)
+        if (isin_2d_equal(envp, copy) == 0)
         {
                 (free(copy), free(temp));
                 return (-1);
