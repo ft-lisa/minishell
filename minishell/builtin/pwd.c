@@ -1,5 +1,23 @@
 #include "../minishell.h"
 
+
+char     *pwd2(t_list *pip)
+{
+        char *buf;
+        char *err;
+        char **str;
+
+        buf = malloc(4097 * sizeof(char));
+        err = getcwd(buf, 4096);
+        if (!err)
+        {
+                ft_printf_fd(2, "chdir: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+                free(buf);
+                return (NULL);
+        }
+        return (buf);
+}
+
 int     pwd1(t_list *pip)
 {
         char *buf;

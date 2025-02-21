@@ -37,7 +37,6 @@ int	echo_var2(char *envp[], char *p1)
 	i = 0;
         k = 0;
         len_p1 = ft_strlen(p1);
-
         while (p1[i])
         {
                 if (p1[i] == '$')

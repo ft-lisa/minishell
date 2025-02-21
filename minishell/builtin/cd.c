@@ -17,6 +17,31 @@ int     error_cd(char **str)
         }
 }
 
+int cd_pwd(t_list *pip, char *buf)
+{
+        int     ret;
+        char    *temp;
+        char    *path;
+
+        ret = chdir(buf);
+        if (ret != -1)
+        {
+                path = get_path_var(*(pip->data->envp), "PWD");
+                temp = ft_strjoin("OLDPWD=", path);
+                add_last_2d( pip->data->envp, temp);
+                free(temp);
+                path = pwd2(pip);
+                if (path)
+                {
+                        temp = ft_strjoin("PWD=", path);
+                        add_last_2d( pip->data->envp, temp);
+                        free(temp);
+                }
+                free(path);
+        }
+        return (ret);
+}
+
 int     cd1(t_list *pip)
 {
         char **str;
@@ -32,13 +57,13 @@ int     cd1(t_list *pip)
         {
                 buf = get_path_var(*(pip->data->envp), "HOME");
                 if (buf)
-                        ret = chdir(buf);
+                        ret = cd_pwd(pip, buf);
                 if (buf == NULL || ret == -1)
                         ft_printf_fd(2, "bash: cd: HOME not set\n");
         }
         else if (ft_strcmp(str[0], "cd") == 0 && str[1])
         {
-                ret = (chdir(str[1]));
+                ret = cd_pwd(pip, str[1]);
                 if (ret == -1)
                 {
                         printf("error_cd");
