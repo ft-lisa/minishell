@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/21 14:27:08 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/22 10:40:27 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,12 @@ int     is_cmd(t_list *pip);
 void exe_other(t_list *pip);
 void exe_other_isolate(t_list *pip);
 
-
+// utils 
+int operator(char* txt);
+void print_list(t_list *lst);
+int pass_quote1(char quote, char* str, int i);
+int size_delim(char **content, int j);
+int double_strlen(char **content);
 
 // libft
 char	*ft_strjoin(char const *s1, const char *s2);
@@ -106,6 +111,8 @@ char	**cleanexit(char **a);
 int	lvl2_len(int **fd);
 char	*free_list(t_list *list);
 char *del_c(char *str, char c);
+int all_space(char* line);
+int count_pipes (char* str);
 
 
 // printf_fd
@@ -135,11 +142,31 @@ int					ft_strcmp(char *s1, char *s2);
 // list creation
 char	**ft_split_txt(char const *s);
 char	**ft_split_quotes(char const *s, char c);
+char	**ft_split_ope_bis(char const *s, char c);
+int pass_quote_plus(char quote, const char* str, int i);
 char	**ft_split_ope(char const *s);
 int count_node(char* line);
 t_list *creat_list(char* line, char **envp, char **argv, int argc);
 t_list* init_list(int count, char **envp, char **argv, int argc);
 t_data	*init_exe(char **envp, char **argv, int argc, int count);
+void fill_file_list(t_list *list, char** content);
+int fill_com_list2(t_list *new, char** content, int j, int max);
+void fill_ope_list(t_list *list, char** content);
+void fill_com_list(t_list *list, char** content);
+
+//check list
+
+int count_puts (char* str);
+int count_puts_two (char* str);
+int check_files_puts(char** str);
+int check_pipe(char** split, char** ope, int i, int j);
+int check_puts(char** split, char** ope, int i, int j);
+int check_operator(char** split);
+
+//clean content list
+
+void del_space(t_list *command);
+void del_quotes(t_list *command);
 
 // temp
 void print_list(t_list *lst);

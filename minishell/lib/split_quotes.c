@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/17 17:42:11 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/22 10:37:23 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char *del_quo(char *str, char c, char lettre)
         num_quotes = 0;
         if (!str || str == NULL)
                 return (NULL);
-        while(str[i])
+        while(str[i] != '\0')
         {
             if(str[i] == c)
             {
@@ -208,7 +208,7 @@ char	**ft_split_quotes(char const *s, char c)
 	return (t1);
 }
 
-// #include <stdio.h>
+#include <stdio.h>
 
 // int	main(int c, char *v[])
 // {
@@ -217,10 +217,10 @@ char	**ft_split_quotes(char const *s, char c)
 
 // 	(void)c;
 // 	i = 0;
-// 	a = split_quotes(v[1], v[2][0]);
+// 	a = ft_split_quotes(v[1], v[2][0]);
 // 	while (a[i])
 // 	{
-// 		printf("%s\n", a[i]);
+// 		printf("|%s|\n", a[i]);
 // 		i++;
 // 	}
 // 	i = 0;

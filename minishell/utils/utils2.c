@@ -83,3 +83,53 @@ char	*no_args_cmd(char *cmd)
 	first_cmd[j] = '\0';
 	return (first_cmd);
 }
+
+int operator(char* txt)
+{
+    int i;
+
+    i = 0;
+    if(txt == NULL)
+        return(-1);
+    if (txt[i] == '|')
+        return(2);
+    if (txt[i] == '>' && txt[i + 1] == '>')
+        return(3);
+    if (txt[i] == '>')
+        return(1);
+    if (txt[i] == '<' && txt[i + 1] == '<')
+        return(7);
+    if (txt[i] == '<')
+      return(6);
+    if (txt[i] == '&')
+        return(8);
+    return(0);
+}
+
+void print_list(t_list *lst)
+{
+    int i;
+    while (lst)
+    {
+        i = 0;
+        printf("Command: |%s|\n", lst->cmd ? lst->cmd : "(null)");
+        printf("Nbr commands: |%d|\n", lst->data->n_cmd);
+        printf("Index: %d\n", lst->index);
+        printf("Exe1: %d\n", lst->exe1);
+        printf("Exe2: %d\n", lst->exe2);
+        printf("If File1: |%s|\n", lst->if_file1 ? lst->if_file1 : "(null)");
+        printf("If File2: |%s|\n", lst->if_file2 ? lst->if_file2 : "(null)");
+        if(lst->delim)
+        {
+            while(lst->delim[i] != NULL)
+            {
+                printf("If delim: |%s|\n", lst->delim[i] ? lst->delim[i] : "(null)");
+                i++;
+            }            
+        }
+
+            
+        printf("--------------------\n");
+        lst = lst->next;
+    }
+}
