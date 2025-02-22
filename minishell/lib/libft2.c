@@ -64,6 +64,26 @@ int	isin_2d_equal(char **str, char *check)
 	return (1);
 }
 
+int	isin_2d_index(char **str, char *check)
+{
+	int	j;
+	int	count;
+	char 	*temp;
+
+	j = 0;
+	count = 0;
+	temp = ft_strjoin(check, "=");
+	if (!temp)
+		return (1);
+	while (str[j])
+	{
+		if(ft_strncmp(str[j], temp, strlen(temp)) == 0)
+			return (free(temp), j);
+		j++;
+	}
+	return (free(temp), -1);
+}
+
 int	isin_2d_delim(char **str, char *check, char delim)
 {
 	int	j;
@@ -126,6 +146,32 @@ char	*copy_until(char *str, char c)
 	size = 0;
 	while (str[size])
 		if (str[size++] == c)
+			break;
+	if (str[size] == '\0')
+		return (ft_strdup(str));
+	size--;
+	new = malloc((size + 1) * sizeof(char));
+	if (!new)
+		return (NULL);
+	while (i < size)
+	{
+		new[i] = str[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}
+
+char	*copy_until_one(char *str, char *c)
+{
+	int	i;
+	int	size;
+	char	*new;
+
+	i = 0;
+	size = 0;
+	while (str[size])
+		if (isin(c, str[size++]) == 1)
 			break;
 	if (str[size] == '\0')
 		return (ft_strdup(str));

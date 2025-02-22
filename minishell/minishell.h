@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/21 18:24:06 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/22 14:05:15 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n);
 char	*ft_strstr(char *str, char *to_find);
 void	*ft_memcpy(void *dest_str, const void *src_str, size_t n);
 char	*copy_until(char *str, char c);
+char	*copy_until_one(char *str, char *c);
 int	isin_2d_delim(char **str, char *check, char delim);
 int	isin_2d_equal(char **str, char *check);
 // int pass_quote(char quote, const char* str, int i);
