@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/22 16:03:14 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/23 11:14:27 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 typedef struct s_pipex
 {
-	char			**envp;
+	char			***envp;
 	char			**path;
 	int				**fd;
 	int				*pid;
@@ -73,6 +73,7 @@ int	**ft_add_fd(int **fd, int len);
 int	wait_all(int *pid, int len);
 void	ft_close_all(int **fd);
 char	*get_path_command(char **paths, char *command);
+char	*get_path_var(char *envp[], char *p1);
 char	*no_args_cmd(char *cmd);
 void type1(t_list *pip);
 void type2(t_list *pip);
@@ -85,6 +86,16 @@ int is_other(t_list *pip);
 int     is_cmd(t_list *pip);
 void exe_other(t_list *pip);
 void exe_other_isolate(t_list *pip);
+void     ifexit(t_list *pip, char **str);
+
+// builtin
+int     cd1(t_list *pip);
+void export1(t_list *pip, char **str);
+int     pwd1(t_list *pip);
+char     *pwd2(t_list *pip);
+int     env1(t_list *pip);
+int     echo1(t_list *pip);
+int     unset1(t_list *pip, char **str);
 
 // utils 
 int operator(char* txt);
@@ -103,6 +114,22 @@ char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, const char *set);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
  int pass_quote(char quote, const char* str, int i);
+int	str_len_2d(char **str);
+char	**strdup_2d(char **s);
+int     add_last_2d(char ***str2, char *add);
+int     rmv_str_2d(char ***str2, char *rmv);
+char	*ft_strchr(const char *str, int search_str);
+int	ft_isalnum_under_plus(char *str);
+char	*ft_strcpy(char *dest, char *src);
+char	*ft_strcat(char *dest, const char *src);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char	*ft_strstr(char *str, char *to_find);
+void	*ft_memcpy(void *dest_str, const void *src_str, size_t n);
+char	*copy_until(char *str, char c);
+char	*copy_until_one(char *str, char *c);
+int	isin_2d_delim(char **str, char *check, char delim);
+int	isin_2d_equal(char **str, char *check);
+// int pass_quote(char quote, const char* str, int i);
 
 // various
 int	isin(char *s, char c);
@@ -169,6 +196,8 @@ int check_operator(char** split);
 void del_space(t_list *command);
 void del_quotes(t_list *command);
 
+// parcing
+char	*parcing_export(char *str);
 // temp
 void print_list(t_list *lst);
 

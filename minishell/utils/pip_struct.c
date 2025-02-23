@@ -6,12 +6,13 @@ void	free_pip(t_list *pip)
 		return ;
 	ft_close_all(pip->data->fd);
 	cleanexit_int(pip->data->fd);
-	cleanexit(pip->data->path);
+	if (pip->data->path)
+		cleanexit(pip->data->path);
 	cleanexit(pip->data->content);
 	free(pip->data->pid);
 	if(pip->delim)
 		free(pip->delim);
-	//free(pip->data);
+	free(pip->data);
 	free_list(pip);
 }
 
@@ -65,7 +66,7 @@ int	**ft_add_fd(int **fd, int len)
 	return (new_fd);
 }
 
-t_data	*init_exe(char **envp, char **argv, int argc, int count)
+t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 {
 	t_data *pipex;
 	int	i;
@@ -89,15 +90,15 @@ t_data	*init_exe(char **envp, char **argv, int argc, int count)
 	}
 	pipex->path = NULL;
 	pipex->exit1 = 0;
-	pipex->pid = malloc(count * sizeof(int));
+	pipex->pid = malloc(count * sizeof(int));    
 	if (!pipex->pid)
 		return (free(pipex), NULL);
 	pipex->pid[0] = 0;
 	pipex->path = ft_split_exe("error env", ' ');
-	if (pipex->envp[0] && pipex->envp[0][0] != 'V')
+	if (pipex->envp[0] && *(pipex->envp)[0][0] != 'V')
 	{
 		cleanexit(pipex->path);
-		pipex->path = get_path(pipex->envp);
+		pipex->path = get_path(*(pipex->envp));
 	}
 	return (pipex);
 }
