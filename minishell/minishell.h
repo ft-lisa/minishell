@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/22 10:40:27 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:03:14 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	*cleanexit_int(int **a);
 char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, const char *set);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
-// int pass_quote(char quote, const char* str, int i);
+ int pass_quote(char quote, const char* str, int i);
 
 // various
 int	isin(char *s, char c);
@@ -143,6 +143,7 @@ int					ft_strcmp(char *s1, char *s2);
 char	**ft_split_txt(char const *s);
 char	**ft_split_quotes(char const *s, char c);
 char	**ft_split_ope_bis(char const *s, char c);
+char	**ft_split_puts(char const *s);
 int pass_quote_plus(char quote, const char* str, int i);
 char	**ft_split_ope(char const *s);
 int count_node(char* line);

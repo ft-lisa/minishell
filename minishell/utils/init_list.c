@@ -72,6 +72,7 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     char** content_node;
     t_list *command;
     int i = 0;
+    int j;
 
 
     if (all_space(line) == 1)
@@ -82,10 +83,15 @@ t_list *creat_list(char* line, char **envp, char **argv, int argc)
     // if (check_operator(content_node) == 0)
     //    return(NULL);
     command = init_list(count, envp, argv, argc);
-    fill_ope_list(command, content_node);
+    while(content_node[i])
+    {
+        content_node[i] = ft_strtrim(content_node[i], " ");
+        i++;
+    }
+    fill_ope_list(command, content_node);    
+    fill_com_list(command, content_node);
     print_list(command);
     return(NULL);
-    fill_com_list(command, content_node);
     fill_file_list(command, content_node);
     del_space(command);
     // printf("delim |%s| \n\n", command->delim); // print_info

@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/02/20 09:59:29 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/23 09:54:46 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static int	splitlen(char const *s1)
 
 	i = 0;
 	k = 0;
-	while (s1[i])
+	while (s1[i] != '\0')
 	{
 		if (s1[i] == '|' || s1[i] == '<' || s1[i] == '>' || s1[i] == '&')
 			k++;
-		while ((s1[i] == '|' || s1[i] == '<' || s1[i] == '>' || s1[i] == '&') && s1[i])
+		while ((s1[i] == '|' || s1[i] == '<' || s1[i] == '>' || s1[i] == '&') && s1[i] != '\0')
 		{
 			if(s1[i] == '"' || s1[i] == '\'')
 				i = pass_quote(s1[i], s1, i + 1);
@@ -41,7 +41,7 @@ static int	splitlen(char const *s1)
 		}
 		if (s1[i])
 			k++;
-		while ((s1[i] != '|' && s1[i] != '<' && s1[i] != '>' && s1[i] != '&') && s1[i])
+		while ((s1[i] != '|' && s1[i] != '<' && s1[i] != '>' && s1[i] != '&') && s1[i] != '\0')
 		{
 			if(s1[i] == '"' || s1[i] == '\'')
 				i = pass_quote(s1[i], s1, i + 1);

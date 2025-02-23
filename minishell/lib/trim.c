@@ -5,7 +5,7 @@ static int	isin2(const char *set, const char c)
 	size_t	i;
 
 	i = 0;
-	while (set[i] != '\0')
+	while (set[i] != '\0' && set[i])
 	{
 		if (set[i] == c)
 			return (1);

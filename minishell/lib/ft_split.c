@@ -7,7 +7,7 @@ static int	splitlen(char const *s1, char c1)
 
 	i = 0;
 	k = 0;
-	while (s1[i])
+	while (s1[i] != '\0')
 	{
 		while (s1[i] == c1 && s1[i])
 			i++;
