@@ -45,13 +45,11 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
     char** content_node;
     t_list *command;
     int i = 0;
-    int j;
-
+    char *temp;
 
     if (all_space(line) == 1)
         return(NULL);
-    content_node = ft_split_txt(line);
-    if(check_operator(content_node) == 0)
+    if(check_operator(line) == 1)
         return(NULL);
     content_node = ft_split_ope_bis(line, '|');
     // expand_vars(content_node, envp);
@@ -59,7 +57,9 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
     command = init_list(count, envp, argv, argc);
     while(content_node[i])
     {
+        temp = content_node[i];
         content_node[i] = ft_strtrim(content_node[i], " ");
+        free(temp);
         i++;
     }
     fill_ope_list(command, content_node);    

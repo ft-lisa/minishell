@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/24 09:27:43 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:53:52 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,13 +184,9 @@ void fill_ope_list(t_list *list, char** content);
 void fill_com_list(t_list *list, char** content);
 
 //check list
+int     chck2op(char *str);
+int check_operator(char* str);
 
-int count_puts (char* str);
-int count_puts_two (char* str);
-int check_files_puts(char** str);
-int check_pipe(char** split, char** ope, int i, int j);
-int check_puts(char** split, char** ope, int i, int j);
-int check_operator(char** split);
 
 //clean content list
 
