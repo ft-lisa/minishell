@@ -99,9 +99,9 @@ int check_pipe(char** split, char** ope, int i, int j) // good
         if (split[j - 1] == NULL)
         {
             num_pipes = count_pipes(ope[i]);
-            if(num_pipes == 2)
+            if(num_pipes == 1)
                 return(printf("bash: syntax error near unexpected token `|'\n"), 0);
-            if(num_pipes > 2)
+            if(num_pipes > 1)
                 return(printf("bash: syntax error near unexpected token `||'\n"), 0);
             return(1);
         }

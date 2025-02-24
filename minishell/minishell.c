@@ -24,9 +24,13 @@ int main(int argc, char** argv, char** envp)
             exit_minishell();
         add_history(str);
         exe = creat_list(str, &env, argv, argc);
-        exe->data->exit1 = error;
-        //print_list(exe);
-        error = exe1(exe);
+        if(exe)
+        {
+            exe->data->exit1 = error;
+            //print_list(exe);
+            error = exe1(exe);
+        }
+        
     }
 }
 
