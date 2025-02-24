@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/23 11:14:27 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/23 15:21:27 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void print_list(t_list *lst);
 int pass_quote1(char quote, char* str, int i);
 int size_delim(char **content, int j);
 int double_strlen(char **content);
+int search_exe2(char* content);
+int search_exe1(char* content);
 
 // libft
 char	*ft_strjoin(char const *s1, const char *s2);
@@ -113,7 +115,6 @@ char	*cleanexit_int(int **a);
 char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, const char *set);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
- int pass_quote(char quote, const char* str, int i);
 int	str_len_2d(char **str);
 char	**strdup_2d(char **s);
 int     add_last_2d(char ***str2, char *add);
@@ -174,9 +175,9 @@ char	**ft_split_puts(char const *s);
 int pass_quote_plus(char quote, const char* str, int i);
 char	**ft_split_ope(char const *s);
 int count_node(char* line);
-t_list *creat_list(char* line, char **envp, char **argv, int argc);
+t_list *creat_list(char* line, char ***envp, char **argv, int argc);
 t_list* init_list(int count, char **envp, char **argv, int argc);
-t_data	*init_exe(char **envp, char **argv, int argc, int count);
+t_data	*init_exe(char ***envp, char **argv, int argc, int count);
 void fill_file_list(t_list *list, char** content);
 int fill_com_list2(t_list *new, char** content, int j, int max);
 void fill_ope_list(t_list *list, char** content);
@@ -200,5 +201,7 @@ void del_quotes(t_list *command);
 char	*parcing_export(char *str);
 // temp
 void print_list(t_list *lst);
+
+int check_exit(char** str);
 
 #endif //FT_H

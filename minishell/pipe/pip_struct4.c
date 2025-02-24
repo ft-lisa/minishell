@@ -113,7 +113,8 @@ void exe_other(t_list *pip)
         else if (ft_strcmp(str[0], "echo") == 0)
                 (echo1(pip), ifexit(pip, str));
         else if (ft_strcmp(str[0], "exit") == 0)
-                (free_pip(pip), cleanexit(str), exit(0));
+                if(check_exit(str) == 1)
+                        (free_pip(pip), cleanexit(str), exit(0));  
         else if (ft_strcmp(str[0], "export") == 0)
                 (export1(pip, str), ifexit(pip, str));
         else if (ft_strcmp(str[0], "unset") == 0)

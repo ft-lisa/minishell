@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/22 10:37:23 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:01:22 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@ int last_quotes(char* str, char quotes)
         i++;
     }
     return(j);
-}
-int pass_quote_plus(char quote, const char* str, int i)
-{
-    int j;
-    
-    j = i;
-    while(str[i] != quote && str[i] != '\0')
-        i++;
-    if (str[i] == '\0')
-        return(j);
-    return(i);
 }
 
 char *del_quo(char *str, char c, char lettre)
@@ -117,7 +106,7 @@ void del(char **command)
 
 
 
-static int	splitlen(char const *s1, char c1)
+static int	splitlen5(char const *s1, char c1)
 {
 	int	i;
 	int	k;
@@ -177,7 +166,7 @@ char	**ft_split_quotes(char const *s, char c)
 	int		i;
 	int		j;
 
-	t1 = malloc((splitlen(s, c) + 1) * sizeof(char *));
+	t1 = malloc((splitlen5(s, c) + 1) * sizeof(char *));
 	if (t1 == NULL)
 		return (NULL);
 	i = 0;

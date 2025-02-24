@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_exe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/06 11:48:49 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:00:38 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*t2f(char const *s, int start_s, char c)
 	return (t2);
 }
 
-int	splitlen(char const *s1, char c1)
+int	splitlen1(char const *s1, char c1)
 {
 	int	i;
 	int	k;
@@ -103,7 +103,7 @@ char	**ft_split_exe(char *s, char c)
 	int		i;
 	int		j;
 
-	t1 = malloc((splitlen(s, c) + 1) * sizeof(char *));
+	t1 = malloc((splitlen1(s, c) + 1) * sizeof(char *));
 	if (t1 == NULL)
 		return (NULL);
 	i = 0;

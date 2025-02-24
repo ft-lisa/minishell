@@ -6,23 +6,13 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/02/23 09:54:46 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:07:49 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int pass_quote(char quote, const char* str, int i)
-{
-    while(str[i] != quote && str[i] != '\0')
-        i++;
-	i++;
-	while(str[i] == ' ')
-		i++;
-    return(i - 1);
-}
-
-static int	splitlen(char const *s1)
+static int	splitlen6(char const *s1)
 {
 	int	i;
 	int	k;
@@ -36,7 +26,7 @@ static int	splitlen(char const *s1)
 		while ((s1[i] == '|' || s1[i] == '<' || s1[i] == '>' || s1[i] == '&') && s1[i] != '\0')
 		{
 			if(s1[i] == '"' || s1[i] == '\'')
-				i = pass_quote(s1[i], s1, i + 1);
+				i = pass_quote_plus(s1[i], s1, i + 1);
 			i++;						
 		}
 		if (s1[i])
@@ -44,7 +34,7 @@ static int	splitlen(char const *s1)
 		while ((s1[i] != '|' && s1[i] != '<' && s1[i] != '>' && s1[i] != '&') && s1[i] != '\0')
 		{
 			if(s1[i] == '"' || s1[i] == '\'')
-				i = pass_quote(s1[i], s1, i + 1);
+				i = pass_quote_plus(s1[i], s1, i + 1);
 			i++;	
 		}
 	}
@@ -61,7 +51,7 @@ static char	*t2f(char const *s, int start_s)
 	while ((s[i] == '|' || s[i] == '<' || s[i] == '>' || s[i] == '&' )&& s[i])
 	{
 		if(s[i] == '"' || s[i] == '\'')
-			i = pass_quote(s[i], s, i + 1);	
+			i = pass_quote_plus(s[i], s, i + 1);	
 		i++;			
 	}		
 	if (i == start_s)
@@ -69,7 +59,7 @@ static char	*t2f(char const *s, int start_s)
 		while ((s[i] != '|' && s[i] != '<' && s[i] != '>' && s[i] != '&') && s[i])
 		{
 			if(s[i] == '"' || s[i] == '\'')
-				i = pass_quote(s[i], s, i + 1);
+				i = pass_quote_plus(s[i], s, i + 1);
 			i++;	
 		}
 	}
@@ -94,12 +84,11 @@ char	**ft_split_txt(char const *s)
 	int		j;
 	int		check;
 
-	t1 = malloc((splitlen(s) + 1) * sizeof(char *));
+	t1 = malloc((splitlen6(s) + 1) * sizeof(char *));
 	if (t1 == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;
-	//printf("taille %d\n",splitlen(s));
 	while (s[i])
 	{
 		t1[j] = t2f(s, i);
@@ -109,7 +98,7 @@ char	**ft_split_txt(char const *s)
 		while ((s[i] != '|' && s[i] != '<' && s[i] != '>' && s[i] != '&') && s[i])
 		{
 			if(s[i] == '"' || s[i] == '\'')
-				i = pass_quote(s[i], s, i + 1);	
+				i = pass_quote_plus(s[i], s, i + 1);	
 			i++;	
 		}
 		if (i == check)
@@ -117,7 +106,7 @@ char	**ft_split_txt(char const *s)
 			while ((s[i] == '|' || s[i] == '<' || s[i] == '>' || s[i] == '&') && s[i])
 			{
 				if(s[i] == '"' || s[i] == '\'')
-					i = pass_quote(s[i], s, i + 1);
+					i = pass_quote_plus(s[i], s, i + 1);
 				i++;
 			}	
 		}

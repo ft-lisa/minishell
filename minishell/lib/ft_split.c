@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-static int	splitlen(char const *s1, char c1)
+static int	splitlen3(char const *s1, char c1)
 {
 	int	i;
 	int	k;
@@ -49,7 +49,7 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	int		j;
 
-	t1 = malloc((splitlen(s, c) + 1) * sizeof(char *));
+	t1 = malloc((splitlen3(s, c) + 1) * sizeof(char *));
 	if (t1 == NULL)
 		return (NULL);
 	i = 0;

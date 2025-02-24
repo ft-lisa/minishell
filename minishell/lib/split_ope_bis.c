@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/22 10:40:07 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:01:11 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // echo dfasg       sdfdsf "|dfadfa     ''  |" dsfdsf
 
 
-static int	splitlen(char const *s1, char c1)
+static int	splitlen4(char const *s1, char c1)
 {
 	int	i;
 	int	k;
@@ -77,7 +77,7 @@ char	**ft_split_ope_bis(char const *s, char c)
 	int		i;
 	int		j;
 
-	t1 = malloc((splitlen(s, c) + 1) * sizeof(char *));
+	t1 = malloc((splitlen4(s, c) + 1) * sizeof(char *));
 	if (t1 == NULL)
 		return (NULL);
 	i = 0;

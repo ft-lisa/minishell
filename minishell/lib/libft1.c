@@ -1,15 +1,5 @@
 #include "../minishell.h"
 
-size_t	ft_strlen(const char *c)
-{
-	size_t	i;
-
-	i = 0;
-	while (c[i] != '\0')
-		i++;
-	return (i);
-}
-
 char	*ft_strjoin(char const *s1, const char *s2)
 {
 	char	*t;

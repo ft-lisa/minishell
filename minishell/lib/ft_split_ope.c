@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-static int	splitlen(char const *s1)
+static int	splitlen2(char const *s1)
 {
 	int	i;
 	int	k;
@@ -84,12 +84,11 @@ char	**ft_split_ope(char const *s)
 	int		j;
 	char lettre;
 
-	t1 = malloc((splitlen(s) + 1) * sizeof(char *));
+	t1 = malloc((splitlen2(s) + 1) * sizeof(char *));
 	if (t1 == NULL)
 		return (NULL);
 	i = 0;
 	j = 0;
-	//printf("taille %d\n",splitlen(s));
 	while (s[i])
 	{
 		t1[j] = t2f(s, i);
