@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/23 15:21:27 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/24 09:27:43 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ int pass_quote_plus(char quote, const char* str, int i);
 char	**ft_split_ope(char const *s);
 int count_node(char* line);
 t_list *creat_list(char* line, char ***envp, char **argv, int argc);
-t_list* init_list(int count, char **envp, char **argv, int argc);
+t_list* init_list(int count, char ***envp, char **argv, int argc);
 t_data	*init_exe(char ***envp, char **argv, int argc, int count);
 void fill_file_list(t_list *list, char** content);
 int fill_com_list2(t_list *new, char** content, int j, int max);

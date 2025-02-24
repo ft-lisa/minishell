@@ -10,7 +10,7 @@ void init_list2(t_list *list)
         list->delim = NULL;
 }
 
-t_list* init_list(int count, char **envp, char **argv, int argc)
+t_list* init_list(int count, char ***envp, char **argv, int argc)
 {
     t_list *first;
     t_list *list;
@@ -49,6 +49,9 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
 
 
     if (all_space(line) == 1)
+        return(NULL);
+    content_node = ft_split_txt(line);
+    if(check_operator(content_node) == 0)
         return(NULL);
     content_node = ft_split_ope_bis(line, '|');
     // expand_vars(content_node, envp);
