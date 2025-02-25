@@ -53,7 +53,7 @@ int is_other(t_list *pip)
         else if (ft_strcmp(str[0], "env") == 0 && is_cmd_2d(pip) == 0)
                 ret = 1;
         else if (ft_strcmp(str[0], "echo") == 0)
-                ret = 1;
+                 ret = 1;
         else if (ft_strcmp(str[0], "exit") == 0)
                 ret = 1;
         else if (ft_strcmp(str[0], "export") == 0)

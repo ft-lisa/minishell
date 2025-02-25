@@ -27,10 +27,9 @@ int main(int argc, char** argv, char** envp)
         if(exe)
         {
             exe->data->exit1 = error;
-            print_list(exe);
+            // print_list(exe);
             error = exe1(exe);
         }
-        
     }
 }
 

@@ -5,7 +5,7 @@ int     ft_isalldigit(char* str)
     int i;
 
     i = 0;
-    printf("v2: %s\n", str);
+    // printf("v2: %s\n", str);
     if (str[0] == '-' || str[0] == '+') 
         i++;     
     while(str[i])

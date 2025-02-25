@@ -50,3 +50,9 @@ bash-5.1$ ls || grep "df
 
 i should check first if there is any problem from left to right
 ###############
+
+
+
+errors
+"" ""
+'' "" '"' "'" '""""""""""""""""""""' "'''''''''''''''''''"

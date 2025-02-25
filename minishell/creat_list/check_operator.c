@@ -5,7 +5,10 @@ int     chck1op(char *str)
     char *temp;
     int i;
 
-    temp = ft_strtrim(str, " ");
+    if(str && str[0])
+        temp = ft_strtrim(str, " ");
+    else
+        return (0);
     i = 0;
     if (isin("<>", temp[0]) && !temp[1])
         (ft_printf_fd(2, "bash: syntax error near unexpected token `newline'\n"), i++);
@@ -142,9 +145,12 @@ int     chck2op(char *str)
 	char	**op;
 	int		i;
 
+    if(str && str[0])
+        temp = ft_strtrim(str, " ");
+    else
+        return (0);
 	i = chck2op_type(str);
 	op = ft_split("<< >> < > |", ' ');
-    temp = ft_strtrim(str, " ");
 	if (isconsecutive_opsloop(str, op[i]) == 1)
         return (free(temp), cleanexit(op), 1);
     else if (isin("<>|", temp[ft_strlen(temp) - 1]) == 1)
@@ -155,7 +161,29 @@ int     chck2op(char *str)
     return (free(temp), cleanexit(op), 0);
 }
 
-char	*remove_biggest_quotes(char *str)
+char pick_quote(char *str)
+{
+	char del_q;
+    char *p_single;
+    char *p_double;
+
+    p_single = ft_strchr(str, '\'');
+    p_double = ft_strchr(str, '\"');
+    if (p_single && p_double)
+    {
+        if (p_single < p_double)
+            del_q = '\'';
+        else
+            del_q = '\"';
+    }
+    else if (p_single)
+        del_q = '\'';
+    else
+        del_q = '\"';
+    return (del_q);
+}
+
+char	*remove_first_quotes(char *str)
 {
 	char *temp;
 	char *temp2;
@@ -164,34 +192,56 @@ char	*remove_biggest_quotes(char *str)
 
 	if (ft_strchr(str, '\'') == NULL && ft_strchr(str, '\"') == NULL)
 		return (str);
-	if (isin(str, '\'') == 1)
-		del_q = '\'';
-	if (isin(str, '\"') == 1)
-		del_q = '\"';
-	if ((isin(str, '\"') == 1)  && (isin(str, '\'') == 1))
-		if (ft_strlen(ft_strchr(str, '\'')) > ft_strlen(ft_strchr(str, '\"')))
-			del_q = '\'';
+	del_q = pick_quote(str);
 	temp = copy_until(str, del_q);
 	temp2 = ft_strchr(str, del_q) + 1;
-	while (temp2 && temp2[0])
-	{
-		if(!ft_strchr(temp2, del_q))
-			break;
-		temp2 = ft_strchr(temp2, del_q) + 1;
-	}
-	join = ft_strjoin(temp, temp2);
+	temp2 = ft_strchr(temp2, del_q) + 1;
+    if (temp && temp2 && temp[0] && temp2[0])
+	    join = ft_strjoin(temp, temp2);
+    else if (!temp || !temp[0])
+        join = ft_strdup(temp2);
+    else
+        return (free(temp), temp);
 	free(temp);
 	return (join);
 }
 
+char	*remove_all_quotes(char *str)
+{
+	char *temp;
+	char *temp2;
+	char *join;
+	char del_q;
+
+    del_q = pick_quote(str);
+    temp = ft_strdup(str);
+    while (count_c(temp, '\'') > 0 || count_c(temp, '\"') > 0)
+    {
+        temp2 = remove_first_quotes(temp);
+        if (ft_strchr(temp2, '\'') == NULL && ft_strchr(temp2, '\"') == NULL)
+            return (free(temp), temp2);
+        free(temp);
+        temp = ft_strdup(temp2);
+        free(temp2);
+        del_q = pick_quote(temp);
+        if (count_c(temp, del_q) == 1)
+            return (temp);
+    }
+    free(temp);
+	return (str);
+}
 
 int check_operator(char* str1)
 {
 	char *str;
+    int     i;
+    int     j;
 
-	str = remove_biggest_quotes(str1);
-	printf("%s\n", str);
-	if (isin(str, '\'') == 1 || isin(str, '\"') == 1)
+    i = 0;
+    j = 0;
+	str = remove_all_quotes(str1);
+    printf("q rem %s |%d| |%d|\n\n", str, count_c(str, '\''), count_c(str, '\"'));
+	if (count_c(str, '\'') % 2 != 0 || count_c(str, '\"') % 2 != 0)
 		{
 			ft_printf_fd(2, "bash: syntax error: unclosed quotes\n");
 			return(free(str), 1);

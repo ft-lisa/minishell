@@ -65,13 +65,14 @@ int     echo1(t_list *pip)
                 j++;
         while(str[j])
         {
-                error = echo_var2(*pip->data->envp, str[j]);
+                // error = echo_var2(*pip->data->envp, str[j]);
+                ft_printf_fd(1, "%s", str[j]);
                 j++;
-                if (str[j] && error != -1)
-                        printf(" ");
+                if (str[j])
+                        ft_printf_fd(1, " ");
         }
         if (!str[1] || ft_strcmp(str[1], "-n") != 0)
-                printf("\n");
+                ft_printf_fd(1, "\n");
         cleanexit(str);
         return (0);
 }

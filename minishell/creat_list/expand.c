@@ -23,7 +23,7 @@ int	replace_str(char **mainstr, char *before, char *after, int index)
 		i++;
 	}
 	i = 0;
-	while(after[i])
+	while(after && after[i])
 	{
 		new[index + i] = after[i];
 		i++;
@@ -87,7 +87,8 @@ int	expand(char **cmd, char **env)
 		replace_str(cmd, temp, temp2, i);
 		return (free(temp), 0);
 	}
-	return (free(temp), 1);
+	replace_str(cmd, temp, NULL, i);
+	return (free(temp), 0);
 }
 
 int 	expand_vars(char **cmd, char ***env)

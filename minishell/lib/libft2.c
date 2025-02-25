@@ -141,7 +141,7 @@ char	*copy_until(char *str, char c)
 			break;
 	if (str[size] == '\0')
 		return (ft_strdup(str));
-	size--;
+	size = (size > 0) * (size - 1);
 	new = malloc((size + 1) * sizeof(char));
 	if (!new)
 		return (NULL);

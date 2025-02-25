@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/25 11:56:45 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:19:13 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ char	*copy_until_alnum_under(char *str);
 int	isin_2d_delim(char **str, char *check, char delim);
 int	isin_2d_equal(char **str, char *check);
 int	ft_isalnum(int c);
+int	count_c(char *str, char c);
 // int pass_quote(char quote, const char* str, int i);
 
 // various

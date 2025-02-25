@@ -53,3 +53,21 @@ int	ft_isalnum(int c)
 	else
 		return (0);
 }
+
+int	count_c(char *str, char c)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	if (!str || !str[0] || !c)
+		return (0);
+	while(str[i])
+	{
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
+}
