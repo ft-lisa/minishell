@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/24 11:53:52 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:56:45 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,10 @@ char	*ft_strstr(char *str, char *to_find);
 void	*ft_memcpy(void *dest_str, const void *src_str, size_t n);
 char	*copy_until(char *str, char c);
 char	*copy_until_one(char *str, char *c);
+char	*copy_until_alnum_under(char *str);
 int	isin_2d_delim(char **str, char *check, char delim);
 int	isin_2d_equal(char **str, char *check);
+int	ft_isalnum(int c);
 // int pass_quote(char quote, const char* str, int i);
 
 // various
@@ -195,6 +197,7 @@ void del_quotes(t_list *command);
 
 // parcing
 char	*parcing_export(char *str);
+int 	expand_vars(char **cmd, char ***env);
 // temp
 void print_list(t_list *lst);
 

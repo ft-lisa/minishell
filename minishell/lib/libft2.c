@@ -1,13 +1,5 @@
 #include "../minishell.h"
 
-int	ft_isalnum(int c)
-{
-	if ((c > 64 && c < 91) || (c > 96 && c < 123) || (c > 47 && c < 58))
-		return (1);
-	else
-		return (0);
-}
-
 int	str_len_2d(char **str)
 {
 	int	j;
@@ -188,4 +180,30 @@ char	*copy_until_one(char *str, char *c)
 	return (new);
 }
 
+char	*copy_until_alnum_under(char *str)
+{
+	int	i;
+	int	size;
+	char	*new;
 
+	i = 0;
+	size = 0;
+	while (str[size])
+	{
+		size++;
+		if (ft_isalnum(str[size]) == 0 || str[size] == '_')
+			break;
+	}
+	if (str[size] == '\0')
+		return (ft_strdup(str));
+	new = malloc((size + 1) * sizeof(char));
+	if (!new)
+		return (NULL);
+	while (i < size)
+	{
+		new[i] = str[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}

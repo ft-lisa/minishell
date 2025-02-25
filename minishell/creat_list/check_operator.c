@@ -163,7 +163,7 @@ char	*remove_biggest_quotes(char *str)
 	char del_q;
 
 	if (ft_strchr(str, '\'') == NULL && ft_strchr(str, '\"') == NULL)
-		return (ft_strdup(str));
+		return (str);
 	if (isin(str, '\'') == 1)
 		del_q = '\'';
 	if (isin(str, '\"') == 1)
@@ -200,5 +200,7 @@ int check_operator(char* str1)
         return (free(str), 1);
     else if (chck2op(str) == 1)
         return (free(str), 1);
-    return (0);
+    if (ft_strcmp(str1, str) == 0)
+        return (0);
+    return (free(str), 0);
 }

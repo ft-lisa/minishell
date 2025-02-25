@@ -45,3 +45,11 @@ void	*ft_memcpy(void *dest_str, const void *src_str, size_t n)
 	}
 	return (dest_str);
 }
+
+int	ft_isalnum(int c)
+{
+	if ((c > 64 && c < 91) || (c > 96 && c < 123) || (c > 47 && c < 58))
+		return (1);
+	else
+		return (0);
+}

@@ -51,8 +51,10 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
         return(NULL);
     if(check_operator(line) == 1)
         return(NULL);
+    if (expand_vars(&line, envp) == -1)
+        return (NULL);
     content_node = ft_split_ope_bis(line, '|');
-    // expand_vars(content_node, envp);
+    free(line);
     count = double_strlen(content_node);
     command = init_list(count, envp, argv, argc);
     while(content_node[i])
