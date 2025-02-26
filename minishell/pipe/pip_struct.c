@@ -90,6 +90,7 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 	}
 	pipex->path = NULL;
 	pipex->exit1 = 0;
+	pipex->new_exit = 0;
 	pipex->pid = malloc(count * sizeof(int));    
 	if (!pipex->pid)
 		return (free(pipex), NULL);
@@ -103,7 +104,7 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 	return (pipex);
 }
 
-int	wait_all(int *pid, int len)
+int	wait_all(int *pid, int len, t_list *pip)
 {
 	int	i;
 	int	k;
@@ -112,6 +113,8 @@ int	wait_all(int *pid, int len)
 	i = 0;
 	k = 0;
 	rn = 0;
+	if (is_other(pip) == 1 && pip->data->n_cmd == 1)
+		return(pip->data->new_exit);
 	if (!pid || !pid[0])
 		return (0);
 	while (i < len)

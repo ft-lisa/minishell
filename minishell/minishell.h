@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/26 13:05:35 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:55:54 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_pipex
     int             n_cmd;
     char            **content;
     int             exit1;
+    int             new_exit;
 }					t_data;
 
 typedef struct s_list
@@ -70,7 +71,7 @@ typedef struct s_list
 int exe1(t_list *pip);
 void	free_pip(t_list *pip);
 int	**ft_add_fd(int **fd, int len);
-int	wait_all(int *pid, int len);
+int	wait_all(int *pid, int len, t_list *pip);
 void	ft_close_all(int **fd);
 char	*get_path_command(char **paths, char *command);
 char	*get_path_var(char *envp[], char *p1);

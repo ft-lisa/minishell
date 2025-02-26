@@ -93,7 +93,7 @@ void     ifexit(t_list *pip, char **str)
         if (pip->data->n_cmd > 1)
         {
                 free_pip(pip);
-                exit(0);
+                exit(pip->data->new_exit);
         }
 }
  

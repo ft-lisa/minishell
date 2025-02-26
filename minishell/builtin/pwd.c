@@ -32,6 +32,7 @@ int     pwd1(t_list *pip)
                 if (str[1][0] == '-' && str[1][1])
                 {
                         ft_printf_fd(2, "bash: pwd: %c%c: invalid option\n", str[1][0], str[1][1]);
+                        pip->data->new_exit = 2;
                         ifexit(pip, str);
                         return (2);
                 }
@@ -41,7 +42,10 @@ int     pwd1(t_list *pip)
         if (err)
                 printf("%s\n", buf);
         else
+        {
                 ft_printf_fd(2, "pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+                pip->data->new_exit = 1;
+        }
         free(buf);
         ifexit(pip, str);
         return (0);

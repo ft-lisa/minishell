@@ -111,6 +111,7 @@ int exe1(t_list *pip)
 		i++;
 	}
         ft_close_all(pip->data->fd);
-	i = wait_all(pip->data->pid, pip->data->n_cmd);
+	i = wait_all(pip->data->pid, pip->data->n_cmd, pip);
+	printf("pid n |%d|\n", i);
 	return (free_pip(head), i);
 }

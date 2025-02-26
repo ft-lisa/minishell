@@ -51,6 +51,23 @@ int	echo_var2(char *envp[], char *p1)
         return (k);
 }
 
+int     echoarg(char *str)
+{
+        int     i;
+
+        i = 1;
+        // printf("str |%s| cmp |%d|", str, ft_strncmp(str, "-n", 2));
+        if (ft_strncmp(str, "-n", 2) != 0)
+                return (0);
+        while (str[i])
+        {
+                if (str[i] != 'n')
+                        return (0);
+                i++;
+        }
+        return (1);
+}
+
 int     echo1(t_list *pip)
 {
         int     i;
@@ -61,17 +78,21 @@ int     echo1(t_list *pip)
         str = ft_split(pip->cmd, ' ');
         j = 1;
         error = 0;
-        if (str[1] && ft_strcmp(str[1], "-n") == 0)
+        if (str[1] && echoarg(str[1]) == 1)
                 j++;
         while(str[j])
         {
-                // error = echo_var2(*pip->data->envp, str[j]);
+                if (str[j] && echoarg(str[j]) == 1)
+                {
+                        j++;
+                        continue ;
+                }
                 ft_printf_fd(1, "%s", str[j]);
                 j++;
                 if (str[j])
                         ft_printf_fd(1, " ");
         }
-        if (!str[1] || ft_strcmp(str[1], "-n") != 0)
+        if (!str[1] || echoarg(str[1]) != 1)
                 ft_printf_fd(1, "\n");
         cleanexit(str);
         return (0);
