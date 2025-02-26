@@ -61,9 +61,15 @@ int     unset1(t_list *pip, char **str)
                 if (unset_valid(str[i]) == 1)
                         rmv_str_2d(pip->data->envp, str[i]);
                 else if (unset_valid(str[i]) == 0)
+		{
                         ft_printf_fd(2, "bash: unset: ʻ%s': not a valid identifier\n", str[i]);
+			pip->data->new_exit = 1;
+		}
                 else if (unset_valid(str[i]) == 3)
+		{
                         ft_printf_fd(2, "bash: unset: %c%c: invalid option\n", str[i][0], str[i][1]);
+			pip->data->new_exit = 2;
+		}
                 i++;
         }
 }

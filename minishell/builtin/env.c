@@ -18,6 +18,7 @@ int     env1(t_list *pip)
         else
         {
                 ft_printf_fd(2, "env: ʻ%s’: No such file or directory\n", str[1]);
+                pip->data->new_exit = 127;
                 ifexit(pip, str);
         }
 }

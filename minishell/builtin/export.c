@@ -231,7 +231,7 @@ void export1(t_list *pip, char **str)
         i = 1;
         if (!str[1])
                 while ((*(pip->data->envp))[i])
-                        printf("%s\n", (*(pip->data->envp))[i++]);
+			ft_printf_fd(1, "%s\n", (*(pip->data->envp))[i++]);
         else
         {
                 while(str[i])
@@ -242,9 +242,15 @@ void export1(t_list *pip, char **str)
                         else if (export_valid(str[i]) == 1)
                                 add_last_2d(pip->data->envp, temp);
 			else if (export_valid(str[i]) == 0)
+			{
 				ft_printf_fd(2, "bash: export: ʻ%s': not a valid identifier\n", str[i]);
+				pip->data->new_exit = 1;
+			}
 			else if (export_valid(str[i]) == 3)
+			{
 				ft_printf_fd(2, "bash: export: %c%c: invalid option\n", str[i][0], str[i][1]);
+				pip->data->new_exit = 2;
+			}
                         if (temp)
                                 free(temp);
 			// if (export_valid(str[i]) == 3 || export_valid(str[i]) == 0)
