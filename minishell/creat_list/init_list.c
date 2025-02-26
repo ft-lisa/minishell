@@ -45,12 +45,11 @@ int     check_line(char **line, char ***envp, int error)
         return (1);
     if (open_only_one_quote(*line) == 1)
         return (1);
-    if(check_operator(*line) == 1)
+    if (check_operator(*line) == 1)
         return (1);
     if (expand_vars(line, envp, error) == -1)
         return (1);
     return (0);
-    
 }
 
 t_list *creat_list(char* line, char ***envp, char **argv, int argc)

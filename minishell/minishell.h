@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/26 14:55:54 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:40:59 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int     is_cmd(t_list *pip);
 void exe_other(t_list *pip);
 void exe_other_isolate(t_list *pip);
 void     ifexit(t_list *pip, char **str);
+int	check_exit(char **str, t_list *pip);
 
 // builtin
 int     cd1(t_list *pip);
@@ -199,7 +200,6 @@ int     check_line(char **line, char ***envp, int error);
 
 
 //clean content list
-
 void del_space(t_list *command);
 void del_quotes(t_list *command);
 
@@ -209,7 +209,5 @@ int 	expand_vars(char **cmd, char ***env, int error);
 
 // temp
 void print_list(t_list *lst);
-
-int check_exit(char** str);
 
 #endif //FT_H

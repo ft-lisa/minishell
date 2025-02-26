@@ -35,15 +35,31 @@ int	check_long_long(char *str)
 	return (1);
 }
 
-int	check_exit(char **str)
+void exit_minishell_error(t_list *pip)
+{
+	rl_clear_history();
+	free_pip(pip);
+	exit(2);
+}
+
+
+int	check_exit(char **str, t_list *pip)
 {
 	if (!str[1])
 		return (1);
 	if (!ft_isalldigit(str[1]))
-		return (printf("bash: exit: %s: numeric argument required\n", str[1]), 1);
+	{
+		printf("bash: exit: %s: numeric argument required\n", str[1]);
+		exit_minishell_error(pip);
+	}
 	if (!check_long_long(str[1]))
-		return (printf("bash: exit: %s: numeric argument required\n", str[1]), 1);
+	{
+		printf("bash: exit: %s: numeric argument required\n", str[1]);
+	}
 	if (str[2])
+	{
+		pip->data->new_exit = 1;
 		return (printf("bash: exit: too many arguments\n"), 0);
+	}
 	return (1);
 }
