@@ -79,6 +79,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	temp2 = ft_split_exe(pip->cmd, ' ');
 	no_a = no_args_cmd(pip->cmd);
 	get_p = get_path_command(pip->data->path, no_a);
+	ft_printf_fd(2, "path |%s| exec |%s|\n", get_p, no_a);
 	execve(get_p, temp2, *(pip->data->envp));
 	ft_printf_fd(2, "bash: %s: command not found\n", temp2[0]);
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
