@@ -71,3 +71,19 @@ int	count_c(char *str, char c)
 	}
 	return (count);
 }
+
+int	isemptyor_spacetab(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str || !str[0])
+		return (1);
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\t')
+			return (0);
+		i++;
+	}
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/25 15:19:13 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:05:35 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char     *pwd2(t_list *pip);
 int     env1(t_list *pip);
 int     echo1(t_list *pip);
 int     unset1(t_list *pip, char **str);
+void  exit_minishell(t_list *pip);
 
 // utils 
 int operator(char* txt);
@@ -133,6 +134,9 @@ int	isin_2d_delim(char **str, char *check, char delim);
 int	isin_2d_equal(char **str, char *check);
 int	ft_isalnum(int c);
 int	count_c(char *str, char c);
+int	isemptyor_spacetab(char *str);
+long long ft_atoll(const char *s);
+char	*ft_itoa(int k);
 // int pass_quote(char quote, const char* str, int i);
 
 // various
@@ -189,6 +193,8 @@ void fill_com_list(t_list *list, char** content);
 //check list
 int     chck2op(char *str);
 int check_operator(char* str);
+int     open_only_one_quote(char *str);
+int     check_line(char **line, char ***envp, int error);
 
 
 //clean content list
@@ -198,7 +204,8 @@ void del_quotes(t_list *command);
 
 // parcing
 char	*parcing_export(char *str);
-int 	expand_vars(char **cmd, char ***env);
+int 	expand_vars(char **cmd, char ***env, int error);
+
 // temp
 void print_list(t_list *lst);
 

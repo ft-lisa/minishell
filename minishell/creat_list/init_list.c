@@ -39,6 +39,20 @@ t_list* init_list(int count, char ***envp, char **argv, int argc)
     return(first);
 }
 
+int     check_line(char **line, char ***envp, int error)
+{
+    if (all_space(*line) == 1)
+        return (1);
+    if (open_only_one_quote(*line) == 1)
+        return (1);
+    if(check_operator(*line) == 1)
+        return (1);
+    if (expand_vars(line, envp, error) == -1)
+        return (1);
+    return (0);
+    
+}
+
 t_list *creat_list(char* line, char ***envp, char **argv, int argc)
 {
     int count;
@@ -47,12 +61,6 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
     int i = 0;
     char *temp;
 
-    if (all_space(line) == 1)
-        return(NULL);
-    if(check_operator(line) == 1)
-        return(NULL);
-    if (expand_vars(&line, envp) == -1)
-        return (NULL);
     content_node = ft_split_ope_bis(line, '|');
     free(line);
     count = double_strlen(content_node);

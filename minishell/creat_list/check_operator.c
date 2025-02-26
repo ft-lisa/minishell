@@ -201,7 +201,7 @@ char	*remove_first_quotes(char *str)
     else if (!temp || !temp[0])
         join = ft_strdup(temp2);
     else
-        return (free(temp), temp);
+        return (temp);
 	free(temp);
 	return (join);
 }
@@ -240,7 +240,9 @@ int check_operator(char* str1)
     i = 0;
     j = 0;
 	str = remove_all_quotes(str1);
-    printf("q rem %s |%d| |%d|\n\n", str, count_c(str, '\''), count_c(str, '\"'));
+    // printf("q rem |%s| |%d| |%d|\n\n", str, count_c(str, '\''), count_c(str, '\"'));
+    if (isemptyor_spacetab(str) == 1)
+        return (free (str), 0);
 	if (count_c(str, '\'') % 2 != 0 || count_c(str, '\"') % 2 != 0)
 		{
 			ft_printf_fd(2, "bash: syntax error: unclosed quotes\n");

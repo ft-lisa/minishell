@@ -67,7 +67,7 @@ int	indexto_skip_squotes(char *str, char c)
 	return (-1);
 }
 
-int	expand(char **cmd, char **env)
+int	expand(char **cmd, char **env, int error)
 {
 	char	*new;
 	char	*temp;
@@ -78,9 +78,15 @@ int	expand(char **cmd, char **env)
         if (i == -1 || (*cmd)[i] == '\0')
                 return (1);
 	temp = copy_until_alnum_under(*cmd + i + 1);
-	// printf("CHECKING COPY |%s| index |%d|\n\n", temp, i);
+	// printf("CHECKING COPY |%s| index |%d| strcmp |%d|\n\n", temp, i, ft_strcmp(temp, "$"));
 	if (!temp)
 		return (-1);
+	if (ft_strcmp(temp, "?") == 0)
+	{
+		temp2 = ft_itoa(error);
+		replace_str(cmd, temp, temp2, i);
+		return (free(temp), free(temp2), 0);
+	}
 	if (isin_2d_equal(env, temp) == 1)
 	{
 		temp2 = get_path_var(env, temp);
@@ -91,7 +97,7 @@ int	expand(char **cmd, char **env)
 	return (free(temp), 0);
 }
 
-int 	expand_vars(char **cmd, char ***env)
+int 	expand_vars(char **cmd, char ***env, int error)
 {
 	int	check;
 	int	j;
@@ -104,7 +110,7 @@ int 	expand_vars(char **cmd, char ***env)
 		return (-1);
 	while (check == 0)
 	{
-		check = expand(&str, *env);
+		check = expand(&str, *env, error);
 	}
 	*cmd = str;
 	return (check);
