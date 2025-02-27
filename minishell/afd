@@ -1,0 +1,16 @@
+afd
+builtin
+creat_list
+exe1.c
+lib
+Makefile
+minishell
+minishell.c
+minishell.h
+pipe
+printf_fd-gnl
+readline.supp
+test.c
+test.txt
+txt
+utils

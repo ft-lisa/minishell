@@ -3,7 +3,7 @@
 void	free_pip(t_list *pip)
 {
 	if (!pip)
-		returnm
+		return ;
 	ft_close_all(pip->data->fd);
 	cleanexit_int(pip->data->fd);
 	if (pip->data->path)
