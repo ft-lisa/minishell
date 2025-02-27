@@ -15,7 +15,7 @@ void type7(t_list *pip)
 		(perror("dup minipipe"), exit(EXIT_FAILURE));
 	if (dup2(mini_pipe[1], STDOUT_FILENO) == -1)
 		(perror("dup2 minipipe"), exit(EXIT_FAILURE));
-	ft_until_limiter(pip->delim);	
+	ft_until_limiter(pip->delim[0]);	
 	if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
                 (perror("dup2 minipipe"), exit(EXIT_FAILURE));
 	if (dup2(stdout1, STDOUT_FILENO) == -1)
@@ -80,9 +80,18 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	no_a = no_args_cmd(pip->cmd);
 	get_p = get_path_command(pip->data->path, no_a);
 	ft_printf_fd(2, "path |%s| exec |%s|\n", get_p, no_a);
+	if ((!get_p || !get_p[0]) && pip->data->path)
+	{
+		ft_printf_fd(2, "bash: %s: command not found\n", temp2[0]);
+		(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
+	}
 	execve(get_p, temp2, *(pip->data->envp));
-	ft_printf_fd(2, "bash: %s: command not found\n", temp2[0]);
-	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
+	ft_printf_fd(2, "bash: %s: %s\n", no_a, strerror(errno));
+	if (errno == 2)
+		errno = 127;
+	else if (errno == 13)
+		errno = 126;
+	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(errno));
 }
 
 int exe1(t_list *pip)

@@ -112,11 +112,15 @@ void exe_other(t_list *pip)
                 (cleanexit(str), env1(pip));
         else if (ft_strcmp(str[0], "echo") == 0)
                 (echo1(pip), ifexit(pip, str));
-        else if (ft_strcmp(str[0], "exit") == 0)
-                if(check_exit(str, pip) == 1)
-                        (cleanexit(str), exit_minishell(pip));  
         else if (ft_strcmp(str[0], "export") == 0)
                 (export1(pip, str), ifexit(pip, str));
         else if (ft_strcmp(str[0], "unset") == 0)
                 (unset1(pip, str), ifexit(pip, str));
+        else if (ft_strcmp(str[0], "exit") == 0)
+        {
+                if(check_exit(str, pip) == 1)
+                {
+                        (cleanexit(str), exit_minishell(pip));
+                }
+        }
 }
