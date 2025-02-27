@@ -45,6 +45,8 @@ int is_other(t_list *pip)
         char **str;
 
         ret = 0;
+        if (isemptyor_spacetab(pip->cmd) == 1)
+                return (0);
         str = ft_split(pip->cmd, ' ');
         if (ft_strcmp(str[0], "cd") == 0)
                 ret = 1;

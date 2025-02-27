@@ -56,6 +56,7 @@ void fill_seven(t_list* new, char* content)
             i++;
         }
         split = ft_split(split_txt[i], ' ');
+        free(split_txt[i]);
         new->delim[k] = split[0];
         new->delim[k + 1] = NULL;
         if(split[1])

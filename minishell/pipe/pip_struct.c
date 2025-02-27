@@ -3,15 +3,13 @@
 void	free_pip(t_list *pip)
 {
 	if (!pip)
-		return ;
+		returnm
 	ft_close_all(pip->data->fd);
 	cleanexit_int(pip->data->fd);
 	if (pip->data->path)
 		cleanexit(pip->data->path);
 	cleanexit(pip->data->content);
 	free(pip->data->pid);
-	if(pip->delim)
-		free(pip->delim);
 	free(pip->data);
 	free_list(pip);
 }

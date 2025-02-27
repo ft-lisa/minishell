@@ -23,6 +23,8 @@ void type7(t_list *pip)
 	close(mini_pipe[0]);
 	close(mini_pipe[1]);
 	free(mini_pipe);
+	if (!pip->cmd)
+		(free_pip(pip), exit(0));
 }
 
 void type6(t_list *pip)

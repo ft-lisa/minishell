@@ -88,7 +88,7 @@ int main(int argc, char** argv, char** envp)
         {
             sigaction(SIGINT, &scn, NULL);
             exe->data->exit1 = error;
-            // print_list(exe);
+            print_list(exe);
             error = exe1(exe);
         }
     }
