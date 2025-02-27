@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:38:45 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/10 12:43:13 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:33:29 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	ft_strcmp(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
+	if (!s1 || !s2)
+		return(-1);
 	while (s1[i] != '\0' && s1[i] == s2[i])
 		i++;
 	j = s1[i] - s2[i];

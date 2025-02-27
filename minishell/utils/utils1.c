@@ -60,13 +60,23 @@ char	*free_list(t_list *list)
 		tmp = list;
 		list = list->next;
 		if (tmp->cmd)
+		{
+			printf("%p\n", tmp->cmd);
 			free(tmp->cmd);
+		}
+			
 		if (tmp->delim)
 			cleanexit(tmp->delim);
 		if (tmp->if_file1)
+		{
 			free(tmp->if_file1);
+		}
+			
 		if (tmp->if_file2)
+		{
 			free(tmp->if_file2);
+		}
+			
 		free(tmp);
 	}
 	return (NULL);

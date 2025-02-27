@@ -12,6 +12,7 @@ void	free_pip(t_list *pip)
 	free(pip->data->pid);
 	free(pip->data);
 	free_list(pip);
+
 }
 
 char	**get_path(char *envp[])

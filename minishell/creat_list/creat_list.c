@@ -52,12 +52,11 @@ void fill_seven(t_list* new, char* content)
         while(split_txt[i + 1])
         {
             if(operator(split_txt[i]) == 0)
-                new->delim[k++] = split_txt[i];
+                new->delim[k++] = strdup(split_txt[i]);
             i++;
         }
         split = ft_split(split_txt[i], ' ');
-        free(split_txt[i]);
-        new->delim[k] = split[0];
+        new->delim[k] = strdup(split[0]);
         new->delim[k + 1] = NULL;
         if(split[1])
             new->cmd = ft_strdup(split[1]);
@@ -70,7 +69,7 @@ void fill_seven(t_list* new, char* content)
         while(split_txt[i])
         {
             if(operator(split_txt[i]) == 0)
-                new->delim[k++] = split_txt[i];
+                new->delim[k++] = ft_strdup(split_txt[i]);
             i++;
         }
         new->delim[k++] = NULL;
@@ -134,7 +133,11 @@ void fill_com_list(t_list *list, char** content)
     while(content[j])
     {
         if((new->exe1 == 4 || new->exe1 == 5) && (new->exe2 == 2 || new->exe2 == 0))
+        {
             new->cmd = ft_strdup(content[j]);
+            printf("%p\n", new->cmd);
+        }
+            
         if((new->exe1 == 6 || new->exe1 == 7) && (new->exe2 == 1 || new->exe2 == 3))
         {
             split = split_until(content[j], '>');
@@ -143,6 +146,7 @@ void fill_com_list(t_list *list, char** content)
             else
                 fill_seven(new, split[0]);
             fill_one_three(new, split[1]);
+            cleanexit(split);
         }
         else
         {
@@ -150,7 +154,7 @@ void fill_com_list(t_list *list, char** content)
                 fill_six(new, content[j]);
             if(new->exe1 == 7)
                 fill_seven(new, content[j]);
-            if(new->exe2 == 1 ||new->exe2 == 3)
+            if(new->exe2 == 1 || new->exe2 == 3)
                 fill_one_three(new, content[j]);
         }
         j++;
