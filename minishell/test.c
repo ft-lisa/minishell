@@ -1,4 +1,4 @@
-// #include "minishell.h"
+ #include "minishell.h"
 
 // size_t	ft_strlen(const char *c)
 // {
@@ -282,4 +282,9 @@
 //         expand(&main, env);
 //         printf("|%s|\n$|%d|\n", main, i);
 // 	free(main);
+// }
+// int main(void)
+// {
+//     sleep(5);
+//     return(1);
 // }
