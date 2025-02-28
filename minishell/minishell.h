@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/27 13:55:02 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:02:28 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ char				*get_next_line(int fd);
 size_t				sl(const char *c);
 void				*ft_calloc2(size_t nitems, size_t size);
 char				*ft_realloc(char *oldlloc, size_t buffersize);
-void				ft_until_limiter(char *argv);
+void	            ft_until_limiter(char *argv, int verbose);
 int					isin1(const char *set, const char c, int buffersize);
 int					ft_strcmp(char *s1, char *s2);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:38:45 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/27 17:33:29 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:02:09 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_putstr_fd1(char *s, int fd)
 	}
 }
 
-void	ft_until_limiter(char *argv)
+void	ft_until_limiter(char *argv, int verbose)
 {
 	char	*line;
 	char	*delimiter;
@@ -96,7 +96,8 @@ void	ft_until_limiter(char *argv)
 			free(delimiter);
 			break ;
 		}
-		ft_putstr_fd1(line, 1);
+		if (verbose == 1)
+			ft_putstr_fd1(line, 1);
 		free(line);
 	}
 }

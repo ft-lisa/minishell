@@ -4,7 +4,9 @@ void type7(t_list *pip)
 {
 	int *mini_pipe;
 	int stdout1;
+	int i;
 
+	i = 0;
 	mini_pipe = malloc(sizeof(int *) * 2);
 	if (!mini_pipe)
 		return;
@@ -13,9 +15,11 @@ void type7(t_list *pip)
 	stdout1 = dup(STDOUT_FILENO);
 	if (stdout1 == -1)
 		(perror("dup minipipe"), exit(EXIT_FAILURE));
+	while (pip->delim[i + 1])
+		ft_until_limiter(pip->delim[i++], 0);
 	if (dup2(mini_pipe[1], STDOUT_FILENO) == -1)
 		(perror("dup2 minipipe"), exit(EXIT_FAILURE));
-	ft_until_limiter(pip->delim[0]);	
+	ft_until_limiter(pip->delim[i], 1);	
 	if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
                 (perror("dup2 minipipe"), exit(EXIT_FAILURE));
 	if (dup2(stdout1, STDOUT_FILENO) == -1)
@@ -60,6 +64,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	char	**temp2;
 	char	*no_a;
 	char	*get_p;
+	struct stat st;
 
 	if (is_other(pip) == 1)
                 ;
@@ -88,7 +93,10 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 		(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
 	}
 	execve(get_p, temp2, *(pip->data->envp));
-	ft_printf_fd(2, "bash: %s: %s\n", no_a, strerror(errno));
+	if (stat(get_p, &st) == 0 && S_ISDIR(st.st_mode))
+		ft_printf_fd(2, "bash: %s: Is a directory\n", no_a);
+	else
+		ft_printf_fd(2, "bashh: %s: %s\n", no_a, strerror(errno));
 	if (errno == 2)
 		errno = 127;
 	else if (errno == 13)
