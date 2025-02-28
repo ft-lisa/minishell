@@ -135,3 +135,15 @@ void print_list(t_list *lst)
         lst = lst->next;
     }
 }
+
+void print_split(char **str)
+{
+    int i;
+    
+    i = 0;
+    ft_printf_fd(1, "SPLIT\n");
+    while (str[i])
+    {
+        ft_printf_fd(1, "%s\n", str[i++]);
+    }
+}

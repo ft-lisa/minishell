@@ -69,4 +69,5 @@ void del_quotes(t_list *command)
         }
         new = new->next;
     }
+    
 }

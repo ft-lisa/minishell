@@ -192,10 +192,12 @@ char	*remove_first_quotes(char *str)
 
 	if (ft_strchr(str, '\'') == NULL && ft_strchr(str, '\"') == NULL)
 		return (str);
+    // printf("TIME |%s|\n", str);
 	del_q = pick_quote(str);
 	temp = copy_until(str, del_q);
 	temp2 = ft_strchr(str, del_q) + 1;
 	temp2 = ft_strchr(temp2, del_q) + 1;
+    // printf("str |%s| temp |%s| temp2 |%s|\n", str, temp, temp2);
     if (temp && temp2 && temp[0] && temp2[0])
 	    join = ft_strjoin(temp, temp2);
     else if (!temp || !temp[0])

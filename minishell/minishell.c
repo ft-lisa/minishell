@@ -23,9 +23,23 @@ void exit_minishell(t_list *pip)
     free_pip(pip);
     exit(exit_code);
 }
+void disable_ctrl_echo(void)
+{
+    struct termios term;
+
+    if (tcgetattr(STDIN_FILENO, &term) == -1)
+        return; // gestion d'erreur si besoin
+
+    term.c_lflag &= ~ECHOCTL;  // Désactive l'affichage des caractères de contrôle
+
+    if (tcsetattr(STDIN_FILENO, TCSANOW, &term) == -1)
+        return; // gestion d'erreur si besoin
+}
 
 void handler (int signal)
 {
+    rl_replace_line("minishell> ^C", 0);
+    rl_redisplay();
     write(1, "\n", 1);
     rl_on_new_line();
     rl_replace_line("", 0);
@@ -38,6 +52,7 @@ void new(int signal)
 {
     write(1, "\n", 1);
     rl_on_new_line();
+    sig_g = signal;
     return ;
 }
 
@@ -73,18 +88,25 @@ int main(int argc, char** argv, char** envp)
     sigaction(SIGQUIT, &sa, NULL);
     while(1)
     {
+        disable_ctrl_echo();
         sigaction(SIGINT, &sc, NULL);
         str = readline("minishell> ");
         if (str == NULL)
         {
+            printf("exit\n");
             rl_clear_history();
             exit(1);
         }
         add_history(str);
+        if (sig_g == 2)
+        {
+            error = 130;
+            sig_g = 0;
+        }
         if (check_line(&str, &env, error) == 1)
             continue;
         exe = creat_list(str, &env, argv, argc);
-        print_list(exe);
+        // print_list(exe);
         if(exe)
         {
             sigaction(SIGINT, &scn, NULL);

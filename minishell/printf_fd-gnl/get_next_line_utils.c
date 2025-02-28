@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:38:45 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/28 14:02:09 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/28 19:17:54 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void	ft_putstr_fd1(char *s, int fd)
 	}
 }
 
+
+
+
 void	ft_until_limiter(char *argv, int verbose)
 {
 	char	*line;
@@ -88,6 +91,7 @@ void	ft_until_limiter(char *argv, int verbose)
 	{
 		ft_putstr_fd1("> ", 0);
 		line = get_next_line(0);
+		printf("line |%s|\n", line);
 		if (ft_strcmp(delimiter, line) == 0)
 		{
 			free(line);

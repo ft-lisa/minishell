@@ -173,7 +173,6 @@ void fill_ope_list(t_list *list, char** content)
     {
         new->index = j + 1;
         str = remove_all_quotes(content[j]);
-        printf("TEST1|%s|\n\n", str);
         if(content [j + 1] != NULL)
         {
             new->exe2 = 2;
