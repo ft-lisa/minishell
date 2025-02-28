@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/28 14:02:28 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:04:49 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ int     chck2op(char *str);
 int check_operator(char* str);
 int     open_only_one_quote(char *str);
 int     check_line(char **line, char ***envp, int error);
+char	*remove_all_quotes(char *str);
 
 
 //clean content list

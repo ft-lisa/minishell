@@ -165,22 +165,27 @@ void fill_ope_list(t_list *list, char** content)
 {
     int j;
     t_list *new;
+    char* str;
 
     j = 0;
     new = list;
     while(content[j])
     {
         new->index = j + 1;
+        str = remove_all_quotes(content[j]);
+        printf("TEST1|%s|\n\n", str);
         if(content [j + 1] != NULL)
         {
             new->exe2 = 2;
             new->next->exe1 = 5;
         }
-        if(new->exe1 == -1 || (search_exe1(content[j]) != 4 && new->exe1 == 5))
-        new->exe1 = search_exe1(content[j]);
-        if(new->exe2 == -1 || (search_exe2(content[j]) != 0 && new->exe2 == 2))
-            new->exe2 = search_exe2(content[j]);
+        if(new->exe1 == -1 || (search_exe1(str) != 4 && new->exe1 == 5))
+        new->exe1 = search_exe1(str);
+        if(new->exe2 == -1 || (search_exe2(str) != 0 && new->exe2 == 2))
+            new->exe2 = search_exe2(str);
         new = new->next;
+        if (str && strcmp(str, content[j]) != 0)
+            free(str);        
         j++;
     }
 }

@@ -91,11 +91,14 @@ char	*get_path_var(char *envp[], char *p1)
 
 void     ifexit(t_list *pip, char **str)
 {
+        int     exit1;
+
         cleanexit(str);
         if (pip->data->n_cmd > 1)
         {
+                exit1 = pip->data->new_exit;
                 free_pip(pip);
-                exit(pip->data->new_exit);
+                exit(exit1);
         }
 }
  
