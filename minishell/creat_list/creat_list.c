@@ -135,7 +135,6 @@ void fill_com_list(t_list *list, char** content)
         if((new->exe1 == 4 || new->exe1 == 5) && (new->exe2 == 2 || new->exe2 == 0))
         {
             new->cmd = ft_strdup(content[j]);
-            printf("%p\n", new->cmd);
         }
             
         if((new->exe1 == 6 || new->exe1 == 7) && (new->exe2 == 1 || new->exe2 == 3))

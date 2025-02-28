@@ -84,7 +84,6 @@ int main(int argc, char** argv, char** envp)
         if (check_line(&str, &env, error) == 1)
             continue;
         exe = creat_list(str, &env, argv, argc);
-        printf("%p\n", exe->cmd);
         if(exe)
         {
             sigaction(SIGINT, &scn, NULL);

@@ -61,7 +61,6 @@ char	*free_list(t_list *list)
 		list = list->next;
 		if (tmp->cmd)
 		{
-			printf("%p\n", tmp->cmd);
 			free(tmp->cmd);
 		}
 			
