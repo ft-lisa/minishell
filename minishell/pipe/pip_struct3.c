@@ -15,10 +15,14 @@ void type7(t_list *pip)
 	stdout1 = dup(STDOUT_FILENO);
 	if (stdout1 == -1)
 		(perror("dup minipipe"), exit(EXIT_FAILURE));
+	dup2(STDOUT_FILENO, 1);
+	dup2(STDIN_FILENO, 0);
 	while (pip->delim[i + 1])
 		ft_until_limiter(pip->delim[i++], 0);
 	if (dup2(mini_pipe[1], STDOUT_FILENO) == -1)
 		(perror("dup2 minipipe"), exit(EXIT_FAILURE));
+	dup2(STDOUT_FILENO, 1);
+	dup2(STDIN_FILENO, 0);
 	ft_until_limiter(pip->delim[i], 1);	
 	if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
                 (perror("dup2 minipipe"), exit(EXIT_FAILURE));
@@ -131,6 +135,6 @@ int exe1(t_list *pip)
 	}
         ft_close_all(pip->data->fd);
 	i = wait_all(pip->data->pid, pip->data->n_cmd, pip);
-	printf("pid n |%d|\n", i);
+	//printf("pid n |%d|\n", i);
 	return (free_pip(head), i);
 }
