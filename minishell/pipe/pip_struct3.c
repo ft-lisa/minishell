@@ -10,27 +10,23 @@ void type7(t_list *pip)
 	mini_pipe = malloc(sizeof(int *) * 2);
 	if (!mini_pipe)
 		return;
-	if (pipe(mini_pipe) == -1)
-			perror("minipipe");
-	stdout1 = dup(STDOUT_FILENO);
-	if (stdout1 == -1)
-		(perror("dup minipipe"), exit(EXIT_FAILURE));
-	dup2(STDOUT_FILENO, 1);
-	dup2(STDIN_FILENO, 0);
-	while (pip->delim[i + 1])
-		ft_until_limiter(pip->delim[i++], 0);
-	if (dup2(mini_pipe[1], STDOUT_FILENO) == -1)
-		(perror("dup2 minipipe"), exit(EXIT_FAILURE));
-	dup2(STDOUT_FILENO, 1);
-	dup2(STDIN_FILENO, 0);
+	// if (pipe(mini_pipe) == -1)
+	// 		perror("minipipe");
+	// stdout1 = dup(STDOUT_FILENO);
+	// if (stdout1 == -1)
+	// 	(perror("dup minipipe"), exit(EXIT_FAILURE));
+	// while (pip->delim[i + 1])
+	// 	ft_until_limiter(pip->delim[i++], 0);
+	// if (dup2(mini_pipe[1], STDOUT_FILENO) == -1)
+	// 	(perror("dup2 minipipe"), exit(EXIT_FAILURE));
 	ft_until_limiter(pip->delim[i], 1);	
-	if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
-                (perror("dup2 minipipe"), exit(EXIT_FAILURE));
-	if (dup2(stdout1, STDOUT_FILENO) == -1)
-                (perror("dup2 minipipe"), exit(EXIT_FAILURE));
-	close(mini_pipe[0]);
-	close(mini_pipe[1]);
-	free(mini_pipe);
+	// if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
+        //         (perror("dup2 minipipe"), exit(EXIT_FAILURE));
+	// if (dup2(stdout1, STDOUT_FILENO) == -1)
+        //         (perror("dup2 minipipe"), exit(EXIT_FAILURE));
+	// close(mini_pipe[0]);
+	// close(mini_pipe[1]);
+	// free(mini_pipe);
 	if (!pip->cmd)
 		(free_pip(pip), exit(0));
 }
@@ -88,7 +84,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	if (is_other(pip) == 1)
 		exe_other(pip);
 	temp2 = ft_split_exe(pip->cmd, ' ');
-	no_a = no_args_cmd(pip->cmd);
+	no_a = no_args_cmd(temp2[0]);
 	get_p = get_path_command(pip->data->path, no_a);
 	if ((!get_p || !get_p[0]) && pip->data->path)
 	{

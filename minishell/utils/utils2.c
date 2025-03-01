@@ -141,9 +141,11 @@ void print_split(char **str)
     int i;
     
     i = 0;
+    ft_printf_fd(1, "__________________________\n");
     ft_printf_fd(1, "SPLIT\n");
     while (str[i])
     {
-        ft_printf_fd(1, "%s\n", str[i++]);
+        ft_printf_fd(1, "|..%s..|\n", str[i++]);
     }
+    ft_printf_fd(1, "__________________________\n");
 }

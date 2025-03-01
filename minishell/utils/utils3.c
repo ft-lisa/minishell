@@ -37,7 +37,7 @@ int all_space(char* line)
         return(-1);
     while(line[i] != '\0')
     {
-        if (line[i] != ' ')
+        if (line[i] != ' ' && line[i] != '\t')
             return(0);
         i++;
     }

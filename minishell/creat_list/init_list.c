@@ -49,6 +49,8 @@ int     check_line(char **line, char ***envp, int error)
         return (1);
     if (expand_vars(line, envp, error) == -1)
         return (1);
+    if (isemptyor_spacetab(*line) == 1)
+        return (1);
     return (0);
 }
 

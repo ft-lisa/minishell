@@ -85,6 +85,7 @@ int main(int argc, char** argv, char** envp)
             exit(1);
         }
         add_history(str);
+        // printf("line |%c = %d|", str[0], str[0]);
         if (sig_g == 2)
         {
             error = 130;

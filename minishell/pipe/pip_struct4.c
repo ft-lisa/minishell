@@ -47,7 +47,7 @@ int is_other(t_list *pip)
         ret = 0;
         if (isemptyor_spacetab(pip->cmd) == 1)
                 return (0);
-        str = ft_split(pip->cmd, ' ');
+        str = ft_split_exe(pip->cmd, ' ');
         if (ft_strcmp(str[0], "cd") == 0)
                 ret = 1;
         else if (ft_strcmp(str[0], "pwd") == 0)
@@ -108,7 +108,7 @@ void exe_other(t_list *pip)
         int     i;
         char **str;
 
-        str = ft_split(pip->cmd, ' ');
+        str = ft_split_exe(pip->cmd, ' ');
         if (ft_strcmp(str[0], "cd") == 0)
                 (cleanexit(str), cd1(pip));
         else if (ft_strcmp(str[0], "pwd") == 0)

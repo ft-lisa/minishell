@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_exe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/02/23 13:00:38 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/01 19:29:10 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	no_space_until_q(char const *s, int start_s, char c)
 {
-	while (s[start_s] != '\'')
+	while (s[start_s] != '\'' && s[start_s] != '\"')
 	{
-		if (s[start_s] == c || s[start_s] == '\0')
+		if (s[start_s] == c || s[start_s] == '\t' || s[start_s] == '\0')
 			return (0);
 		start_s++;
 	}
@@ -25,27 +25,35 @@ int	no_space_until_q(char const *s, int start_s, char c)
 
 int	if_next_quote(char const *s, int start_s, char c, int i)
 {
-	if (s[start_s] == '\'')
+	if (s[start_s] == '\'' || s[start_s] == '\"')
 	{
 		i = start_s + 1;
-		while (s[i] != '\'' && s[i])
+		while (s[i] != s[start_s] && s[i])
 			i++;
 		if (s[i])
 			return (i + 1);
 	}
 	else if (no_space_until_q(s, start_s, c) == 1)
 	{
-		while (s[i] != '\'' && s[i])
+
+		while (s[i] && s[i] != '\'' && s[i] != '\"' && s[i] != c && s[i] != '\t')
 			i++;
-		i++;
-		while (s[i] != '\'' && s[i])
+		if (s[i] == '\'' || s[i] == '\"')
+		{
+			char q = s[i];
 			i++;
-		if (s[i])
-			return (i + 1);
+			while (s[i] != q && s[i])
+				i++;
+			if (s[i])
+				i++;
+		}
+		while (s[i] && s[i] != c && s[i] != '\t')
+			i++;
+		return (i);
 	}
 	else
 	{
-		while (s[i] != c && s[i])
+		while (s[i] && s[i] != c && s[i] != '\t')
 			i++;
 	}
 	return (i);
@@ -59,7 +67,7 @@ static char	*t2f(char const *s, int start_s, char c)
 
 	i = start_s;
 	i = if_next_quote(s, start_s, c, i);
-	if (s[start_s] == '\'')
+	if (s[start_s] == '\'' || s[start_s] == '\"')
 	{
 		start_s++;
 		i--;
@@ -87,11 +95,11 @@ int	splitlen1(char const *s1, char c1)
 	k = 0;
 	while (s1[i])
 	{
-		while (s1[i] == c1 && s1[i])
+		while (s1[i] && (s1[i] == c1 || s1[i] == '\t'))
 			i++;
 		if (s1[i])
 			k++;
-		while (s1[i] != c1 && s1[i])
+		while (s1[i] && s1[i] != c1 && s1[i] != '\t')
 			i++;
 	}
 	return (k);
@@ -110,7 +118,7 @@ char	**ft_split_exe(char *s, char c)
 	j = 0;
 	while (s[i])
 	{
-		while (s[i] == c && s[i])
+		while (s[i] && (s[i] == c || s[i] == '\t'))
 			i++;
 		if (!s[i])
 			break ;

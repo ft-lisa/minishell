@@ -16,7 +16,8 @@ static char	*remove_surrounding_quotes(const char *s)
 		res[len - 2] = '\0';
 		return (res);
 	}
-	return (strdup(s));
+	res = strdup(s);
+	return (res);
 }
 
 static char	*process_backslashes(const char *s)
@@ -222,6 +223,13 @@ int	add_plus(char ***env, char *add)
 	return (1);
 }
 
+// int	add_plus_fixed(char ***str2, char *add)
+// {
+// 	char	*temp;
+
+// 	add_plus(str2, temp);
+// 	temp = (remove_surrounding_quotes())
+// }
 
 void export1(t_list *pip, char **str)
 {
@@ -237,6 +245,7 @@ void export1(t_list *pip, char **str)
                 while(str[i])
                 {
                         temp = parcing_export(str[i]);
+			printf("str |%s| parced |%s| \n", str[i], temp);
                         if (export_valid(str[i]) == 2)
                                 add_plus(pip->data->envp, temp);
                         else if (export_valid(str[i]) == 1)
