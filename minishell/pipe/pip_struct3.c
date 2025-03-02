@@ -2,33 +2,43 @@
 
 void type7(t_list *pip)
 {
-	int *mini_pipe;
+	int mini_pipe[2];
 	int stdout1;
 	int i;
 
 	i = 0;
-	mini_pipe = malloc(sizeof(int *) * 2);
-	if (!mini_pipe)
+	if (pipe(mini_pipe) == -1)
+	{
+		perror("minipipe");
 		return;
-	// if (pipe(mini_pipe) == -1)
-	// 		perror("minipipe");
-	// stdout1 = dup(STDOUT_FILENO);
-	// if (stdout1 == -1)
-	// 	(perror("dup minipipe"), exit(EXIT_FAILURE));
-	// while (pip->delim[i + 1])
-	// 	ft_until_limiter(pip->delim[i++], 0);
-	// if (dup2(mini_pipe[1], STDOUT_FILENO) == -1)
-	// 	(perror("dup2 minipipe"), exit(EXIT_FAILURE));
-	ft_until_limiter(pip->delim[i], 1);	
-	// if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
-        //         (perror("dup2 minipipe"), exit(EXIT_FAILURE));
-	// if (dup2(stdout1, STDOUT_FILENO) == -1)
-        //         (perror("dup2 minipipe"), exit(EXIT_FAILURE));
-	// close(mini_pipe[0]);
-	// close(mini_pipe[1]);
-	// free(mini_pipe);
+	}
+	stdout1 = dup(STDOUT_FILENO);
+	if (stdout1 == -1)
+	{
+		perror("dup minipipe");
+		exit(EXIT_FAILURE);
+	}
+	while (pip->delim[i + 1])
+		ft_until_limiter(pip->delim[i++], 0, mini_pipe[1]);
+	ft_until_limiter(pip->delim[i], 1, mini_pipe[1]);
+	close(mini_pipe[1]);
+	if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
+	{
+		perror("dup2 minipipe");
+		exit(EXIT_FAILURE);
+	}
+	if (dup2(stdout1, STDOUT_FILENO) == -1)
+	{
+		perror("dup2 minipipe");
+		exit(EXIT_FAILURE);
+	}
+	close(mini_pipe[0]);
+	close(stdout1);
 	if (!pip->cmd)
-		(free_pip(pip), exit(0));
+	{
+		free_pip(pip);
+		exit(0);
+	}
 }
 
 void type6(t_list *pip)

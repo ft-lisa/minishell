@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:38:45 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/01 14:31:07 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/02 13:33:57 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,75 +76,28 @@ void	ft_putstr_fd1(char *s, int fd)
 	}
 }
 
-void	restore_fds(void)
-{
-	int fd;
-
-	fd = open("/dev/tty", O_RDONLY);
-	if (fd != -1)
-		dup2(fd, 0); // Restaure stdin
-	close(fd);
-
-	fd = open("/dev/tty", O_WRONLY);
-	if (fd != -1)
-		dup2(fd, 1); // Restaure stdout
-	close(fd);
-}
-
-// void	ft_until_limiter(char *argv, int verbose)
-// {
-// 	char	*line;
-// 	char	*delimiter;
-// 	int		bomb;
-	
-// 	bomb = 0;
-// 	delimiter = argv;
-// 	while (bomb == 0)
-// 	{
-// 		//restore_fds();
-// 		if (sig_g == 2)
-// 			break;
-// 		line = readline("> ");
-// 		if (!line)
-// 		{
-// 			printf("bash: warning: here-document at line 1 delimited by end-of-file (wanted `%s')\n", argv);
-// 			break ;
-// 		}	
-// 		if (ft_strcmp(delimiter, line) == 0)
-// 		{
-// 			free(line);
-// 			bomb = 1;
-// 			break ;
-// 		}
-// 		if (verbose == 1)
-// 			ft_putstr_fd1(line, 1);
-// 		free(line);
-// 	}
-// }
-
-void	ft_until_limiter(char *argv, int verbose)
+void	ft_until_limiter(char *argv, int verbose, int write_fd)
 {
 	char	*line;
 	char	*delimiter;
 	int		bomb;
 
 	bomb = 0;
-	delimiter = ft_strjoin(argv, "\n");
+	delimiter = argv;
 	while (bomb == 0)
 	{
-		ft_putstr_fd1("> ", 0);
-		line = get_next_line(0);
-		// printf("line |%s|\n", line);
+		line = readline("> ");
 		if (ft_strcmp(delimiter, line) == 0)
 		{
 			free(line);
 			bomb = 1;
-			line = get_next_line(-14);
-			free(delimiter);
 			break ;
 		}
 		if (verbose == 1)
-			ft_putstr_fd1(line, 1);
+		{
+			write(write_fd, line, ft_strlen(line));
+			write(write_fd, "\n", 1);
+		}
 		free(line);
 	}
 }
