@@ -3,7 +3,6 @@
 void type7(t_list *pip)
 {
 	int mini_pipe[2];
-	int stdout1;
 	int i;
 
 	i = 0;
@@ -12,28 +11,28 @@ void type7(t_list *pip)
 		perror("minipipe");
 		return;
 	}
-	stdout1 = dup(STDOUT_FILENO);
-	if (stdout1 == -1)
-	{
-		perror("dup minipipe");
-		exit(EXIT_FAILURE);
-	}
 	while (pip->delim[i + 1])
-		ft_until_limiter(pip->delim[i++], 0, mini_pipe[1]);
-	ft_until_limiter(pip->delim[i], 1, mini_pipe[1]);
+	{
+		ft_until_limiter(pip->delim[i++], 0, mini_pipe);
+		if(sig_g == 2)
+		{
+			ft_close_all(pip->data->fd);
+			exit(1) ;
+		}		
+	}	
+	ft_until_limiter(pip->delim[i], 1, mini_pipe);
+	if(sig_g == 2)
+	{
+		ft_close_all(pip->data->fd);
+		exit(1) ;
+	}
 	close(mini_pipe[1]);
 	if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
 	{
 		perror("dup2 minipipe");
 		exit(EXIT_FAILURE);
 	}
-	if (dup2(stdout1, STDOUT_FILENO) == -1)
-	{
-		perror("dup2 minipipe");
-		exit(EXIT_FAILURE);
-	}
 	close(mini_pipe[0]);
-	close(stdout1);
 	if (!pip->cmd)
 	{
 		free_pip(pip);
@@ -77,19 +76,19 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	struct stat st;
 
 	if (is_other(pip) == 1)
-                ;
+        ;
 	else if (t1 == 5) 
-                type5(pip);
-        else if (t1 == 6) 
-                type6(pip);
-        else if (t1 == 7)
-                type7(pip);
-        if (t2 == 1)
-                type1(pip);
+        type5(pip);
+    else if (t1 == 6) 
+        type6(pip);
+    else if (t1 == 7)
+        type7(pip);
+    if (t2 == 1)
+        type1(pip);
 	else if (t2 == 2)
-                type2(pip);
+        type2(pip);
 	else if (t2 == 3)
-                type3(pip);
+        type3(pip);
 	ft_close_all(pip->data->fd);
 	if (is_other(pip) == 1)
 		exe_other(pip);
@@ -120,8 +119,8 @@ int exe1(t_list *pip)
 
 	i = 1;
 	head = pip;
-	if (is_other(pip) == 1 && pip->data->n_cmd == 1)
-        {
+	if (is_other(pip) == 1 && pip->data->n_cmd == 1 && pip->exe1 != 7)
+    {
 		exe_other(pip);
 	}
 	else
@@ -139,8 +138,7 @@ int exe1(t_list *pip)
 			(exe_isolate(pip, pip->exe1, pip->exe2));
 		i++;
 	}
-        ft_close_all(pip->data->fd);
+    ft_close_all(pip->data->fd);
 	i = wait_all(pip->data->pid, pip->data->n_cmd, pip);
-	//printf("pid n |%d|\n", i);
 	return (free_pip(head), i);
 }

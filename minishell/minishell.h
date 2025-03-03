@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/02 13:13:04 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:57:12 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_list
     t_data *data;
     struct s_list	*next;
 }					t_list;
+
+void handler (int signal);
+void her(int signal);
 
 // exe
 
@@ -175,7 +178,7 @@ char				*get_next_line(int fd);
 size_t				sl(const char *c);
 void				*ft_calloc2(size_t nitems, size_t size);
 char				*ft_realloc(char *oldlloc, size_t buffersize);
-void	ft_until_limiter(char *argv, int verbose, int write_fd);
+void	ft_until_limiter(char *argv, int verbose, int* write_fd);
 int					isin1(const char *set, const char c, int buffersize);
 int					ft_strcmp(char *s1, char *s2);
 
