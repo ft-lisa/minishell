@@ -49,17 +49,17 @@ int	check_exit(char **str, t_list *pip)
 		return (1);
 	if (!ft_isalldigit(str[1]))
 	{
-		printf("bash: exit: %s: numeric argument required\n", str[1]);
+		ft_printf_fd(2, "bash: exit: %s: numeric argument required\n", str[1]);
 		exit_minishell_error(pip);
 	}
 	if (!check_long_long(str[1]))
 	{
-		printf("bash: exit: %s: numeric argument required\n", str[1]);
+		ft_printf_fd(2, "bash: exit: %s: numeric argument required\n", str[1]);
 	}
 	if (str[2])
 	{
 		pip->data->new_exit = 1;
-		return (printf("bash: exit: too many arguments\n"), 0);
+		return (ft_printf_fd(2, "bash: exit: too many arguments\n"), 0);
 	}
 	return (1);
 }

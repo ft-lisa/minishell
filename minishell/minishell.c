@@ -8,7 +8,7 @@ void exit_minishell(t_list *pip)
     int exit_code;
     char **cmd;
 
-    cmd = ft_split(pip->cmd, ' ');
+    cmd = ft_split_exe(pip->cmd, ' ');
     if (!cmd[1])
     {
         free_pip(pip);
@@ -17,6 +17,7 @@ void exit_minishell(t_list *pip)
     }
     exit_val = ft_atoll(cmd[1]);
     exit_code = (int)(exit_val % 256);
+    // printf("val |%lld| code |%d| cmd |%s|\n\n", exit_val, exit_code, cmd[1]);
     if (exit_code < 0)
         exit_code += 256;
     rl_clear_history();
@@ -94,7 +95,7 @@ int main(int argc, char** argv, char** envp)
         if (check_line(&str, &env, error) == 1)
             continue;
         exe = creat_list(str, &env, argv, argc);
-        // print_list(exe);
+        //print_list(exe);
         if(exe)
         {
             sigaction(SIGINT, &scn, NULL);

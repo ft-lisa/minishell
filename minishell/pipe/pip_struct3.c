@@ -101,6 +101,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 		ft_printf_fd(2, "bash: %s: command not found\n", temp2[0]);
 		(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
 	}
+	//print_split(temp2);
 	execve(get_p, temp2, *(pip->data->envp));
 	if (stat(get_p, &st) == 0 && S_ISDIR(st.st_mode))
 		ft_printf_fd(2, "bash: %s: Is a directory\n", no_a);
@@ -133,7 +134,7 @@ int exe1(t_list *pip)
 	while(i < pip->data->n_cmd)
 	{
 		pip = pip->next;
-		waitpid(pip->data->pid[pip->index - 2], NULL, 0);
+		// waitpid(pip->data->pid[pip->index - 2], NULL, 0);
 		pip->data->pid[i] = fork();
 		if (pip->data->pid[i] == 0)
 			(exe_isolate(pip, pip->exe1, pip->exe2));

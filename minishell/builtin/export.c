@@ -245,7 +245,7 @@ void export1(t_list *pip, char **str)
                 while(str[i])
                 {
                         temp = parcing_export(str[i]);
-			printf("str |%s| parced |%s| \n", str[i], temp);
+			// printf("str |%s| parced |%s| \n", str[i], temp);
                         if (export_valid(str[i]) == 2)
                                 add_plus(pip->data->envp, temp);
                         else if (export_valid(str[i]) == 1)

@@ -127,5 +127,10 @@ int 	expand_vars(char **cmd, char ***env, int error)
 		check = expand(&str, *env, error);
 	}
 	*cmd = str;
+	if (isemptyor_spacetab(*cmd) == 1)
+        {
+		free(*cmd);
+		check = -1;
+	}
 	return (check);
 }
