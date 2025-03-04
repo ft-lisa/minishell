@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/03 18:57:12 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:15:57 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@
 #  define BUFFER_SIZE 1
 # endif
 
+// enum TYPE 
+// {
+//     cmd,
+//     coucou,
+//     test,
+// }
+
 extern int sig_g;
 
 typedef struct s_pipex
@@ -71,6 +78,7 @@ typedef struct s_list
 
 void handler (int signal);
 void her(int signal);
+void parent_her(int signal);
 
 // exe
 

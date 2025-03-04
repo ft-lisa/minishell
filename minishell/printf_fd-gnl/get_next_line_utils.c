@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 17:38:45 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/03 19:37:23 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:27:36 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,15 @@ void	ft_putstr_fd1(char *s, int fd)
 	}
 }
 
-void	ft_until_limiter(char *argv, int verbose, int* write_fd)
+void	ft_until_limiter(char *delimiter, int verbose, int* write_fd)
 {
 	char	*line;
-	char	*delimiter;
 	int		bomb;
-	static int num = 1;
 
 	bomb = 0;
-	delimiter = argv;
+	signal(SIGINT, her);
 	while (bomb == 0)
 	{
-		signal(SIGINT, her);
 		line = readline("> ");
 		if(sig_g == 2)
 		{
@@ -98,7 +95,7 @@ void	ft_until_limiter(char *argv, int verbose, int* write_fd)
 		}
 		if (line == NULL)
 		{
-			printf("bash: warning: here-document at line %d delimited by end-of-file (wanted `%s') sad\n", num, argv);
+			printf("bash: warning: here-document delimited by end-of-file (wanted `%s') sad\n", num, argv);
 			return ;
 		}
 		if (ft_strcmp(delimiter, line) == 0)
@@ -114,6 +111,4 @@ void	ft_until_limiter(char *argv, int verbose, int* write_fd)
 		}
 		free(line);
 	}
-	if (verbose == 1)
-		num++;
 }

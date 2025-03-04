@@ -42,11 +42,16 @@ void new(int signal)
 }
 void her(int signal)
 { 
+    write(1, "\n", 1);
     close(0);
     sig_g = signal;
     return ;
 }
-
+void parent_her(int signal)
+{ 
+    sig_g = signal;
+    return ;
+}
 
 int main(int argc, char** argv, char** envp)
 {

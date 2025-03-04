@@ -17,14 +17,14 @@ void type7(t_list *pip)
 		if(sig_g == 2)
 		{
 			ft_close_all(pip->data->fd);
-			exit(1) ;
+			exit(130) ;
 		}		
 	}	
 	ft_until_limiter(pip->delim[i], 1, mini_pipe);
 	if(sig_g == 2)
 	{
 		ft_close_all(pip->data->fd);
-		exit(1) ;
+		exit(130) ;
 	}
 	close(mini_pipe[1]);
 	if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
@@ -125,6 +125,8 @@ int exe1(t_list *pip)
 	}
 	else
 	{
+		if (pip->exe1 == 7)
+			signal(SIGINT, parent_her);
 		pip->data->pid[0] = fork();
 		if (pip->data->pid[0] == 0)
 			(exe_isolate(pip, pip->exe1, pip->exe2));
