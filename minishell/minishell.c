@@ -95,7 +95,7 @@ int main(int argc, char** argv, char** envp)
         if (check_line(&str, &env, error) == 1)
             continue;
         exe = creat_list(str, &env, argv, argc);
-        //print_list(exe);
+        // print_list(exe);
         if(exe)
         {
             sigaction(SIGINT, &scn, NULL);

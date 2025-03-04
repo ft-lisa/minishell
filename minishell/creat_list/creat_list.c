@@ -81,7 +81,6 @@ void fill_one_three(t_list* new, char* content)
 {
     char** split_txt;
     char** split;
-    int j = 0;
 
     split_txt = ft_split_txt(content);
         if(operator(split_txt[0]) == 1 || operator(split_txt[0]) == 3)
@@ -95,7 +94,7 @@ void fill_one_three(t_list* new, char* content)
         else
         {
             new->cmd = ft_strdup(split_txt[0]);
-            new->if_file2 = ft_strdup(split_txt[2]);
+            new->if_file2 = ft_strdup(split_txt[double_strlen(split_txt) - 1]);
         }
         cleanexit(split_txt);
 }
@@ -117,7 +116,7 @@ void fill_six(t_list* new, char* content)
         else
         {
             new->cmd = ft_strdup(split_txt[0]);
-            new->if_file1 = ft_strdup(split_txt[2]);
+            new->if_file1 = ft_strdup(split_txt[double_strlen(split_txt) - 1]);
         }
         cleanexit(split_txt);
 }
