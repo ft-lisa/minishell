@@ -69,28 +69,27 @@ void type5(t_list *pip)
 
 void	exe_build_single(t_list *pip, int t1, int t2)
 {
-	char	**temp2;
-	char	*no_a;
-	char	*get_p;
-	struct stat st;
+	int	stdo;
 
 	if (is_other(pip) == 1)
-        ;
+        	;
 	else if (t1 == 5) 
-        type5(pip);
-    else if (t1 == 6) 
-        type6(pip);
-    else if (t1 == 7)
-        type7(pip);
-    if (t2 == 1)
-        type1(pip);
+        	type5(pip);
+	else if (t1 == 6) 
+        	type6(pip);
+    	else if (t1 == 7)
+        	type7(pip);
+   	if (t2 == 1)
+		(stdo = dup(STDOUT_FILENO), type1(pip));
 	else if (t2 == 2)
-        type2(pip);
+        	type2(pip);
 	else if (t2 == 3)
-        type3(pip);
+        	type3(pip);
 	ft_close_all(pip->data->fd);
 	if (is_other(pip) == 1)
 		exe_other(pip);
+	if (t2 == 1)
+		(dup2(stdo, STDOUT_FILENO), close (stdo));
 }
 
 void	exe_isolate(t_list *pip, int t1, int t2)
@@ -101,19 +100,19 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	struct stat st;
 
 	if (is_other(pip) == 1)
-        ;
+        	;
 	else if (t1 == 5) 
-        type5(pip);
-    else if (t1 == 6) 
-        type6(pip);
-    else if (t1 == 7)
-        type7(pip);
-    if (t2 == 1)
-        type1(pip);
+        	type5(pip);
+	else if (t1 == 6) 
+        	type6(pip);
+	else if (t1 == 7)
+        	type7(pip);
+	if (t2 == 1)
+        	type1(pip);
 	else if (t2 == 2)
-        type2(pip);
+        	type2(pip);
 	else if (t2 == 3)
-        type3(pip);
+        	type3(pip);
 	ft_close_all(pip->data->fd);
 	if (is_other(pip) == 1)
 		exe_other(pip);
@@ -146,9 +145,9 @@ int exe1(t_list *pip)
 	i = 1;
 	head = pip;
 	if (is_other(pip) == 1 && pip->data->n_cmd == 1 && pip->exe1 != 7)
-    {
-		exe_other(pip);
-		// exe_build_single(pip, pip->exe1, pip->exe2);
+	{
+		// exe_other(pip);
+		exe_build_single(pip, pip->exe1, pip->exe2);
 	}
 	else
 	{

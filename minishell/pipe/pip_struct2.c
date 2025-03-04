@@ -25,14 +25,30 @@ void type1(t_list *pip)
 {
     int		fd_out;
 
-    if (access(pip->if_file2, F_OK) == 0 && access(pip->if_file2, W_OK) == -1)
+    	if (access(pip->if_file2, F_OK) == 0 && access(pip->if_file2, W_OK) == -1)
 	{
 		ft_printf_fd(2, "bash: permission denied: %s\n", pip->if_file2);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
-    fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    	fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	// ft_printf_fd(2, "fd: %d, file: |%s|", fd_out, pip->if_file2);
-	// if (is_other(pip) != 1)
+	// if (is_other(pip) != 1 || pip->data->n_cmd != 1)
+		dup2(fd_out, STDOUT_FILENO); 
+	close(fd_out);
+}
+
+void type1bis(t_list *pip)
+{
+    int		fd_out;
+
+    	if (access(pip->if_file2, F_OK) == 0 && access(pip->if_file2, W_OK) == -1)
+	{
+		ft_printf_fd(2, "bash: permission denied: %s\n", pip->if_file2);
+		(free_pip(pip), exit(EXIT_FAILURE));
+	}
+    	fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	// ft_printf_fd(2, "fd: %d, file: |%s|", fd_out, pip->if_file2);
+	// if (is_other(pip) != 1 || pip->data->n_cmd != 1)
 		dup2(fd_out, STDOUT_FILENO); 
 	close(fd_out);
 }
