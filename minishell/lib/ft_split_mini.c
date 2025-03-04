@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/04 14:02:40 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:08:41 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	next_token(char *s, int start_s, char c)
 }
 
 
-static char	*t2f(char *s, int *start_s, char c, int start)
+static char	*t3f(char *s, int *start_s, char c, int start)
 {
 	int		i;
 	int		len_s;
@@ -125,7 +125,7 @@ static char	*t2f(char *s, int *start_s, char c, int start)
 	return (t2);
 }
 
-int	splitlen1(char *s1)
+int	splitlen2(char *s1)
 {
 	int	i;
 	int	k;
@@ -150,7 +150,7 @@ char	**ft_split_exe1(char *s)
 	int		i;
 	int		j;
 
-	t1 = malloc((splitlen1(s) + 1) * sizeof(char *));
+	t1 = malloc((splitlen2(s) + 1) * sizeof(char *));
 	if (t1 == NULL)
 		return (NULL);
 	i = 0;
@@ -161,7 +161,7 @@ char	**ft_split_exe1(char *s)
 			i++;
 		if (!s[i])
 			break ;	
-		t1[j] = t2f(s, &i, 'a', i);
+		t1[j] = t3f(s, &i, 'a', i);
 		if (t1[j++] == NULL)
 			return (cleanexit(t1));
 		while (s[i] && s[i] != ' ' && s[i] != '\t')

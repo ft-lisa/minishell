@@ -93,7 +93,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	ft_close_all(pip->data->fd);
 	if (is_other(pip) == 1)
 		exe_other(pip);
-	temp2 = ft_split_exe(pip->cmd, ' ');
+	temp2 = ft_split_exe1(pip->cmd);
 	no_a = no_args_cmd(temp2[0]);
 	get_p = get_path_command(pip->data->path, no_a);
 	if ((!get_p || !get_p[0]) && pip->data->path)

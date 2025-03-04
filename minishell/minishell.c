@@ -8,7 +8,7 @@ void exit_minishell(t_list *pip)
     int exit_code;
     char **cmd;
 
-    cmd = ft_split_exe(pip->cmd, ' ');
+    cmd = ft_split_exe1(pip->cmd);
     if (!cmd[1])
     {
         free_pip(pip);

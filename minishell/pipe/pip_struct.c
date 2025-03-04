@@ -94,7 +94,7 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 	if (!pipex->pid)
 		return (free(pipex), NULL);
 	pipex->pid[0] = 0;
-	pipex->path = ft_split_exe("error env", ' ');
+	pipex->path = ft_split("error env", ' ');
 	if (pipex->envp[0] && *(pipex->envp)[0][0] != 'V')
 	{
 		cleanexit(pipex->path);

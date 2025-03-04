@@ -39,6 +39,7 @@ int	replace_str(char **mainstr, char *before, char *after, int index)
 	return (0);
 }
 
+
 int	isdollar_alone(char *str, int i)
 {
 	if (ft_isalnum(str[i + 1]) == 0 && str[i + 1] != '_' && str[i + 1] != '?')
@@ -95,10 +96,10 @@ int	expand(char **cmd, char **env, int error)
 	// printf("CHECKING COPY |%s| index |%d| strcmp |%d|\n\n", temp, i, ft_strcmp(temp, "$"));
 	if (!temp)
 		return (-1);
-	if (ft_strcmp(temp, "?") == 0)
+	if (ft_strncmp(temp, "?", 1) == 0)
 	{
 		temp2 = ft_itoa(error);
-		replace_str(cmd, temp, temp2, i);
+		replace_str(cmd, "?", temp2, i);
 		return (free(temp), free(temp2), 0);
 	}
 	if (isin_2d_equal(env, temp) == 1)

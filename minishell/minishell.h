@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/02 13:13:04 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:06:19 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ char	*ft_itoa(int k);
 // various
 int	isin(char *s, char c);
 char	**ft_split_exe(char *s, char c);
+char	**ft_split_exe1(char *s);
 char	**cleanexit(char **a);
 int	lvl2_len(int **fd);
 char	*free_list(t_list *list);
