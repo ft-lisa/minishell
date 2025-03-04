@@ -199,11 +199,19 @@ char	*remove_first_quotes(char *str)
 	temp2 = ft_strchr(temp2, del_q) + 1;
     // printf("str |%s| temp |%s| temp2 |%s|\n", str, temp, temp2);
     if (temp && temp2 && temp[0] && temp2[0])
-	    join = ft_strjoin(temp, temp2);
+	{
+        temp2 = ft_strjoin("Z", temp2);
+        join = ft_strjoin(temp, temp2);
+        free(temp2);
+    }
     else if (!temp || !temp[0])
         join = ft_strdup(temp2);
     else
-        return (temp);
+    {
+        temp2 = ft_strjoin(temp, "Z");
+        free(temp);
+        return (temp2);
+    }
 	free(temp);
 	return (join);
 }

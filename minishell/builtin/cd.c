@@ -11,8 +11,8 @@ int     error_cd(char **str, t_list *pip)
         }
         if (stat(str[1], &path_stat) == -1)
         {
-                ft_printf_fd(2, "bash: cd: No such file or directory: %s\n", str[1]);
-                pip->data->new_exit = 2;
+                ft_printf_fd(2, "bash: cd: %s: No such file or directory\n", str[1]);
+                pip->data->new_exit = 1;
         }
         else
         {
