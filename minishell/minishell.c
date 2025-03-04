@@ -32,30 +32,26 @@ void handler (int signal)
     rl_replace_line("", 0);
     rl_redisplay();
     sig_g = signal;
-    return ;
 }
 
 void new(int signal)
 {
     write(1, "\n", 1);
     rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay();
     sig_g = signal;
     return ;
 }
-
-void init_signal(struct sigaction* sa, struct sigaction* sc, struct sigaction* scn)
-{
-    sa->sa_handler = SIG_IGN;     
-    sc->sa_handler = handler;
-    scn->sa_handler = new;
-    scn->sa_flags = 0;
-    sa->sa_flags = 0;
-    sc->sa_flags = 0;             
-    sigemptyset(&sa->sa_mask);
-    sigemptyset(&sc->sa_mask);
-    sigemptyset(&scn->sa_mask);
+void her(int signal)
+{ 
+    write(1, "\n", 1);
+    close(0);
+    sig_g = signal;
+    return ;
+}
+void parent_her(int signal)
+{ 
+    sig_g = signal;
+    return ;
 }
 
 int main(int argc, char** argv, char** envp)
@@ -64,20 +60,15 @@ int main(int argc, char** argv, char** envp)
     char **env;
     t_list *exe;
     int error;
-    struct sigaction sa;
-    struct sigaction sc;
-    struct sigaction scn;
-
 
     if (argc != 1)
         return(1);
     env = strdup_2d(envp);
     error = 0;
-    init_signal(&sa, &sc, &scn);
-    sigaction(SIGQUIT, &sa, NULL);
+    signal(SIGQUIT, SIG_IGN);
     while(1)
     {
-        sigaction(SIGINT, &sc, NULL);
+        signal(SIGINT, handler);
         str = readline("minishell> ");
         if (str == NULL)
         {
@@ -86,7 +77,6 @@ int main(int argc, char** argv, char** envp)
             exit(1);
         }
         add_history(str);
-        // printf("line |%c = %d|", str[0], str[0]);
         if (sig_g == 2)
         {
             error = 130;
@@ -98,7 +88,7 @@ int main(int argc, char** argv, char** envp)
         //print_list(exe);
         if(exe)
         {
-            sigaction(SIGINT, &scn, NULL);
+            signal(SIGINT, new);
             exe->data->exit1 = error;
             error = exe1(exe);
         }
