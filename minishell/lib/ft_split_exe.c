@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/03 20:00:49 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:30:35 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int	istokenquotes(char *s, int start_s)
 	char	*temp;
 	char	afterquotes;
 
-	//ft_printf_fd(2, "content: s|%s| s[s]|%s|\n", s, s + start_s);
+	ft_printf_fd(2, "content: s|%s| s[s]|%s|\n", s, s + start_s);
 	if (s[start_s] != '\'' && s[start_s] != '\"')
 		return (0);
 	temp = ft_strchr(s + start_s + 1, s[start_s]);
-	//ft_printf_fd(2, "content: temp|%s|\n", temp);
+	ft_printf_fd(2, "content: temp|%s|\n", temp);
 	if (!temp || !temp[0])
 		return (0);
 	afterquotes = temp[1];
@@ -89,6 +89,7 @@ int	no_space_until_q(char *s, int start_s, char c)
 
 int	if_next_quote(char *s, int start_s, char c, int i)
 {
+	ft_printf_fd(2, "NEXT QUOTE: content: s|%s| s[s]|%s|\n", s, s + start_s);
 	if (s[start_s] == '\'' || s[start_s] == '\"')
 	{
 		i = start_s + 1;
@@ -136,7 +137,7 @@ int	len_t2f(int i, int start_s, int inside, char *s)
 	return (i - start_s - count_quotes);
 }
 
-static char	*t2f(char *s, int start_s, char c)
+static char	*t2f(char *s, int start_s, char c, int start)
 {
 	int		i;
 	int		len_s;
@@ -146,14 +147,14 @@ static char	*t2f(char *s, int start_s, char c)
 	i = start_s;
 	i = if_next_quote(s, start_s, c, i);
 	inside = 0;
-	if (istokenquotes(s, start_s))
+	if (s[start_s] == '\'' || s[start_s] == '\"')
 	{
 		start_s++;
 		i--;
 		inside++;
 	}
 	len_s = i - start_s;
-	//ft_printf_fd(2, "len |%d| i |%d| inside |%d|\n\n", len_s, i, inside);
+	ft_printf_fd(2, "len |%d| i |%d| inside |%d|\n\n", len_s, i, inside);
 	i = 0;
 	t2 = malloc((len_s + 1) * sizeof(char));
 	if (t2 == NULL)
@@ -204,14 +205,14 @@ char	**ft_split_exe(char *s, char c)
 			i++;
 		if (!s[i])
 			break ;
-		t1[j] = t2f(s, i, c);
+		t1[j] = t2f(s, i, c, i);
 		if (t1[j++] == NULL)
 			return (cleanexit(t1));
 		i = if_next_quote(s, i, c, i);
 	}
-	// ft_printf_fd(2, "split size |%d| split used |%d|\n", (splitlen1(s, c) + 1), j );
+	ft_printf_fd(2, "split size |%d| split used |%d|\n", (splitlen1(s, c) + 1), j );
 	t1[j] = NULL;
-	// print_split(t1);
+	print_split(t1);
 	return (t1);
 }
 
