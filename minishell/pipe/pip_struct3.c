@@ -170,3 +170,6 @@ int exe1(t_list *pip)
 	i = wait_all(pip->data->pid, pip->data->n_cmd, pip);
 	return (free_pip(head), i);
 }
+
+
+
