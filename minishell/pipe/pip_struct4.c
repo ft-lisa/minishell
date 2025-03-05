@@ -129,3 +129,30 @@ void exe_other(t_list *pip)
                 }
         }
 }
+
+void	ft_until_limiter(char *delimiter, int verbose, int *write_fd)
+{
+	char	*line;
+
+	signal(SIGINT, her);
+	while (1)
+	{
+		line = readline("> ");
+		if (g_sig == 2)
+			return (close(write_fd[0]), close(write_fd[1]), free(line));
+		if (line == NULL)
+		{
+			ft_printf_fd(2, "bash: warning: here-document delimited ");
+			ft_printf_fd(2, "by end-of-file wanted `%s') sad\n", delimiter);
+			return ;
+		}
+		if (ft_strcmp(delimiter, line) == 0)
+			return (free(line));
+		if (verbose == 1)
+		{
+			write(write_fd[1], line, ft_strlen(line));
+			write(write_fd[1], "\n", 1);
+		}
+		free(line);
+	}
+}

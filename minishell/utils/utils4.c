@@ -55,3 +55,25 @@ int search_exe2(char* content)
     }
     return(0);
 }
+
+int	wait_all(int *pid, int len, t_list *pip)
+{
+	int	i;
+	int	k;
+	int	rn;
+
+	i = 0;
+	k = 0;
+	rn = 0;
+	if (is_other(pip) == 1 && pip->data->n_cmd == 1)
+		return (pip->data->new_exit);
+	if (!pid || !pid[0])
+		return (0);
+	while (i < len)
+	{
+		waitpid(pid[i], &k, 0);
+		i++;
+	}
+	rn = k >> 8;
+	return (rn);
+}

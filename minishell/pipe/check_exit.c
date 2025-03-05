@@ -1,8 +1,22 @@
-# include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_exit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/05 15:09:29 by lismarti          #+#    #+#             */
+/*   Updated: 2025/03/05 15:09:30 by lismarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
 
 int	ft_isalldigit(char *str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i++;
 	while (str[i])
@@ -16,9 +30,13 @@ int	ft_isalldigit(char *str)
 
 int	check_long_long(char *str)
 {
-	unsigned long long num = 0;
-	int i = 0;
-	int neg = 0;
+	unsigned long long	num;
+	int					i;
+	int					neg;
+
+	num = 0;
+	i = 0;
+	neg = 0;
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
@@ -28,20 +46,20 @@ int	check_long_long(char *str)
 	while (str[i])
 	{
 		num = num * 10 + (str[i] - '0');
-		if ((!neg && num > 9223372036854775807ULL) || (neg && num > 9223372036854775808ULL))
+		if ((!neg && num > 9223372036854775807ULL) || (neg
+				&& num > 9223372036854775808ULL))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-void exit_minishell_error(t_list *pip)
+void	exit_minishell_error(t_list *pip)
 {
 	rl_clear_history();
 	free_pip(pip);
 	exit(2);
 }
-
 
 int	check_exit(char **str, t_list *pip)
 {

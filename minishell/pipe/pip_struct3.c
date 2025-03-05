@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pip_struct3.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/05 16:26:23 by lismarti          #+#    #+#             */
+/*   Updated: 2025/03/05 17:23:31 by lismarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void type7(t_list *pip)
@@ -14,14 +26,14 @@ void type7(t_list *pip)
 	while (pip->delim[i + 1])
 	{
 		ft_until_limiter(pip->delim[i++], 0, mini_pipe);
-		if(sig_g == 2)
+		if(g_sig == 2)
 		{
 			ft_close_all(pip->data->fd);
 			exit(130) ;
 		}		
 	}	
 	ft_until_limiter(pip->delim[i], 1, mini_pipe);
-	if(sig_g == 2)
+	if(g_sig == 2)
 	{
 		ft_close_all(pip->data->fd);
 		exit(130) ;
@@ -170,6 +182,3 @@ int exe1(t_list *pip)
 	i = wait_all(pip->data->pid, pip->data->n_cmd, pip);
 	return (free_pip(head), i);
 }
-
-
-
