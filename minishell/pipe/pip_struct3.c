@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:26:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/05 17:37:02 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:36:24 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	exe_build_single(t_list *pip, int t1, int t2)
 	if (t2 == 1)
 	{
 		stdo = dup(STDOUT_FILENO);
+		if (stdo == -1)
+			return ;
 		type1(pip);
 	}
 	else if (t2 == 2)
@@ -37,7 +39,13 @@ void	exe_build_single(t_list *pip, int t1, int t2)
 	if (is_other(pip) == 1)
 		exe_other(pip);
 	if (t2 == 1)
-		(dup2(stdo, STDOUT_FILENO), close(stdo));
+	{
+		if (dup2(stdo, STDOUT_FILENO) == -1)
+			return ;
+		if (close(stdo) == -1)
+			return;
+	}
+
 }
 
 void	type(t_list *pip, int t1, int t2)
@@ -99,6 +107,8 @@ int	exe1(t_list *pip, int i)
 		if (pip->exe1 == 7)
 			signal(SIGINT, parent_her);
 		pip->data->pid[0] = fork();
+		if (pip->data->pid[0] == -1)
+			return (-1);
 		if (pip->data->pid[0] == 0)
 			(exe_isolate(pip, pip->exe1, pip->exe2));
 	}
@@ -106,6 +116,8 @@ int	exe1(t_list *pip, int i)
 	{
 		pip = pip->next;
 		pip->data->pid[i] = fork();
+		if (pip->data->pid[i] == -1)
+			return (-1);
 		if (pip->data->pid[i] == 0)
 			(exe_isolate(pip, pip->exe1, pip->exe2));
 		i++;

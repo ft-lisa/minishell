@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/05 14:50:30 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:35:25 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	execution(t_list *exe, int error)
 	{
 		signal(SIGINT, new);
 		exe->data->exit1 = error;
-		error = exe1(exe);
+		error = exe1(exe, 1);
 	}
 	return (error);
 }
@@ -56,6 +56,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	env = strdup_2d(envp);
 	error = 0;
+	
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
@@ -70,6 +71,7 @@ int	main(int argc, char **argv, char **envp)
 		if (check_line(&str, &env, error) == 1)
 			continue ;
 		exe = creat_list(str, &env, argv, argc);
+
 		error = execution(exe, error);
 	}
 }

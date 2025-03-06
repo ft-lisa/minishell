@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/05 15:40:56 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:47:00 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 {
 	t_data	*pipex;
 	int		i;
+	int a = 0;
+	int b = 0;
+	
 
 	i = 1;
 	pipex = init_exe2(pipex, envp, argv, count);
@@ -112,10 +115,14 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 		return (free(pipex), NULL);
 	pipex->pid[0] = 0;
 	pipex->path = ft_split("error env", ' ');
-	if (pipex->envp[0] && *(pipex->envp)[0][0] != 'V')
+	if (pipex->envp[0][0])
 	{
-		cleanexit(pipex->path);
-		pipex->path = get_path(*(pipex->envp));
+		if(*(pipex->envp)[0][0] != 'V')
+		{
+			cleanexit(pipex->path);
+			pipex->path = get_path(*(pipex->envp));
+		}
 	}
+
 	return (pipex);
 }

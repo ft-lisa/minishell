@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/05 17:25:56 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:31:25 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,18 +139,21 @@ char	*recup_path(char *src);
 /* pip_struct3 */
 
 void	exe_build_single(t_list *pip, int t1, int t2);
+void	type(t_list *pip, int t1, int t2);
 void	exe_isolate(t_list *pip, int t1, int t2);
-int exe1(t_list *pip);
+int exe1(t_list *pip, int i);
 
 
 /* pipe_struct4 */
 int     is_cmd(t_list *pip);
 int     is_cmd_2d(t_list *pip);
-int is_other(t_list *pip);
 char	*get_path_var(char *envp[], char *p1);
 void     ifexit(t_list *pip, char **str);
-void exe_other(t_list *pip);
 void	ft_until_limiter(char *delimiter, int verbose, int *write_fd);
+
+/* search_if_build */
+int is_other(t_list *pip);
+void exe_other(t_list *pip);
 
 /* type1_to_3 */
 
@@ -198,6 +201,20 @@ int	isemptyor_spacetab(char *str);
 long long ft_atoll(const char *s);
 char	*ft_itoa(int k);
 char	**ft_split_exe1(char *s);
+char	**ft_split_exe(char *s, char c);
+int	ft_strcmp(char *s1, char *s2);
+int     open_only_one_quote(char *str);
+char	**ft_split_ope_bis(char const *s, char c);
+size_t				ft_strlennull(const char *c);
+int					ft_print_adress(void *ptr);
+int					ft_sizenbr_base(long int numb, char *base, int unsigned1);
+char				*ft_straddend1(char *malloc1, char *toadd, int index);
+char				*ft_adresschar(void *ptr, char *mainmalloc, int index);
+char				*ft_nbrcharhex(int nbr, char *base, char *mainmalloc, int index);
+char				*ft_nbrchardec(int nbr, int unsigned1, char *mainmalloc, int index);
+int					isformat(const char c);
+int					ft_putstr_fd(char *s, int fd, int size);
+char	**ft_split_txt(char const *s);
 
                 /* creat_list */
 
@@ -214,6 +231,7 @@ char pick_quote(char *str);
 char	*remove_first_quotes(char *str);
 char	*remove_all_quotes(char *str);
 int check_operator(char* str1);
+
 
 /* clean_content_list */
 

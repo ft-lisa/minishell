@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:41:18 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/05 16:11:04 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/06 10:30:40 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_close_all(int **fd)
 		while (j < 2)
 		{
 			if (fd[i][j] != -1)
-				close(fd[i][j]);
+				if (close(fd[i][j]) == -1)
+					return ;
 			j++;
 		}
 		i++;

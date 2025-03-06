@@ -66,6 +66,7 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
     free(line);
     count = double_strlen(content_node);
     command = init_list(count, envp, argv, argc);
+    
     while(content_node[i])
     {
         temp = content_node[i];
