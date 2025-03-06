@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/06 14:25:56 by lismarti          #+#    #+#             */
+/*   Updated: 2025/03/06 14:26:01 by lismarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 static int	splitlen3(char const *s1, char c1)
@@ -18,7 +30,6 @@ static int	splitlen3(char const *s1, char c1)
 	}
 	return (k);
 }
-
 
 static char	*t2f(char const *s, int start_s, char c)
 {

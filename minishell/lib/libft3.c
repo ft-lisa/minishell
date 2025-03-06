@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/06 14:42:32 by lismarti          #+#    #+#             */
+/*   Updated: 2025/03/06 14:42:36 by lismarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char	*ft_strchr(const char *str, int search_str)
@@ -17,28 +29,27 @@ char	*ft_strchr(const char *str, int search_str)
 
 int	ft_isalnum_under_plus(char *str)
 {
-        int     i;
-        char    c;
+	int		i;
+	char	c;
 
-        i = 0;
+	i = 0;
 	if (!str)
 		return (0);
-        while (str[i])
-        {
-                c = str[i];
-                if ((c > 64 && c < 91) || (c > 96 && c < 123) || (c > 47 && c < 58) ||
-                        c == '_')
-                        i++;
-                else
-                        break;
-        }
-        if (str[i] && str[i] == '+' && str[i + 1] == '\0')
-                return (2);
-        else if (str[i] == '\0')
-                return (1);
-        else
-                return (0);
-	
+	while (str[i])
+	{
+		c = str[i];
+		if ((c > 64 && c < 91) || (c > 96 && c < 123) || (c > 47 && c < 58)
+			|| c == '_')
+			i++;
+		else
+			break ;
+	}
+	if (str[i] && str[i] == '+' && str[i + 1] == '\0')
+		return (2);
+	else if (str[i] == '\0')
+		return (1);
+	else
+		return (0);
 }
 
 char	*ft_strcpy(char *dest, char *src)

@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:39:09 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/05 17:40:52 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:29:33 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_until_limiter(char *delimiter, int verbose, int *write_fd)
 		if (line == NULL)
 		{
 			ft_printf_fd(2, "bash: warning: here-document delimited ");
-			ft_printf_fd(2, "by end-of-file wanted `%s') sad\n", delimiter);
+			ft_printf_fd(2, "by end-of-file (wanted `%s') sad\n", delimiter);
 			return ;
 		}
 		if (ft_strcmp(delimiter, line) == 0)

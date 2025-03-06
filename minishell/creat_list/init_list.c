@@ -62,11 +62,10 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
     int i = 0;
     char *temp;
 
-    content_node = ft_split_ope_bis(line, '|');
+    content_node = ft_split_ope_bis(line, '|', 0, 0);
     free(line);
     count = double_strlen(content_node);
     command = init_list(count, envp, argv, argc);
-    
     while(content_node[i])
     {
         temp = content_node[i];

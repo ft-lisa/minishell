@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft4.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/06 14:42:44 by lismarti          #+#    #+#             */
+/*   Updated: 2025/03/06 14:42:48 by lismarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char	*ft_strstr(char *str, char *to_find)
@@ -63,7 +75,7 @@ int	count_c(char *str, char c)
 	count = 0;
 	if (!str || !str[0] || !c)
 		return (0);
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == c)
 			count++;
