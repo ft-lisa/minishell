@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 11:47:00 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:05:32 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,14 @@ t_data	*init_exe2(t_data *pipex, char ***envp, char **argv, int count)
 	pipex->n_cmd = count;
 	pipex->path = NULL;
 	return (pipex);
+	pipex->exit1 = 0;
+	pipex->new_exit = 0;
 }
 
 t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 {
 	t_data	*pipex;
 	int		i;
-	int a = 0;
-	int b = 0;
-	
 
 	i = 1;
 	pipex = init_exe2(pipex, envp, argv, count);
@@ -108,8 +107,6 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 			perror("pipe1");
 		i++;
 	}
-	pipex->exit1 = 0;
-	pipex->new_exit = 0;
 	pipex->pid = malloc(count * sizeof(int));
 	if (!pipex->pid)
 		return (free(pipex), NULL);
@@ -117,12 +114,8 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 	pipex->path = ft_split("error env", ' ');
 	if (pipex->envp[0][0])
 	{
-		if(*(pipex->envp)[0][0] != 'V')
-		{
-			cleanexit(pipex->path);
-			pipex->path = get_path(*(pipex->envp));
-		}
+		if (*(pipex->envp)[0][0] != 'V')
+			(cleanexit(pipex->path), pipex->path = get_path(*(pipex->envp)));
 	}
-
 	return (pipex);
 }
