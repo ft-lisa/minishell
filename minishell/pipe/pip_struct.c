@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pip_struct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 14:05:32 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:49:32 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,15 @@ int	**ft_add_fd(int **fd, int len)
 	return (new_fd);
 }
 
+
+
 t_data	*init_exe2(t_data *pipex, char ***envp, char **argv, int count)
 {
 	pipex = malloc(sizeof(t_data));
 	if (!pipex)
 		exit(1);
+	if (str_len_2d(*envp) < 6)
+		no_env_init(envp);
 	pipex->envp = envp;
 	pipex->v = argv;
 	pipex->fd = ft_add_fd(NULL, 0);

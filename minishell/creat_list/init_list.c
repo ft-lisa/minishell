@@ -10,6 +10,23 @@ void init_list2(t_list *list)
         list->delim = NULL;
 }
 
+int	no_env_init(char ***envp)
+{
+	char	*temp;
+	char	*path;
+	
+	path = pwd2((t_list *)"");
+	if (path)
+	{
+		temp = ft_strjoin("PWD=", path);
+		add_last_2d(envp, temp);
+		free(temp);
+		free(path);
+	}
+	add_last_2d(envp, "SHLVL=1");
+	add_last_2d(envp, "_=/usr/bin/env");
+}
+
 t_list* init_list(int count, char ***envp, char **argv, int argc)
 {
     t_list *first;

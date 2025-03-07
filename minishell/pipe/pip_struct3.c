@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pip_struct3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:26:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/07 11:15:34 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:33:08 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	if (stat(get_p, &st) == 0 && S_ISDIR(st.st_mode))
 		ft_printf_fd(2, "bash: %s: Is a directory\n", no_a);
 	else
-		ft_printf_fd(2, "bashh: %s: %s\n", no_a, strerror(errno));
+		ft_printf_fd(2, "bash: %s: %s\n", no_a, strerror(errno));
 	if (errno == 2)
 		errno = 127;
 	else if (errno == 13)

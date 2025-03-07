@@ -34,9 +34,12 @@ int cd_pwd(t_list *pip, char *buf)
         if (ret != -1)
         {
                 path = get_path_var(*(pip->data->envp), "PWD");
+                if (path)
+                {
                 temp = ft_strjoin("OLDPWD=", path);
                 add_last_2d( pip->data->envp, temp);
                 free(temp);
+                }
                 path = pwd2(pip);
                 if (path)
                 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/07 11:40:32 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:50:28 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ char				*ft_nbrcharhex(int nbr, char *base, char *mainmalloc, int index);
 char				*ft_nbrchardec(int nbr, int unsigned1, char *mainmalloc, int index);
 int					isformat(const char c);
 int					ft_putstr_fd(char *s, int fd, int size);
-char	**ft_split_txt(char const *s);
+char	**ft_split_txt(char const *s, int i, int j);
 
                 /* creat_list */
 
@@ -263,6 +263,7 @@ void init_list2(t_list *list);
 t_list* init_list(int count, char ***envp, char **argv, int argc);
 int     check_line(char **line, char ***envp, int error);
 t_list *creat_list(char* line, char ***envp, char **argv, int argc);
+int	no_env_init(char ***envp);
 
                 /* builtin */
 
