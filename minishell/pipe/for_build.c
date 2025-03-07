@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_if_build.c                                  :+:      :+:    :+:   */
+/*   for_build.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:41:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/05 17:42:02 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:12:58 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,30 @@ void	exe_other(t_list *pip)
 			(cleanexit(str), exit_minishell(pip));
 		}
 	}
+}
+
+void	exe_build_single(t_list *pip, int t1, int t2)
+{
+	int	stdo;
+
+	if (is_other(pip) == 1)
+		;
+	else if (t1 == 5)
+		type5(pip);
+	else if (t1 == 6)
+		type6(pip);
+	else if (t1 == 7)
+		type7(pip);
+	if (t2 == 1)
+		stdo = for_t2_and_t3(stdo, pip, t2);
+	else if (t2 == 2)
+		type2(pip);
+	else if (t2 == 3)
+		stdo = for_t2_and_t3(stdo, pip, t2);
+	ft_close_all(pip->data->fd);
+	if (is_other(pip) == 1)
+		exe_other(pip);
+	if (t2 == 1 || t2 == 3)
+		if (dup2(stdo, STDOUT_FILENO) == -1 || close(stdo) == -1)
+			return ;
 }

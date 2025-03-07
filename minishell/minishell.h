@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/06 14:57:56 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:40:32 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void	ft_close_all(int **fd);
 int	ft_strrchr(const char *string, int searchedChar);
 char	*recup_path(char *src);
 void for_fork(int i, t_list* pip);
+int	for_t2_and_t3(int stdo, t_list *pip, int t2);
 
 /* pip_struct3 */
 

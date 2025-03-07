@@ -6,47 +6,22 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:26:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 14:22:14 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:15:34 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	for_t2(int stdo, t_list *pip)
+int	for_t2_and_t3(int stdo, t_list *pip, int t2)
 {
 	stdo = dup(STDOUT_FILENO);
 	if (stdo == -1)
 		return (stdo);
-	type1(pip);
-	return (stdo);
-}
-
-void	exe_build_single(t_list *pip, int t1, int t2)
-{
-	int	stdo;
-
-	if (is_other(pip) == 1)
-		;
-	else if (t1 == 5)
-		type5(pip);
-	else if (t1 == 6)
-		type6(pip);
-	else if (t1 == 7)
-		type7(pip);
 	if (t2 == 1)
-	{
-		stdo = for_t2(stdo, pip);
-	}
-	else if (t2 == 2)
-		type2(pip);
-	else if (t2 == 3)
+		type1(pip);
+	if (t2 == 3)
 		type3(pip);
-	ft_close_all(pip->data->fd);
-	if (is_other(pip) == 1)
-		exe_other(pip);
-	if (t2 == 1)
-		if (dup2(stdo, STDOUT_FILENO) == -1 || close(stdo) == -1)
-			return ;
+	return (stdo);
 }
 
 void	type(t_list *pip, int t1, int t2)
@@ -96,6 +71,13 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(errno));
 }
 
+void	exe2(t_list *pip)
+{
+	if (pip->exe1 == 7)
+		signal(SIGINT, parent_her);
+	pip->data->pid[0] = fork();
+}
+
 int	exe1(t_list *pip, int i)
 {
 	t_list	*head;
@@ -105,14 +87,14 @@ int	exe1(t_list *pip, int i)
 		exe_build_single(pip, pip->exe1, pip->exe2);
 	else
 	{
-		if (pip->exe1 == 7)
-			signal(SIGINT, parent_her);
-		pip->data->pid[0] = fork();
+		exe2(pip);
 		for_fork(0, pip);
 	}
 	while (i < pip->data->n_cmd)
 	{
 		pip = pip->next;
+		if (pip->exe1 == 7)
+			waitpid(pip->data->pid[pip->index - 2], NULL, 0);
 		pip->data->pid[i] = fork();
 		if (pip->data->pid[i] == -1)
 			return (-1);
