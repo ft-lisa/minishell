@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/06 14:58:24 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/07 11:51:17 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ static char	*t2f(char const *s, int start_s, char c)
 	return (t2);
 }
 
+int	split2(char const *s, int i)
+{
+	if (s[i] == '"' || s[i] == '\'')
+		i = pass_quote_plus(s[i], s, i + 1);
+	i++;
+	return (i);
+}
+
 char	**ft_split_ope_bis(char const *s, char c, int i, int j)
 {
 	char	**t1;
@@ -76,11 +84,7 @@ char	**ft_split_ope_bis(char const *s, char c, int i, int j)
 	while (s[i])
 	{
 		while (s[i] == c && s[i])
-		{
-			if (s[i] == '"' || s[i] == '\'')
-				i = pass_quote_plus(s[i], s, i + 1);
-			i++;
-		}
+			i = split2(s, i);
 		if (!s[i])
 			break ;
 		t1[j] = t2f(s, i, c);
