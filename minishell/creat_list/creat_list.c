@@ -43,7 +43,7 @@ void fill_seven(t_list* new, char* content)
     int i;
     int k;
 
-    split_txt = ft_split_txt(content);
+    split_txt = ft_split_txt(content, 0, 0);
     i = 0;
     k = 0;
     new->delim = malloc((size_delim(split_txt, 0) + 1) * sizeof(char *));
@@ -82,7 +82,7 @@ void fill_one_three(t_list* new, char* content)
     char** split_txt;
     char** split;
 
-    split_txt = ft_split_txt(content);
+    split_txt = ft_split_txt(content, 0, 0);
         if(operator(split_txt[0]) == 1 || operator(split_txt[0]) == 3)
         {
             split = ft_split(split_txt[1], ' ');
@@ -104,7 +104,7 @@ void fill_six(t_list* new, char* content)
     char** split_txt;
     char** split;
 
-    split_txt = ft_split_txt(content);
+    split_txt = ft_split_txt(content, 0, 0);
         if(operator(split_txt[0]) == 6)
         {
             split = ft_split(split_txt[1], ' ');

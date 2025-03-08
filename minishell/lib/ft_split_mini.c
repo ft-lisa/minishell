@@ -3,76 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_mini.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/04 14:08:41 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/08 10:52:16 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// int	count_c(char *str, char c)
-// {
-// 	int	i;
-// 	int	count;
-
-// 	i = 0;
-// 	count = 0;
-// 	if (!str || !str[0] || !c)
-// 		return (0);
-// 	while(str[i])
-// 	{
-// 		if (str[i] == c)
-// 			count++;
-// 		i++;
-// 	}
-// 	return (count);
-// }
-
-// int	isin(char *s, char c)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] == c)
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-// char	**cleanexit(char **a)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (a[i])
-// 	{
-// 		free(a[i]);
-// 		i++;
-// 	}
-// 	free(a);
-// 	return (NULL);
-// }
-
-int	next_token(char *s, int start_s, char c)
+int	next_token(char *s, int start_s, char c, int i)
 {
 	char	quote;
-	int	isquote;
-	int	i;
+	int		isquote;
 
-	i = start_s;
 	isquote = 0;
-	while(s[start_s])
+	while (s[start_s])
 	{
 		if (isin("\'\"", s[start_s]) == 1 && isquote == 0)
 		{
 			isquote = 1;
-			quote = s[start_s];
-			start_s++;
+			quote = s[start_s++];
 		}
 		if (isquote == 1 && s[start_s] == quote)
 		{
@@ -90,21 +41,25 @@ int	next_token(char *s, int start_s, char c)
 	return (i);
 }
 
-
-static char	*t3f(char *s, int *start_s, char c, int start)
+char	*ft_malloc(int len_s)
 {
-	int		i;
+	char	*t2;
+
+	t2 = malloc((len_s + 1) * sizeof(char));
+	if (t2 == NULL)
+		return (NULL);
+	return (t2);
+}
+
+static char	*t3f(char *s, int *start_s, char c, int i)
+{
 	int		len_s;
 	int		inside;
 	char	*t2;
 
-	i = next_token(s, *start_s, c);
-	len_s = i - *start_s;
-	i = 0;
+	len_s = next_token(s, *start_s, c, *start_s) - *start_s;
 	inside = 0;
-	t2 = malloc((len_s + 1) * sizeof(char));
-	if (t2 == NULL)
-		return (NULL);
+	t2 = ft_malloc(len_s);
 	while (i < len_s)
 	{
 		if (isin("\'\"", s[*start_s]) == 1 && inside == 0)
@@ -160,52 +115,13 @@ char	**ft_split_exe1(char *s)
 		while (s[i] && (s[i] == ' ' || s[i] == '\t'))
 			i++;
 		if (!s[i])
-			break ;	
-		t1[j] = t3f(s, &i, 'a', i);
+			break ;
+		t1[j] = t3f(s, &i, 'a', 0);
 		if (t1[j++] == NULL)
 			return (cleanexit(t1));
 		while (s[i] && s[i] != ' ' && s[i] != '\t')
 			i++;
 	}
-	// ft_printf_fd(2, "split size |%d| split used |%d|\n", (splitlen1(s, c) + 1), j );
 	t1[j] = NULL;
-	// print_split(t1);
 	return (t1);
 }
-
-// int	main(int c, char *v[])
-// {
-// 	int		i;
-// 	int		j;
-// 	char	**a;
-
-// 	(void)c;
-// 	i = 0;
-// 	a = ft_split_exe1(v[1]);
-// 	while (a[i])
-// 	{
-// 		printf("|%s|\n", a[i]);
-// 		// j = 0;
-// 		// while(a[i][j])
-// 		// {
-// 		// 	printf("printing char index |%d| as |%c|\n", j, a[i][j]);
-// 		// 	j++;
-// 		// }
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (a[i])
-// 	{
-// 		free(a[i]);
-// 		i++;
-// 	}
-// 	free(a);
-// 	printf("\n%s\n", v[1]);
-// 	return (0);
-// }
-
-// int	main(int c, char *v[])
-// {
-// 	printf("\n%s\n", v[1]);
-// 	return (0);
-// }

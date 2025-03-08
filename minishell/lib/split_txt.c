@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/07 12:11:26 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/08 10:02:57 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static int	splitlen6(char const *s1, int i, int k)
 	{
 		if (s1[i] == '|' || s1[i] == '<' || s1[i] == '>')
 			k++;
-		while ((s1[i] == '|' || s1[i] == '<' || s1[i] == '>')
-			&& s1[i] != '\0')
+		while ((s1[i] == '|' || s1[i] == '<' || s1[i] == '>') && s1[i] != '\0')
 		{
 			if (s1[i] == '"' || s1[i] == '\'')
 				i = pass_quote_plus(s1[i], s1, i + 1);
@@ -27,8 +26,7 @@ static int	splitlen6(char const *s1, int i, int k)
 		}
 		if (s1[i])
 			k++;
-		while ((s1[i] != '|' && s1[i] != '<' && s1[i] != '>')
-			&& s1[i] != '\0')
+		while ((s1[i] != '|' && s1[i] != '<' && s1[i] != '>') && s1[i] != '\0')
 		{
 			if (s1[i] == '"' || s1[i] == '\'')
 				i = pass_quote_plus(s1[i], s1, i + 1);
@@ -38,7 +36,7 @@ static int	splitlen6(char const *s1, int i, int k)
 	return (k);
 }
 
-int t3f(char const* s, int start_s, int i)
+int	t3f(char const *s, int start_s, int i)
 {
 	if (i == start_s)
 	{
@@ -79,15 +77,16 @@ static char	*t2f(char const *s, int start_s)
 	t2[i] = '\0';
 	return (t2);
 }
-int split_bis(char const* s, int i)
+
+int	split_bis(char const *s, int i)
 {
-			while (s[i] == '|' || s[i] == '<' || s[i] == '>' && s[i])
-			{
-				if (s[i] == '"' || s[i] == '\'')
-					i = pass_quote_plus(s[i], s, i + 1);
-				i++;
-			}
-			return(i);
+	while (s[i] == '|' || s[i] == '<' || s[i] == '>' && s[i])
+	{
+		if (s[i] == '"' || s[i] == '\'')
+			i = pass_quote_plus(s[i], s, i + 1);
+		i++;
+	}
+	return (i);
 }
 
 char	**ft_split_txt(char const *s, int i, int j)

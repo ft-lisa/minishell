@@ -6,12 +6,11 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:37:42 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 14:42:13 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/08 10:35:49 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 int	add_last_2d(char ***str2, char *add)
 {

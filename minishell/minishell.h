@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/07 16:50:28 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/08 10:20:24 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,9 @@ long long ft_atoll(const char *s);
 char	*ft_itoa(int k);
 char	**ft_split_exe1(char *s);
 char	**ft_split_exe(char *s, char c);
+int	istokenquotes(char *s, int start_s);
+int	no_space_until_q(char *s, int start_s, char c);
+int	if_quote(char *s, int start_s, char c, int i);
 int	ft_strcmp(char *s1, char *s2);
 int     open_only_one_quote(char *str);
 char	**ft_split_ope_bis(char const *s, char c, int i, int j);
