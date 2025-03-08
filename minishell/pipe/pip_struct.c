@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pip_struct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/07 16:49:32 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:24:35 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	**get_path(char *envp[])
 		if (j == 5)
 		{
 			path1 = ft_split_exe(envp[i] + j, ':');
+			
 			return (path1);
 		}
 		i++;

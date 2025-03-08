@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/08 10:20:24 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:11:00 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ int     chck1op(char *str);
 int     isconsecutive_ops1_index(char *str, char *op);
 int     isconsecutive_opsloop_index(char *str, char *op);
 int     chck2op_type(char *str);
-int     isconsecutive_ops1(char *str, char *op);
+int     isconsecutive_ops1(char *str, char *op, int j);
 int     isconsecutive_opsloop(char *str, char *op);
 int     chck2op(char *str);
 char pick_quote(char *str);
@@ -246,7 +246,7 @@ void del_quotes(t_list *command);
 /* creat_list */
 
 char	**split_until(char *str, char c);
-void fill_seven(t_list* new, char* content);
+int fill_seven(t_list* new, char* content);
 void fill_one_three(t_list* new, char* content);
 void fill_six(t_list* new, char* content);
 void fill_com_list(t_list *list, char** content);

@@ -37,6 +37,8 @@ t_list* init_list(int count, char ***envp, char **argv, int argc)
     if(!first)
         exit(1);
     data = init_exe(envp, argv, argc, count);
+    if (data == NULL)
+        (free(first), exit (1));
     first->data = data;
     list = first;
     while (count--)
@@ -47,12 +49,11 @@ t_list* init_list(int count, char ***envp, char **argv, int argc)
         {
             list->next = malloc(sizeof(t_list));
             if(list->next == NULL)
-                exit(1);
+                free_list(first);
             list = list->next;    
         }
     }
     list->next = NULL;
-
     return(first);
 }
 
@@ -81,6 +82,8 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
 
     content_node = ft_split_ope_bis(line, '|', 0, 0);
     free(line);
+    if (content_node == NULL)
+        exit(1);
     count = double_strlen(content_node);
     command = init_list(count, envp, argv, argc);
     while(content_node[i])

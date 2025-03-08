@@ -93,22 +93,26 @@ int	expand(char **cmd, char **env, int error)
         if (i == -1 || (*cmd)[i] == '\0')
                 return (1);
 	temp = copy_until_alnum_under(*cmd + i + 1);
-	// printf("CHECKING COPY |%s| index |%d| strcmp |%d|\n\n", temp, i, ft_strcmp(temp, "$"));
 	if (!temp)
 		return (-1);
 	if (ft_strncmp(temp, "?", 1) == 0)
 	{
 		temp2 = ft_itoa(error);
-		replace_str(cmd, "?", temp2, i);
+		if (!temp2)
+			return (free(temp), -1);
+		if (replace_str(cmd, "?", temp2, i) == -1)
+			return (free(temp), free(temp2), -1);
 		return (free(temp), free(temp2), 0);
 	}
 	if (isin_2d_equal(env, temp) == 1)
 	{
 		temp2 = get_path_var(env, temp);
-		replace_str(cmd, temp, temp2, i);
+		if (replace_str(cmd, temp, temp2, i) == -1)
+			return (free(temp), -1);
 		return (free(temp), 0);
 	}
-	replace_str(cmd, temp, NULL, i);
+	if (replace_str(cmd, temp, temp2, i) == -1)
+			return (free(temp), -1);
 	return (free(temp), 0);
 }
 

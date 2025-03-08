@@ -36,7 +36,7 @@ char	**split_until(char *str, char c)
 	return (new);
 }
 
-void fill_seven(t_list* new, char* content)
+int fill_seven(t_list* new, char* content)
 {
     char** split_txt;
     char** split;
@@ -44,9 +44,13 @@ void fill_seven(t_list* new, char* content)
     int k;
 
     split_txt = ft_split_txt(content, 0, 0);
+    if (split_txt == NULL)
+        return(-1);
     i = 0;
     k = 0;
     new->delim = malloc((size_delim(split_txt, 0) + 1) * sizeof(char *));
+    if (new->delim == NULL)
+        return(-1);
     if(operator(split_txt[i]) == 7)
     {
         while(split_txt[i + 1])
@@ -56,6 +60,8 @@ void fill_seven(t_list* new, char* content)
             i++;
         }
         split = ft_split(split_txt[i], ' ');
+        if (split == NULL)
+            return(-1);
         new->delim[k] = strdup(split[0]);
         new->delim[k + 1] = NULL;
         if(split[1])
@@ -75,6 +81,7 @@ void fill_seven(t_list* new, char* content)
         new->delim[k++] = NULL;
     }
     cleanexit(split_txt);
+    return(1);
 }
 
 void fill_one_three(t_list* new, char* content)

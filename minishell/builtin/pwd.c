@@ -8,6 +8,8 @@ char     *pwd2(t_list *pip)
         char **str;
 
         buf = malloc(4097 * sizeof(char));
+        if (!buf)
+                exit_minishell(pip);
         err = getcwd(buf, 4096);
         if (!err)
         {
@@ -38,6 +40,8 @@ int     pwd1(t_list *pip)
                 }
         }
         buf = malloc(4097 * sizeof(char));
+        if (!buf)
+                exit_minishell(pip);
         err = getcwd(buf, 4096);
         if (err)
                 printf("%s\n", buf);

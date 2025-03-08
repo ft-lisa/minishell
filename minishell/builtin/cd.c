@@ -60,7 +60,7 @@ int     cd1(t_list *pip)
 
         str = ft_split(pip->cmd, ' ');
         if (!str)
-                return (-1);
+                exit_minishell(pip);
         if (str_len_2d(str) > 2)
         {
                 ft_printf_fd(2, "bash: cd: too many arguments\n");

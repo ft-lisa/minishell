@@ -9,7 +9,7 @@ static char	*remove_surrounding_quotes(const char *s)
 	if (len >= 2 && ((s[0] == '\"' && s[len - 1] == '\"') ||
 		(s[0] == '\'' && s[len - 1] == '\'')))
 	{
-		res = malloc(len - 1);
+		res = malloc(len - 1); // good
 		if (!res)
 			return (NULL);
 		ft_memcpy(res, s + 1, len - 2);
@@ -222,14 +222,6 @@ int	add_plus(char ***env, char *add)
 	free(entry);
 	return (1);
 }
-
-// int	add_plus_fixed(char ***str2, char *add)
-// {
-// 	char	*temp;
-
-// 	add_plus(str2, temp);
-// 	temp = (remove_surrounding_quotes())
-// }
 
 void export1(t_list *pip, char **str)
 {

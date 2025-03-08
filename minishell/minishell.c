@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 13:49:40 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:31:15 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (1);
 	env = strdup_2d(envp);
+	if (env == NULL)
+		exit(1);
 	error = 0;
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -62,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, handler);
 		str = readline("minishell> ");
 		if (!str)
-			(printf("exit\n"), rl_clear_history(), exit(1));
+			(printf("exit\n"), rl_clear_history(), cleanexit(env), exit(1));
 		add_history(str);
 		if (g_sig)
 			error = 130;
