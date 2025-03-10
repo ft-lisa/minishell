@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 10:53:33 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 14:26:32 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:00:28 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,8 @@ int	chck2op(char *str)
 		return (0);
 	i = chck2op_type(str);
 	op = ft_split("<< >> < > |", ' ');
+	if (!op)
+		return(-1);
 	if (isconsecutive_opsloop(str, op[i]) == 1)
 		return (free(temp), cleanexit(op), 1);
 	else if (isin("<>|", temp[ft_strlen(temp) - 1]) == 1)

@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:41:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/07 11:12:58 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:10:25 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	is_other(t_list *pip)
 	if (isemptyor_spacetab(pip->cmd) == 1)
 		return (0);
 	str = ft_split_exe1(pip->cmd);
+	if (!str)
+		return (-1);
 	if (ft_strcmp(str[0], "cd") == 0)
 		ret = 1;
 	else if (ft_strcmp(str[0], "pwd") == 0)
@@ -46,6 +48,8 @@ void	exe_other(t_list *pip)
 	char	**str;
 
 	str = ft_split_exe1(pip->cmd);
+	if (!str)
+		(free_pip(pip), exit(1));
 	if (ft_strcmp(str[0], "cd") == 0)
 		(cleanexit(str), cd1(pip));
 	else if (ft_strcmp(str[0], "pwd") == 0)

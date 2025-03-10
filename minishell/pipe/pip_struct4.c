@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:39:09 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 16:29:33 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:14:24 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	is_cmd(t_list *pip)
 	if (!pip)
 		return (0);
 	no_a = no_args_cmd(pip->cmd);
+	if (!no_a)
+		(free_pip(pip), exit(1));
 	get_p = get_path_command(pip->data->path, no_a);
 	if (get_p[0] == '\0')
 		r = 0;
@@ -41,7 +43,11 @@ int	is_cmd_2d(t_list *pip)
 	if (!pip)
 		return (0);
 	temp2 = ft_split_exe1(pip->cmd);
+	if (!temp2)
+		(free_pip(pip), exit(1));
 	no_a = no_args_cmd(temp2[1]);
+	if (!no_a)
+		(free_pip(pip), exit(1));
 	get_p = get_path_command(pip->data->path, no_a);
 	if (get_p[0] == '\0')
 		r = 0;

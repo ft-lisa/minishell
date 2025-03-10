@@ -76,7 +76,8 @@ int     echo1(t_list *pip)
         char **str;
 
         str = ft_split_exe1(pip->cmd);
-        // print_split(str);
+        if (!str)
+                return(free_pip(pip), -1);
         j = 1;
         error = 0;
         if (str[1] && echoarg(str[1]) == 1)

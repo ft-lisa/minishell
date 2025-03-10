@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/08 10:19:11 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:56:38 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	len_t2f(int i, int start_s, int inside, char *s)
 	if (inside == 1)
 		return (i - start_s);
 	temp1 = copy_until_one(s + start_s, " \t");
+	if (!temp1)
+		return (-1);
 	count_quotes = (count_c(temp1, '\'') + (count_c(temp1, '\"')));
 	free(temp1);
 	return (i - start_s - count_quotes);

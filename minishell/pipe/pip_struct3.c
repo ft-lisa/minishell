@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pip_struct3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:26:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/07 16:33:08 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:13:33 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 
 	type(pip, t1, t2);
 	temp2 = ft_split_exe1(pip->cmd);
+	if (!temp2)
+		(free_pip(pip), exit (1));
 	no_a = no_args_cmd(temp2[0]);
+	if (!no_a)
+		(free_pip(pip), exit(1));
 	get_p = get_path_command(pip->data->path, no_a);
 	if ((!get_p || !get_p[0]) && pip->data->path)
 	{
