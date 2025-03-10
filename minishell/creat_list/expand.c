@@ -99,6 +99,8 @@ int	expand(char **cmd, char **env, int error)
 	if (ft_strncmp(temp, "?", 1) == 0)
 	{
 		temp2 = ft_itoa(error);
+		if (!temp2)
+		return (-1);	
 		replace_str(cmd, "?", temp2, i);
 		return (free(temp), free(temp2), 0);
 	}

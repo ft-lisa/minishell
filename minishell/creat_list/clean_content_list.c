@@ -14,6 +14,8 @@ void del_space(t_list *command)
         {
             tmp = new->cmd;
             new->cmd = ft_strtrim(new->cmd, " ");
+            if (!new->cmd)
+                return ;
             free(tmp);
         }   
             
@@ -21,6 +23,8 @@ void del_space(t_list *command)
         {
             tmp = new->if_file1;
             new->if_file1 = ft_strtrim(new->if_file1, " ");
+            if (!new->if_file1)
+                return ;
             free(tmp);
         }
             
@@ -28,6 +32,8 @@ void del_space(t_list *command)
         {
             tmp  = new->if_file2;
             new->if_file2 = ft_strtrim(new->if_file2, " ");
+            if (!new->if_file2)
+                return ;
             free(tmp);
         }
             
@@ -37,6 +43,8 @@ void del_space(t_list *command)
             {
                 tmp = new->delim[i];
                 new->delim[i] = ft_strtrim(new->delim[i], " ");
+                if (!new->delim[i])
+                    return ;
                 free(tmp);
                 i++;
             }

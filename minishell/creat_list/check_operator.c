@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 10:53:33 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 15:18:33 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:35:30 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,11 @@ int	chck1op(char *str)
 	char	*temp;
 	int		i;
 
-	if (str && str[0])
-	{
-		temp = ft_strtrim(str, " ");
-		if (!temp)
-			return(1);
-	}	
-	else
+	if (!str || !str[0])
 		return (0);
+	temp = ft_strtrim(str, " ");
+	if (!temp)
+		return(1);	
 	i = 0;
 	if (isin("<>", temp[0]) && !temp[1])
 		(ft_printf_fd(2,
@@ -41,8 +38,7 @@ int	chck1op(char *str)
 	else if (isin(">", temp[0]) && temp[1] == '>' && !temp[2])
 		(ft_printf_fd(2,
 				"bash: syntax error near unexpected token `newline'\n"), i++);
-	free(temp);
-	return (i);
+	return (free(temp), i);
 }
 
 int	isconsecutive_ops1_index(char *str, char *op)
@@ -174,15 +170,11 @@ int	chck2op(char *str)
 	char	**op;
 	int		i;
 
-	if (str && str[0])
-	{
-		temp = ft_strtrim(str, " ");
-		if (!temp)
-			return(1);
-	}
-		
-	else
+	if (!str || !str[0])
 		return (0);
+	temp = ft_strtrim(str, " ");
+	if (!temp)
+		return(1);		
 	i = chck2op_type(str);
 	op = ft_split("<< >> < > |", ' ');
 	if (!op)
@@ -241,24 +233,16 @@ char	*remove_first_quotes(char *str)
 		if (!temp2)
 			return(NULL);
 		join = ft_strjoin(temp, temp2);
-		if (!join)
-			return(NULL);
 		free(temp2);
 	}
 	else if (!temp || !temp[0])
-	{
-		join = ft_strdup(temp2);
-		if (!join)
-			return (NULL);
-	}	
+		join = ft_strdup(temp2);	
 	else
 	{
 		temp2 = ft_strjoin(temp, "Z");
-		free(temp);
-		return (temp2);
+		return (free(temp), temp2);
 	}
-	free(temp);
-	return (join);
+	return (free(temp), join);
 }
 
 char	*remove_all_quotes(char *str)
