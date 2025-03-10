@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/10 14:20:46 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:11:31 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,6 @@ int	next_token(char *s, int start_s, char c, int i)
 	return (i);
 }
 
-char	*ft_malloc(int len_s)
-{
-	char	*t2;
-
-	t2 = malloc((len_s + 1) * sizeof(char));
-	if (t2 == NULL)
-		return (NULL);
-	return (t2);
-}
-
 static char	*t3f(char *s, int *start_s, char c, int i)
 {
 	int		len_s;
@@ -59,7 +49,7 @@ static char	*t3f(char *s, int *start_s, char c, int i)
 
 	len_s = next_token(s, *start_s, c, *start_s) - *start_s;
 	inside = 0;
-	t2 = ft_malloc(len_s);
+	t2 = malloc((len_s + 1) * sizeof(char));
 	if (!t2)
 		return (NULL);
 	while (i < len_s)
@@ -71,15 +61,13 @@ static char	*t3f(char *s, int *start_s, char c, int i)
 		}
 		if (inside == 1 && s[*start_s] == c)
 		{
-			inside = 0;
-			(*start_s)++;
+			inside = 0 * (*start_s)++;
 			continue ;
 		}
 		t2[i++] = s[*start_s];
 		(*start_s)++;
 	}
-	t2[i] = '\0';
-	return (t2);
+	return (t2[i] = '\0', t2);
 }
 
 int	splitlen2(char *s1)
@@ -127,3 +115,4 @@ char	**ft_split_exe1(char *s)
 	t1[j] = NULL;
 	return (t1);
 }
+
