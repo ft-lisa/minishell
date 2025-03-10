@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:37:42 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 14:46:00 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:25:50 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,13 @@ int	add_last_2d(char ***str2, char *add)
 	while (nitems > i)
 	{
 		t[i] = ft_strdup((*str2)[i]);
-		if (!t[i])
-			return(-1);
-		i++;
+		if (!t[i++])
+			return (-1);
 	}
 	t[i++] = ft_strdup(add);
 	if (!t[i - 1])
-		return(-1);
-	t[i] = NULL;
-	cleanexit(*str2);
-	*str2 = t;
-	return (free(temp), 0);
+		return (-1);
+	return (t[i] = NULL, cleanexit(*str2), *str2 = t, free(temp), 0);
 }
 
 char	*copy_until(char *str, char c)
