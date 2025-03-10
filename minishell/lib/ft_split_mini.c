@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/08 10:52:16 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:20:46 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static char	*t3f(char *s, int *start_s, char c, int i)
 	len_s = next_token(s, *start_s, c, *start_s) - *start_s;
 	inside = 0;
 	t2 = ft_malloc(len_s);
+	if (!t2)
+		return (NULL);
 	while (i < len_s)
 	{
 		if (isin("\'\"", s[*start_s]) == 1 && inside == 0)

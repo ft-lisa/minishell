@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 10:53:33 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/08 18:25:26 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:26:32 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,8 @@ char	*remove_first_quotes(char *str)
 	else if (!temp || !temp[0])
 	{
 		join = ft_strdup(temp2);
+		if (!join)
+			return (NULL);
 	}	
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:41:18 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 14:22:56 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:22:17 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ char	*recup_path(char *src)
 	if (size == 0)
 		return (NULL);
 	dst = malloc(size + 2);
+	if (!dst)
+		return(NULL);
 	while (i < n && src[i] != '\0')
 	{
 		dst[i] = src[i];

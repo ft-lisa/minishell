@@ -25,7 +25,13 @@ int	rmv_str_2d(char ***str2, char *rmv)
 		if (!temp)
 			return (cleanexit(t), 1);
 		if(ft_strcmp(temp, rmv) != 0)
+		{
 			t[i++] = ft_strdup((*str2)[j]);
+			if (!t[i - 1])
+				return (cleanexit(t), 1);
+
+		}
+			
                 free(temp);
 		j++;
 	}

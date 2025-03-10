@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:36:32 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 14:36:54 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:45:14 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	**strdup_2d(char **s)
 	while (nitems > i)
 	{
 		t[i] = ft_strdup(s[i]);
+		if (!t[i])
+			return(NULL);
 		i++;
 	}
 	t[i] = NULL;

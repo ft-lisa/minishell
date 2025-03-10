@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/10 11:18:49 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:43:57 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,8 +247,8 @@ void del_quotes(t_list *command);
 
 char	**split_until(char *str, char c);
 int fill_seven(t_list* new, char* content);
-void fill_one_three(t_list* new, char* content);
-void fill_six(t_list* new, char* content);
+int fill_one_three(t_list* new, char* content);
+int fill_six(t_list* new, char* content);
 int fill_com_list(t_list *list, char** content);
 int fill_ope_list(t_list *list, char** content);
 
