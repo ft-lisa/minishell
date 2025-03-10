@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/08 12:24:35 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 10:55:18 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_data	*init_exe2(t_data *pipex, char ***envp, char **argv, int count)
 {
 	pipex = malloc(sizeof(t_data));
 	if (!pipex)
-		exit(1);
+		return(NULL);
 	if (str_len_2d(*envp) < 6)
 		no_env_init(envp);
 	pipex->envp = envp;
@@ -105,6 +105,8 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 
 	i = 1;
 	pipex = init_exe2(pipex, envp, argv, count);
+	if (!pipex)
+		return(NULL);
 	while (i < pipex->n_cmd)
 	{
 		pipex->fd = ft_add_fd(pipex->fd, i);

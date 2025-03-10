@@ -128,7 +128,7 @@ void fill_six(t_list* new, char* content)
         cleanexit(split_txt);
 }
 
-void fill_com_list(t_list *list, char** content)
+int fill_com_list(t_list *list, char** content)
 {
     char** split;
     int j;
@@ -141,11 +141,14 @@ void fill_com_list(t_list *list, char** content)
         if((new->exe1 == 4 || new->exe1 == 5) && (new->exe2 == 2 || new->exe2 == 0))
         {
             new->cmd = ft_strdup(content[j]);
-        }
-            
+            if (new->cmd == NULL)
+                return (-1);
+        }    
         if((new->exe1 == 6 || new->exe1 == 7) && (new->exe2 == 1 || new->exe2 == 3))
         {
             split = split_until(content[j], '>');
+            if (!split)
+                return (-1);
             if(new->exe1 == 6)
                 fill_six(new, split[0]);
             else
@@ -167,7 +170,7 @@ void fill_com_list(t_list *list, char** content)
     }
 }
 
-void fill_ope_list(t_list *list, char** content)
+int fill_ope_list(t_list *list, char** content)
 {
     int j;
     t_list *new;
@@ -179,6 +182,8 @@ void fill_ope_list(t_list *list, char** content)
     {
         new->index = j + 1;
         str = remove_all_quotes(content[j]);
+        if (!str)
+            return (-1);
         if(content [j + 1] != NULL)
         {
             new->exe2 = 2;

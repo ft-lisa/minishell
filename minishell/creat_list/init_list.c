@@ -35,10 +35,10 @@ t_list* init_list(int count, char ***envp, char **argv, int argc)
 
     first = malloc(sizeof(t_list));
     if(!first)
-        exit(1);
+        return (NULL);
     data = init_exe(envp, argv, argc, count);
     if (data == NULL)
-        (free(first), exit (1));
+        return(free(first), NULL);
     first->data = data;
     list = first;
     while (count--)
@@ -49,7 +49,7 @@ t_list* init_list(int count, char ***envp, char **argv, int argc)
         {
             list->next = malloc(sizeof(t_list));
             if(list->next == NULL)
-                free_list(first);
+                return (free_list(first), NULL);
             list = list->next;    
         }
     }
@@ -83,9 +83,11 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
     content_node = ft_split_ope_bis(line, '|', 0, 0);
     free(line);
     if (content_node == NULL)
-        exit(1);
+        (cleanexit(*envp), free(envp), exit(1));
     count = double_strlen(content_node);
     command = init_list(count, envp, argv, argc);
+    if (!command)
+        return (NULL);
     while(content_node[i])
     {
         temp = content_node[i];
@@ -93,8 +95,10 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
         free(temp);
         i++;
     }
-    fill_ope_list(command, content_node);    
-    fill_com_list(command, content_node);
+    if (fill_ope_list(command, content_node) == -1)
+        return(free_list(command), NULL);
+    if (fill_com_list(command, content_node) == -1)
+        return(free_list(command), NULL);
     del_space(command);
     del_quotes(command);
     command->data->content = content_node;

@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/08 15:11:00 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:18:49 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,8 +249,8 @@ char	**split_until(char *str, char c);
 int fill_seven(t_list* new, char* content);
 void fill_one_three(t_list* new, char* content);
 void fill_six(t_list* new, char* content);
-void fill_com_list(t_list *list, char** content);
-void fill_ope_list(t_list *list, char** content);
+int fill_com_list(t_list *list, char** content);
+int fill_ope_list(t_list *list, char** content);
 
 /* expand */
 
