@@ -37,6 +37,8 @@ int cd_pwd(t_list *pip, char *buf)
                 if (path)
                 {
                 temp = ft_strjoin("OLDPWD=", path);
+                if (!temp)
+                        return(-1);
                 add_last_2d( pip->data->envp, temp);
                 free(temp);
                 }
@@ -44,6 +46,8 @@ int cd_pwd(t_list *pip, char *buf)
                 if (path)
                 {
                         temp = ft_strjoin("PWD=", path);
+                        if (!temp)
+                                return(-1);
                         add_last_2d( pip->data->envp, temp);
                         free(temp);
                 }

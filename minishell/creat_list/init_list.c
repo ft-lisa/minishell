@@ -19,6 +19,8 @@ int	no_env_init(char ***envp)
 	if (path)
 	{
 		temp = ft_strjoin("PWD=", path);
+        if (!temp)
+            return(free(path), -1);
 		add_last_2d(envp, temp);
 		free(temp);
 		free(path);

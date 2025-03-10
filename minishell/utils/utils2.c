@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:51:05 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 13:58:52 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:20:53 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,11 @@ char	*get_path_command(char **paths, char *command)
 	while (j != 0 && paths[i])
 	{
 		temp = ft_strjoin(paths[i++], "/");
+		if (!temp)
+			return (NULL);
 		temp2 = ft_strjoin(temp, command);
+		if (!temp2)
+			return (NULL);
 		j = access(temp2, F_OK);
 		if (j == 0)
 			path = ft_strdup(temp2);
