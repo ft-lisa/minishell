@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 17:30:45 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:55:31 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int argc, char **argv, char **envp)
 		if (check_line(&str, &env, error) == 1)
 			continue ;
 		exe = creat_list(str, &env, argv, argc);
+		print_list(exe);
 		error = execution(exe, error);
 	}
 }

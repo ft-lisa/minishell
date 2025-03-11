@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/10 17:35:01 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:31:25 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ int fill_ope_list(t_list *list, char** content);
 
 int	replace_str(char **mainstr, char *before, char *after, int index);
 int	isdollar_alone(char *str, int i);
-int	indexto_skip_squotes(char *str, char c);
+int	indexto_skip_squotes(char *str, char c, int i, int in_double);
 int	expand(char **cmd, char **env, int error);
 int 	expand_vars(char **cmd, char ***env, int error);
 

@@ -1,4 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/11 15:29:39 by lismarti          #+#    #+#             */
+/*   Updated: 2025/03/11 15:31:18 by lismarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
+
+void replace_str_2(int index, char **mainstr, char* new, char* after)
+{
+	int i;
+
+	i = 0;
+	while(i < index)
+	{
+		new[i] = (*mainstr)[i];
+		i++;
+	}
+	i = 0;
+	while(after && after[i])
+	{
+		new[index + i] = after[i];
+		i++;
+	}
+}
 
 int	replace_str(char **mainstr, char *before, char *after, int index)
 {
@@ -17,17 +47,7 @@ int	replace_str(char **mainstr, char *before, char *after, int index)
 	new = malloc ((ft_strlen((*mainstr)) - len_b + len_a  + 1) * sizeof(char));
 	if (!new)
 		return (-1);
-	while(i < index)
-	{
-		new[i] = (*mainstr)[i];
-		i++;
-	}
-	i = 0;
-	while(after && after[i])
-	{
-		new[index + i] = after[i];
-		i++;
-	}
+	replace_str_2(index, mainstr, new, after);
 	while((*mainstr)[index + len_b + 1])
 	{
 		new[index + len_a] = (*mainstr)[index + len_b + 1];
@@ -49,13 +69,8 @@ int	isdollar_alone(char *str, int i)
 
 }
 
-int	indexto_skip_squotes(char *str, char c)
+int	indexto_skip_squotes(char *str, char c, int i, int in_double)
 {
-	int	i;
-	int	in_double;
-
-	i = 0;
-	in_double = 0;
 	while (str[(i > 0) * (i - 1)] && str[i]) // if the 2dwhile reaches the end, we go i - 1, but not in the first interation
 	{
 		if (str[i] == '"')
@@ -89,7 +104,7 @@ int	expand(char **cmd, char **env, int error)
 	char	*temp2;
 	int	i;
 
-	i = indexto_skip_squotes(*cmd, '$');
+	i = indexto_skip_squotes(*cmd, '$', 0, 0);
         if (i == -1 || (*cmd)[i] == '\0')
                 return (1);
 	temp = copy_until_alnum_under(*cmd + i + 1);
@@ -100,7 +115,7 @@ int	expand(char **cmd, char **env, int error)
 	{
 		temp2 = ft_itoa(error);
 		if (!temp2)
-		return (-1);	
+			return (-1);	
 		replace_str(cmd, "?", temp2, i);
 		return (free(temp), free(temp2), 0);
 	}

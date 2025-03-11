@@ -46,6 +46,7 @@ int	fill_seven_2(t_list *new, char **split_txt, int k, int i)
 {
 	char	**split;
 
+	printf("fill_2");
 	while (split_txt[i + 1])
 	{
 		if (operator(split_txt[i]) == 0)
@@ -70,6 +71,7 @@ int	fill_seven_2(t_list *new, char **split_txt, int k, int i)
 }
 int	fill_seven_3(t_list *new, char **split_txt, int k, int i)
 {
+	printf("fill_3");
 	new->cmd = ft_strdup(split_txt[0]);
 	if (!new->cmd)
 		return (-1);
@@ -102,10 +104,12 @@ int	fill_seven(t_list *new, char *content)
 	if (new->delim == NULL)
 		return (-1);
 	if (operator(split_txt[i]) == 7)
+	{
 		if (fill_seven_2(new, split_txt, k, i) == -1)
 			return (-1);
-		else if (fill_seven_3(new, split_txt, k, i) == -1)
-			return (-1);
+	}	
+	else if (fill_seven_3(new, split_txt, k, i) == -1)
+		return (-1);
 	cleanexit(split_txt);
 	return (1);
 }
