@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 15:11:51 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:37:52 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,7 @@ t_data	*init_exe(char ***envp, char **argv, int argc, int count)
 	if (!pipex->path)
 		exit(1);
 	if (pipex->envp[0][0])
-	{
 		if (*(pipex->envp)[0][0] != 'V')
 			(cleanexit(pipex->path), pipex->path = get_path(*(pipex->envp)));
-	}
 	return (pipex);
 }

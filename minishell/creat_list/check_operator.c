@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 10:53:33 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 18:35:30 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:05:38 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,9 +272,9 @@ char	*remove_all_quotes(char *str)
 		if (count_c(temp, del_q) == 1)
 			return (temp);
 	}
-	free(temp);
-	return (str);
+	return (free(temp), str);
 }
+
 
 int	check_operator(char *str1)
 {

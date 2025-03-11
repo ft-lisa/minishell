@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:26:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 15:13:33 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:42:44 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ void	type(t_list *pip, int t1, int t2)
 		type3(pip);
 	ft_close_all(pip->data->fd);
 }
+void ft_errno (void)
+{
+	if (errno == 2)
+		errno = 127;
+	else if (errno == 13)
+		errno = 126;
+}
 
 void	exe_isolate(t_list *pip, int t1, int t2)
 {
@@ -57,7 +64,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	no_a = no_args_cmd(temp2[0]);
 	if (!no_a)
 		(free_pip(pip), exit(1));
-	get_p = get_path_command(pip->data->path, no_a);
+	get_p = get_path_command(pip->data->path, no_a, 0, -1);
 	if ((!get_p || !get_p[0]) && pip->data->path)
 	{
 		ft_printf_fd(2, "bash: %s: command not found\n", temp2[0]);
@@ -68,10 +75,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 		ft_printf_fd(2, "bash: %s: Is a directory\n", no_a);
 	else
 		ft_printf_fd(2, "bash: %s: %s\n", no_a, strerror(errno));
-	if (errno == 2)
-		errno = 127;
-	else if (errno == 13)
-		errno = 126;
+	ft_errno();
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(errno));
 }
 

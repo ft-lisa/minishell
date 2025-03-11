@@ -1,5 +1,19 @@
 #include "../minishell.h"
 
+char* del_space2(char* str, t_list* pip)
+{
+    char* tmp;
+
+    if(str == NULL)
+        return(NULL);
+    tmp = str;
+    str = ft_strtrim(str, " ");
+    free(tmp);
+    if (!str)
+        (free_pip(pip), exit(1));
+    return(str);
+}
+
 void del_space(t_list *command)
 {
     t_list *new;
@@ -11,46 +25,20 @@ void del_space(t_list *command)
     {
         i = 0;
         if (new->cmd)
-        {
-            tmp = new->cmd;
-            new->cmd = ft_strtrim(new->cmd, " ");
-            if (!new->cmd)
-                return ;
-            free(tmp);
-        }   
-            
+            new->cmd = del_space2(new->cmd, command);
         if (new->if_file1)
-        {
-            tmp = new->if_file1;
-            new->if_file1 = ft_strtrim(new->if_file1, " ");
-            if (!new->if_file1)
-                return ;
-            free(tmp);
-        }
-            
+            new->if_file1 = del_space2(new->if_file1, command);
         if (new->if_file2)
-        {
-            tmp  = new->if_file2;
-            new->if_file2 = ft_strtrim(new->if_file2, " ");
-            if (!new->if_file2)
-                return ;
-            free(tmp);
-        }
-            
+            new->if_file2 = del_space2(new->if_file2, command);
         if (new->delim)
         {
             while (new->delim[i] != NULL)
             {
                 tmp = new->delim[i];
-                new->delim[i] = ft_strtrim(new->delim[i], " ");
-                if (!new->delim[i])
-                    return ;
-                free(tmp);
+                new->delim[i] = del_space2(new->delim[i], command);
                 i++;
-            }
-                
-        }
-            
+            }        
+        }    
         new = new->next;
     }
 }

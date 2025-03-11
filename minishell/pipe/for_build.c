@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:41:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 15:10:25 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:37:35 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,8 @@ void	exe_other(t_list *pip)
 	else if (ft_strcmp(str[0], "unset") == 0)
 		(unset1(pip, str), ifexit(pip, str));
 	else if (ft_strcmp(str[0], "exit") == 0)
-	{
 		if (check_exit(str, pip) == 1)
-		{
 			(cleanexit(str), exit_minishell(pip));
-		}
-	}
 }
 
 void	exe_build_single(t_list *pip, int t1, int t2)

@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:51:05 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 15:20:53 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:35:55 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,12 @@ char	*del_c(char *str, char c)
 	return (new_s);
 }
 
-char	*get_path_command(char **paths, char *command)
+char	*get_path_command(char **paths, char *command, int i, int j)
 {
-	int		i;
-	int		j;
 	char	*temp;
 	char	*temp2;
 	char	*path;
 
-	i = 0;
-	j = -1;
 	if (isin(command, '/') == 1)
 		return (ft_strdup(command));
 	if ((command == NULL) || (paths == NULL))

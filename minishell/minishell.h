@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/10 14:43:57 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:35:01 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*free_list(t_list *list);
 
 /* utils2.c */
 char *del_c(char *str, char c);
-char	*get_path_command(char **paths, char *command);
+char	*get_path_command(char **paths, char *command, int i, int j);
 char	*no_args_cmd(char *cmd);
 int operator(char* txt);
 void print_list(t_list *lst);

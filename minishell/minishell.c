@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/08 15:31:15 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:30:45 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	exit_minishell(t_list *pip)
 
 int	execution(t_list *exe, int error)
 {
+	if (g_sig)
+		error = 130;
+	g_sig = 0;
 	if (exe)
 	{
 		signal(SIGINT, new);
@@ -66,9 +69,6 @@ int	main(int argc, char **argv, char **envp)
 		if (!str)
 			(printf("exit\n"), rl_clear_history(), cleanexit(env), exit(1));
 		add_history(str);
-		if (g_sig)
-			error = 130;
-		g_sig = 0;
 		if (check_line(&str, &env, error) == 1)
 			continue ;
 		exe = creat_list(str, &env, argv, argc);
