@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:36:18 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 14:36:19 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:01:24 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	*ft_strdup(const char *s)
 	size_t	nitems;
 
 	i = 0;
+	if (s == NULL)
+		return(NULL);
 	nitems = ft_strlen(s);
 	t = malloc(nitems * sizeof(char) + 1);
 	if (t == NULL)
