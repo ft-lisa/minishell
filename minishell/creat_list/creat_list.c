@@ -197,6 +197,42 @@ int	fill_six(t_list *new, char *content)
     }
 	cleanexit(split_txt);
 }
+int	fill_com_list_3(char** content, t_list* new, int j)
+{
+    if (new->exe1 == 6)
+        fill_six(new, content[j]);
+    if (new->exe1 == 7)
+        fill_seven(new, content[j]);
+    if (new->exe2 == 1 || new->exe2 == 3)
+        fill_one_three(new, content[j]);
+}
+
+int	fill_com_list_2(char** content, t_list* new, int j)
+{
+    char** split;
+	if ((new->exe1 == 6 || new->exe1 == 7) && (new->exe2 == 1
+			|| new->exe2 == 3))
+	{
+        split = split_until(content[j], '>');
+        if (!split)
+            return (-1);
+        if (new->exe1 == 6)
+        {
+            if (fill_six(new, split[0]) == -1)
+                return(-1);
+        }
+        else
+        {
+            if (fill_seven(new, split[0]) == -1)
+                return(-1);
+        }    
+        if (fill_one_three(new, split[1])== -1)
+            return(-1);
+        cleanexit(split);
+    }
+    else
+        return(fill_com_list_3(content, new, j));
+}
 
 
 
@@ -217,28 +253,8 @@ int	fill_com_list(t_list *list, char **content)
 			if (new->cmd == NULL)
 				return (-1);
 		}
-		if ((new->exe1 == 6 || new->exe1 == 7) && (new->exe2 == 1
-				|| new->exe2 == 3))
-		{
-			split = split_until(content[j], '>');
-			if (!split)
-				return (-1);
-			if (new->exe1 == 6)
-				fill_six(new, split[0]);
-			else
-				fill_seven(new, split[0]);
-			fill_one_three(new, split[1]);
-			cleanexit(split);
-		}
-		else
-		{
-			if (new->exe1 == 6)
-				fill_six(new, content[j]);
-			if (new->exe1 == 7)
-				fill_seven(new, content[j]);
-			if (new->exe2 == 1 || new->exe2 == 3)
-				fill_one_three(new, content[j]);
-		}
+        if (fill_com_list_2(content, new, j) == -1)
+            return(-1);
 		j++;
 		new = new->next;
 	}
@@ -268,8 +284,7 @@ int	fill_ope_list(t_list *list, char **content)
 		if (new->exe2 == -1 || (search_exe2(str) != 0 && new->exe2 == 2))
 			new->exe2 = search_exe2(str);
 		new = new->next;
-		if (str && strcmp(str, content[j]) != 0)
+		if (str && strcmp(str, content[j++]) != 0)
 			free(str);
-		j++;
 	}
 }
