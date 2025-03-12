@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:26:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 17:42:44 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:53:50 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void ft_errno (void)
 		errno = 127;
 	else if (errno == 13)
 		errno = 126;
+	else if (errno == 9)
+		errno = 127;
 }
 
 void	exe_isolate(t_list *pip, int t1, int t2)
@@ -70,20 +72,40 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 		ft_printf_fd(2, "bash: %s: command not found\n", temp2[0]);
 		(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
 	}
+	// ft_printf_fd(2, "get_p |%s| \n\n", get_p);
+	// print_split(temp2);
 	execve(get_p, temp2, *(pip->data->envp));
 	if (stat(get_p, &st) == 0 && S_ISDIR(st.st_mode))
+	{
 		ft_printf_fd(2, "bash: %s: Is a directory\n", no_a);
+		errno = 126;
+		// ft_printf_fd(2, "errno |%d| \n\n", errno);
+	}
 	else
 		ft_printf_fd(2, "bash: %s: %s\n", no_a, strerror(errno));
 	ft_errno();
+	// ft_printf_fd(2, "errno2 |%d| \n\n", errno);
 	(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(errno));
+}
+
+void	for_fork(int i, t_list *pip)
+{
+	if (pip->data->pid[i] == -1)
+		return ;
+	if (pip->data->pid[i] == 0)
+		(exe_isolate(pip, pip->exe1, pip->exe2));
 }
 
 void	exe2(t_list *pip)
 {
 	if (pip->exe1 == 7)
 		signal(SIGINT, parent_her);
+	pip->data->fd = ft_add_fd(pip->data->fd, 1);
+	if (pipe(pip->data->fd[0]) == -1)
+		perror("pipe1");
 	pip->data->pid[0] = fork();
+	if (pip->data->pid[0] == 0)
+			(exe_isolate(pip, pip->exe1, pip->exe2));
 }
 
 int	exe1(t_list *pip, int i)
@@ -96,10 +118,18 @@ int	exe1(t_list *pip, int i)
 	else
 	{
 		exe2(pip);
-		for_fork(0, pip);
+		// for_fork(0, pip);
 	}
 	while (i < pip->data->n_cmd)
 	{
+		pip->data->fd = ft_add_fd(pip->data->fd, i + 1);
+		if (pipe(pip->data->fd[i]) == -1)
+			perror("pipe1");
+		// if (i > 1)
+		// {
+		// 	close(pip->data->fd[i - 2][0]);
+		// 	close(pip->data->fd[i - 2][1]);
+		// }
 		pip = pip->next;
 		if (pip->exe1 == 7)
 			waitpid(pip->data->pid[pip->index - 2], NULL, 0);
@@ -114,3 +144,4 @@ int	exe1(t_list *pip, int i)
 	i = wait_all(pip->data->pid, pip->data->n_cmd, pip);
 	return (free_pip(head), i);
 }
+

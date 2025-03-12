@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:51:05 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/11 17:56:05 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:33:01 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,16 +146,16 @@ void	print_list(t_list *lst)
 	}
 }
 
-// void	print_split(char **str)
-// {
-// 	int	i;
+void	print_split(char **str)
+{
+	int	i;
 
-// 	i = 0;
-// 	printf("__________________________\n");
-// 	printf("SPLIT\n");
-// 	while (str[i])
-// 	{
-// 		printf("|..%s..|\n", str[i++]);
-// 	}
-// 	printf("__________________________\n");
-// }
+	i = 0;
+	printf("__________________________\n");
+	printf("SPLIT\n");
+	while (str[i])
+	{
+		printf("|..%s..|\n", str[i++]);
+	}
+	printf("__________________________\n");
+}

@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 10:53:33 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/12 10:19:53 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:01:03 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,10 @@ int	isconsecutive_ops1(char *str, char *op, int j)
 		temp = temp + 1;
 	while (temp[i] && temp[i] == ' ')
 		i++;
-	if (temp[i] && temp[i + 1] && isin("|<>", temp[i]) == 1 && isin("|<>",
+	if (temp[i] && temp[i + 1] &&  *op == '|' && isin("<>", temp[i + 1]) == 1)
+		(ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
+			*op), j++);
+	else if (temp[i] && temp[i + 1] && isin("|<>", temp[i]) == 1 && isin("|<>",
 			temp[i + 1]) == 0)
 		(ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
 				temp[i]), j++);

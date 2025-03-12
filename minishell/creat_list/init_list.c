@@ -29,7 +29,7 @@ int	no_env_init(char ***envp)
 	add_last_2d(envp, "_=/usr/bin/env");
 }
 
-t_list* init_list(int count, char ***envp, char **argv, int argc)
+t_list* init_list(int count, char ***envp, char **argv)
 {
     t_list *first;
     t_list *list;
@@ -38,7 +38,7 @@ t_list* init_list(int count, char ***envp, char **argv, int argc)
     first = malloc(sizeof(t_list));
     if(!first)
         return (NULL);
-    data = init_exe(envp, argv, argc, count);
+    data = init_exe(envp, argv, count);
     if (data == NULL)
         return(free(first), NULL);
     first->data = data;
@@ -88,7 +88,7 @@ t_list *creat_list(char* line, char ***envp, char **argv, int argc)
     if (content_node == NULL)
         (cleanexit(*envp), free(envp), exit(1));
     count = double_strlen(content_node);
-    command = init_list(count, envp, argv, argc);
+    command = init_list(count, envp, argv);
     if (!command)
         return (NULL);
     while(content_node[i])

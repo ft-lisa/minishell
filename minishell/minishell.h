@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/11 15:31:25 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:02:36 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	*free_list(t_list *list);
 /* utils2.c */
 char *del_c(char *str, char c);
 char	*get_path_command(char **paths, char *command, int i, int j);
+void	exe_isolate(t_list *pip, int t1, int t2);
+
 char	*no_args_cmd(char *cmd);
 int operator(char* txt);
 void print_list(t_list *lst);
@@ -128,7 +130,7 @@ void	free_pip(t_list *pip);
 char	**get_path(char *envp[]);
 int	**ft_add_fd(int **fd, int len);
 t_data	*init_exe2(t_data *pipex, char ***envp, char **argv, int count);
-t_data	*init_exe(char ***envp, char **argv, int argc, int count);
+t_data	*init_exe(char ***envp, char **argv, int count);
 
 /* pip_struct2 */
 
@@ -263,7 +265,7 @@ int 	expand_vars(char **cmd, char ***env, int error);
 /* init_list */
 
 void init_list2(t_list *list);
-t_list* init_list(int count, char ***envp, char **argv, int argc);
+t_list* init_list(int count, char ***envp, char **argv);
 int     check_line(char **line, char ***envp, int error);
 t_list *creat_list(char* line, char ***envp, char **argv, int argc);
 int	no_env_init(char ***envp);
