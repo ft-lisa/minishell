@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/11 17:55:31 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:09:29 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ void	exit_minishell(t_list *pip)
 
 int	execution(t_list *exe, int error)
 {
-	if (g_sig)
-		error = 130;
-	g_sig = 0;
 	if (exe)
 	{
 		signal(SIGINT, new);
@@ -48,18 +45,27 @@ int	execution(t_list *exe, int error)
 	return (error);
 }
 
-int	main(int argc, char **argv, char **envp)
+void	init_env(char ***env, char **envp)
+{
+	*env = strdup_2d(envp);
+	if (*env == NULL)
+		exit(1);
+}
+
+void	handle_exit(char **env)
+{
+	printf("exit\n");
+	rl_clear_history();
+	cleanexit(env);
+	exit(1);
+}
+
+void	shell_loop(char **env, char **argv, int check)
 {
 	char	*str;
-	char	**env;
 	t_list	*exe;
 	int		error;
 
-	if (argc != 1)
-		return (1);
-	env = strdup_2d(envp);
-	if (env == NULL)
-		exit(1);
 	error = 0;
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -67,12 +73,29 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, handler);
 		str = readline("minishell> ");
 		if (!str)
-			(printf("exit\n"), rl_clear_history(), cleanexit(env), exit(1));
-		add_history(str);
-		if (check_line(&str, &env, error) == 1)
+			handle_exit(env);
+		if (g_sig == 2)
+			error = 130;
+		g_sig = 0;
+		check = check_line(&str, &env, error);
+		if (check != 0)
+		{
+			if (check == 2)
+				error = 2;
 			continue ;
-		exe = creat_list(str, &env, argv, argc);
-		print_list(exe);
+		}
+		exe = creat_list(str, &env, argv, 0);
 		error = execution(exe, error);
 	}
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	char	**env;
+
+	if (argc != 1)
+		return (1);
+	init_env(&env, envp);
+	shell_loop(env, argv, 0);
+	return (0);
 }

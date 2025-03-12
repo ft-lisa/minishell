@@ -61,12 +61,13 @@ t_list* init_list(int count, char ***envp, char **argv, int argc)
 
 int     check_line(char **line, char ***envp, int error)
 {
+    add_history(*line);
     if (all_space(*line) == 1)
         return (1);
     if (open_only_one_quote(*line) == 1)
         return (1);
     if (check_operator(*line) == 1)
-        return (1);
+        return (2);
     if (expand_vars(line, envp, error) == -1)
         return (1);
     if (isemptyor_spacetab(*line) == 1)
