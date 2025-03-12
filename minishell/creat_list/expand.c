@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:29:39 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/12 09:40:08 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/12 10:37:07 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,36 +97,47 @@ int	indexto_skip_squotes(char *str, char c, int i, int in_double)
 	return (-1);
 }
 
-int	expand(char **cmd, char **env, int error)
+int	expand_special_case(char **cmd, int error, int i)
 {
-	char	*new;
 	char	*temp;
-	char	*temp2;
-	int	i;
 
-	i = indexto_skip_squotes(*cmd, '$', 0, 0);
-        if (i == -1 || (*cmd)[i] == '\0')
-                return (1);
-	temp = copy_until_alnum_under(*cmd + i + 1);
-	// printf("CHECKING COPY |%s| index |%d| strcmp |%d|\n\n", temp, i, ft_strcmp(temp, "$"));
+	temp = ft_itoa(error);
 	if (!temp)
 		return (-1);
-	if (ft_strncmp(temp, "?", 1) == 0)
+	replace_str(cmd, "?", temp, i);
+	free(temp);
+	return (0);
+}
+
+int	expand_variable(char **cmd, char **env, char *var, int i)
+{
+	char	*value;
+
+	if (isin_2d_equal(env, var))
 	{
-		temp2 = ft_itoa(error);
-		if (!temp2)
-			return (-1);	
-		replace_str(cmd, "?", temp2, i);
-		return (free(temp), free(temp2), 0);
+		value = get_path_var(env, var);
+		replace_str(cmd, var, value, i);
 	}
-	if (isin_2d_equal(env, temp) == 1)
-	{
-		temp2 = get_path_var(env, temp);
-		replace_str(cmd, temp, temp2, i);
-		return (free(temp), 0);
-	}
-	replace_str(cmd, temp, NULL, i);
-	return (free(temp), 0);
+	else
+		replace_str(cmd, var, NULL, i);
+	free(var);
+	return (0);
+}
+
+int	expand(char **cmd, char **env, int error)
+{
+	char	*var;
+	int		i;
+
+	i = indexto_skip_squotes(*cmd, '$', 0, 0);
+	if (i == -1 || (*cmd)[i] == '\0')
+		return (1);
+	var = copy_until_alnum_under(*cmd + i + 1);
+	if (!var)
+		return (-1);
+	if (ft_strncmp(var, "?", 1) == 0)
+		return (free(var), expand_special_case(cmd, error, i));
+	return (expand_variable(cmd, env, var, i));
 }
 
 int 	expand_vars(char **cmd, char ***env, int error)
