@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/13 15:13:59 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:26:48 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 extern int			g_sig;
 
 # define ERROR_MESS "bash: syntax error near unexpected token "
+# define ERROR_DIREC "error retrieving current directory: getcwd: cannot "
+# define ERROR_TORY "access parent directories: No such file or directory\n"
 
 typedef struct s_pipex
 {
@@ -240,7 +242,7 @@ int					isconsecutive_opsloop(char *str, char *op);
 int					chck2op(char *str);
 char				pick_quote(char *str);
 char				*remove_first_quotes(char *str);
-char				*remove_all_quotes(char *str);
+char				*remove_all_quotes(char *str, char del_q);
 int					check_operator(char *str1);
 
 /* clean_content_list */
@@ -274,6 +276,7 @@ t_list				*init_list(int count, char ***envp, char **argv);
 int					check_line(char **line, char ***envp, int error);
 t_list				*create_list(char *line, char ***envp, char **argv);
 int					no_env_init(char ***envp);
+char				**prepare_content_node(char *line, char ***envp);
 
 /* builtin */
 
@@ -296,14 +299,15 @@ int					env1(t_list *pip);
 
 /* export */
 
-static char			*remove_surrounding_quotes(const char *s);
 static char			*process_backslashes(const char *s);
 char				*parcing_export(char *str, size_t key_len);
 int					export_valid(char *str);
-static char			*extract_key(char *s);
+char				*extract_key(char *s);
 static int			update_existing(char ***env, char *key, char *new_val);
 int					add_plus(char ***env, char *add);
 void				export1(t_list *pip, char **str);
+char				*m_process_backslashes(const char *s);
+char				*remove_surrounding_quotes(const char *s);
 
 /* pwd */
 
@@ -316,4 +320,8 @@ int					rmv_str_2d(char ***str2, char *rmv);
 int					unset_valid(char *str);
 int					unset1(t_list *pip, char **str);
 
+void				ft_errno(void);
+char				**prepare_content_node(char *line, char ***envp);
+void				trim_content_node(char **content_node);
+int					fill_command_data(t_list *command, char **content_node);
 #endif // FT_H

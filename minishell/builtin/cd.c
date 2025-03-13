@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:36:22 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 13:58:28 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:35:11 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ int	error_cd(char **str, t_list *pip)
 	}
 }
 
-char* cd_pwd_2(char* temp, char* path, t_list* pip)
+char	*cd_pwd_2(char *temp, char *path, t_list *pip)
 {
-        temp = ft_strjoin("PWD=", path);
-        if (!temp)
-                (exit_minishell(pip), exit(1));
-        add_last_2d(pip->data->envp, temp);
-        free(temp);
-        return(temp);
+	temp = ft_strjoin("PWD=", path);
+	if (!temp)
+		(exit_minishell(pip), exit(1));
+	add_last_2d(pip->data->envp, temp);
+	free(temp);
+	return (temp);
 }
 
 int	cd_pwd(t_list *pip, char *buf)
@@ -61,7 +61,7 @@ int	cd_pwd(t_list *pip, char *buf)
 		{
 			temp = ft_strjoin("OLDPWD=", path);
 			if (!temp)
-                                (free_pip(pip), exit(1));
+				(free_pip(pip), exit(1));
 			add_last_2d(pip->data->envp, temp);
 			free(temp);
 		}
@@ -75,16 +75,16 @@ int	cd_pwd(t_list *pip, char *buf)
 	return (ret);
 }
 
-void cd2(char* buf, t_list* pip, int ret)
+void	cd2(char *buf, t_list *pip, int ret)
 {
-        buf = get_path_var(*(pip->data->envp), "HOME");
-        if (buf)
-                ret = cd_pwd(pip, buf);
-        if (buf == NULL || ret == -1)
-        {
-                ft_printf_fd(2, "bash: cd: HOME not set\n");
-                pip->data->new_exit = 1;
-        }
+	buf = get_path_var(*(pip->data->envp), "HOME");
+	if (buf)
+		ret = cd_pwd(pip, buf);
+	if (buf == NULL || ret == -1)
+	{
+		ft_printf_fd(2, "bash: cd: HOME not set\n");
+		pip->data->new_exit = 1;
+	}
 }
 
 int	cd1(t_list *pip)

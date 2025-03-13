@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   creat_list.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/13 15:25:55 by lismarti          #+#    #+#             */
+/*   Updated: 2025/03/13 17:20:51 by lismarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	copy_new(char **new, int i, int j, char *str)
@@ -42,120 +54,6 @@ char	**split_until(char *str, char c)
 	return (new);
 }
 
-int	fill_seven_2(t_list *new, char **split_txt, int k, int i)
-{
-	char	**split;
-
-	while (split_txt[i + 1])
-	{
-		if (operator(split_txt[i]) == 0)
-		{
-			new->delim[k++] = strdup(split_txt[i]);
-			if (!new->delim[k - 1])
-				return (-1);
-		}
-		i++;
-	}
-	split = ft_split(split_txt[i], ' ');
-	if (split == NULL)
-		return (-1);
-	new->delim[k] = strdup(split[0]);
-	if (!new->delim[k])
-		return (-1);
-	new->delim[k + 1] = NULL;
-	new->cmd = ft_strdup(split[1]);
-	if (!new->cmd)
-		return (-1);
-	cleanexit(split);
-}
-int	fill_seven_3(t_list *new, char **split_txt, int k, int i)
-{
-	printf("fill_3");
-	new->cmd = ft_strdup(split_txt[0]);
-	if (!new->cmd)
-		return (-1);
-	i++;
-	while (split_txt[i])
-	{
-		if (operator(split_txt[i]) == 0)
-		{
-			new->delim[k++] = ft_strdup(split_txt[i]);
-			if (!new->delim[k - 1])
-				return (-1);
-		}
-		i++;
-	}
-	new->delim[k++] = NULL;
-}
-
-int	fill_seven(t_list *new, char *content)
-{
-	char	**split_txt;
-	int		i;
-	int		k;
-
-	split_txt = ft_split_txt(content, 0, 0);
-	if (split_txt == NULL)
-		return (-1);
-	i = 0;
-	k = 0;
-	new->delim = malloc((size_delim(split_txt, 0) + 1) * sizeof(char *));
-	if (new->delim == NULL)
-		return (-1);
-	if (operator(split_txt[i]) == 7)
-	{
-		if (fill_seven_2(new, split_txt, k, i) == -1)
-			return (-1);
-	}	
-	else if (fill_seven_3(new, split_txt, k, i) == -1)
-		return (-1);
-	cleanexit(split_txt);
-	return (1);
-}
-
-int	fill_one_three_2(char **split_txt, t_list *new)
-{
-	char	**split;
-
-	split = ft_split(split_txt[1], ' ');
-	if (!split)
-		return (-1);
-	new->if_file2 = ft_strdup(split[0]);
-	if (!new->if_file2)
-		return (-1);
-	if (split[1])
-	{
-		new->cmd = ft_strdup(split[1]);
-		if (!new->cmd)
-			return (-1);
-	}
-	cleanexit(split);
-}
-
-int	fill_one_three(t_list *new, char *content)
-{
-	char	**split_txt;
-	char	**split;
-
-	split_txt = ft_split_txt(content, 0, 0);
-	if (!split_txt)
-		return (-1);
-	if (operator(split_txt[0]) == 1 || operator(split_txt[0]) == 3)
-    {
-        if (fill_one_three_2(split_txt, new) == -1)
-            return(-1);
-    }
-	else
-	{
-		new->cmd = ft_strdup(split_txt[0]);
-		if (!new->cmd)
-			return (-1);
-		new->if_file2 = ft_strdup(split_txt[double_strlen(split_txt) - 1]);
-		if (!new->if_file2)
-			return (-1);
-	}
-	cleanexit(split_txt);
-}
 int	fill_six_two(char **split_txt, t_list *new)
 {
 	char	**split;
@@ -185,82 +83,20 @@ int	fill_six(t_list *new, char *content)
 	if (!split_txt)
 		return (-1);
 	if (operator(split_txt[0]) == 6)
-    {
-        if (fill_six_two(split_txt, new) == -1)
+	{
+		if (fill_six_two(split_txt, new) == -1)
 			return (-1);
-    }
-    else
-    {
-        new->cmd = ft_strdup(split_txt[0]);
-        if (!new->cmd)
-            return (-1);
-        new->if_file1 = ft_strdup(split_txt[double_strlen(split_txt) - 1]);
-        if (!new->if_file1)
-            return (-1);
-    }
-	cleanexit(split_txt);
-}
-int	fill_com_list_3(char** content, t_list* new, int j)
-{
-    if (new->exe1 == 6)
-        fill_six(new, content[j]);
-    if (new->exe1 == 7)
-        fill_seven(new, content[j]);
-    if (new->exe2 == 1 || new->exe2 == 3)
-        fill_one_three(new, content[j]);
-}
-
-int	fill_com_list_2(char** content, t_list* new, int j)
-{
-    char** split;
-	if ((new->exe1 == 6 || new->exe1 == 7) && (new->exe2 == 1
-			|| new->exe2 == 3))
-	{
-        split = split_until(content[j], '>');
-        if (!split)
-            return (-1);
-        if (new->exe1 == 6)
-        {
-            if (fill_six(new, split[0]) == -1)
-                return(-1);
-        }
-        else
-        {
-            if (fill_seven(new, split[0]) == -1)
-                return(-1);
-        }    
-        if (fill_one_three(new, split[1])== -1)
-            return(-1);
-        cleanexit(split);
-    }
-    else
-        return(fill_com_list_3(content, new, j));
-}
-
-
-
-int	fill_com_list(t_list *list, char **content)
-{
-	char	**split;
-	int		j;
-	t_list	*new;
-
-	new = list;
-	j = 0;
-	while (content[j])
-	{
-		if ((new->exe1 == 4 || new->exe1 == 5) && (new->exe2 == 2
-				|| new->exe2 == 0))
-		{
-			new->cmd = ft_strdup(content[j]);
-			if (new->cmd == NULL)
-				return (-1);
-		}
-        if (fill_com_list_2(content, new, j) == -1)
-            return(-1);
-		j++;
-		new = new->next;
 	}
+	else
+	{
+		new->cmd = ft_strdup(split_txt[0]);
+		if (!new->cmd)
+			return (-1);
+		new->if_file1 = ft_strdup(split_txt[double_strlen(split_txt) - 1]);
+		if (!new->if_file1)
+			return (-1);
+	}
+	cleanexit(split_txt);
 }
 
 int	fill_ope_list(t_list *list, char **content)
@@ -274,7 +110,7 @@ int	fill_ope_list(t_list *list, char **content)
 	while (content[j])
 	{
 		new->index = j + 1;
-		str = remove_all_quotes(content[j]);
+		str = remove_all_quotes(content[j], 'a');
 		if (!str)
 			return (-1);
 		if (content[j + 1] != NULL)

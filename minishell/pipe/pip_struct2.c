@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pip_struct2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/13 15:20:25 by lismarti          #+#    #+#             */
+/*   Updated: 2025/03/13 15:21:01 by lismarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	ft_close_all(int **fd)
@@ -7,23 +19,24 @@ void	ft_close_all(int **fd)
 
 	i = 0;
 	if (!fd || !fd[0])
-		return;
+		return ;
 	while (fd[i])
 	{
 		j = 0;
 		while (j < 2)
 		{
-			if(fd[i][j] != -1)
+			if (fd[i][j] != -1)
 				close(fd[i][j]);
 			j++;
 		}
 		i++;
 	}
 }
-int ft_strrchr(const char *string, int searchedChar)
+
+int	ft_strrchr(const char *string, int searchedChar)
 {
-	int		i;
-	int		check;
+	int	i;
+	int	check;
 	int	result;
 
 	i = 0;
@@ -47,13 +60,12 @@ int ft_strrchr(const char *string, int searchedChar)
 	return (0);
 }
 
-
-char*	recup_path(char *src)
+char	*recup_path(char *src)
 {
 	unsigned int	i;
 	unsigned int	n;
-	int size;
-	char* dst;
+	int				size;
+	char			*dst;
 
 	size = ft_strrchr(src, '/');
 	i = 0;
@@ -62,7 +74,7 @@ char*	recup_path(char *src)
 		return (NULL);
 	dst = malloc(size + 2);
 	if (!dst)
-		return(NULL);
+		return (NULL);
 	while (i < n && src[i] != '\0')
 	{
 		dst[i] = src[i];

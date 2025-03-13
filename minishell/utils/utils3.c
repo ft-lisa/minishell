@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:51:10 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/08 17:32:45 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:29:11 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	all_space(char *line)
 		i++;
 	}
 	return (1);
-	
 }
 
 int	count_pipes(char *str)

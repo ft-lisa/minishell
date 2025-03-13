@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:51:05 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/12 16:33:01 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:28:42 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,46 +116,4 @@ int	operator(char *txt)
 	if (txt[i] == '&')
 		return (8);
 	return (0);
-}
-
-void	print_list(t_list *lst)
-{
-	int	i;
-
-	while (lst)
-	{
-		i = 0;
-		printf("Command: |%s|\n", lst->cmd ? lst->cmd : "(null)");
-		printf("Nbr commands: |%d|\n", lst->data->n_cmd);
-		printf("Index: %d\n", lst->index);
-		printf("Exe1: %d\n", lst->exe1);
-		printf("Exe2: %d\n", lst->exe2);
-		printf("If File1: |%s|\n", lst->if_file1 ? lst->if_file1 : "(null)");
-		printf("If File2: |%s|\n", lst->if_file2 ? lst->if_file2 : "(null)");
-		if (lst->delim)
-		{
-			while (lst->delim[i] != NULL)
-			{
-				printf("If delim: |%s|\n",
-					lst->delim[i] ? lst->delim[i] : "(null)");
-				i++;
-			}
-		}
-		printf("--------------------\n");
-		lst = lst->next;
-	}
-}
-
-void	print_split(char **str)
-{
-	int	i;
-
-	i = 0;
-	printf("__________________________\n");
-	printf("SPLIT\n");
-	while (str[i])
-	{
-		printf("|..%s..|\n", str[i++]);
-	}
-	printf("__________________________\n");
 }

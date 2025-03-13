@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:39:09 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 10:55:15 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:20:05 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void	ft_until_limiter(char *delimiter, int verbose, int *write_fd)
 	signal(SIGINT, her);
 	while (1)
 	{
-		
 		line = readline("> ");
 		if (g_sig == 2)
 			return (close(write_fd[0]), close(write_fd[1]), free(line));
