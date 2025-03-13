@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:33:19 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:33:26 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:40:31 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,13 @@ int	fill_seven_2(t_list *new, char **split_txt, int k, int i)
 		return (-1);
 	new->delim[k + 1] = NULL;
 	new->cmd = ft_strdup(split[1]);
+        cleanexit(split);
 	if (!new->cmd)
-		return (-1);
-	cleanexit(split);
+		return (-1);	
 }
 
 int	fill_seven_3(t_list *new, char **split_txt, int k, int i)
 {
-	printf("fill_3");
 	new->cmd = ft_strdup(split_txt[0]);
 	if (!new->cmd)
 		return (-1);
@@ -76,11 +75,11 @@ int	fill_seven(t_list *new, char *content)
 	if (operator(split_txt[i]) == 7)
 	{
 		if (fill_seven_2(new, split_txt, k, i) == -1)
-			return (-1);
+			return (cleanexit(split_txt), -1);
 	}
 	else if (fill_seven_3(new, split_txt, k, i) == -1)
-		return (-1);
-	cleanexit(split_txt);
+		return (cleanexit(split_txt), -1);
+        cleanexit(split_txt);
 	return (1);
 }
 
