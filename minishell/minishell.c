@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 11:00:40 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:11:11 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,6 @@ int	execution(t_list *exe, int error)
 	return (error);
 }
 
-void	init_env(char ***env, char **envp)
-{
-	*env = strdup_2d(envp);
-	if (*env == NULL)
-		exit(1);
-}
-
 void	handle_exit(char **env)
 {
 	printf("exit\n");
@@ -68,7 +61,6 @@ void	shell_loop(char **env, char **argv, int check)
 	int		error;
 
 	error = 0;
-	
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
@@ -97,7 +89,9 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 1)
 		return (1);
-	init_env(&env, envp);
+	env = strdup_2d(envp);
+	if (env == NULL)
+		exit(1);
 	shell_loop(env, argv, 0);
 	return (0);
 }

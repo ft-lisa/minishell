@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 10:53:33 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/12 11:01:03 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:20:08 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	chck1op(char *str)
 		return (0);
 	temp = ft_strtrim(str, " ");
 	if (!temp)
-		return(1);	
+		return (1);
 	i = 0;
 	if (isin("<>", temp[0]) && !temp[1])
 		(ft_printf_fd(2,
@@ -128,20 +128,16 @@ int	isconsecutive_ops1(char *str, char *op, int j)
 		temp = temp + 1;
 	while (temp[i] && temp[i] == ' ')
 		i++;
-	if (temp[i] && temp[i + 1] &&  *op == '|' && isin("<>", temp[i + 1]) == 1)
-		(ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
-			*op), j++);
+	if (temp[i] && temp[i + 1] && *op == '|' && isin("<>", temp[i + 1]) == 1)
+		(ft_printf_fd(2, ERROR_MESS "'%c'\n", *op), j++);
 	else if (temp[i] && temp[i + 1] && isin("|<>", temp[i]) == 1 && isin("|<>",
 			temp[i + 1]) == 0)
-		(ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
-				temp[i]), j++);
+		(ft_printf_fd(2, ERROR_MESS "`%c'\n", temp[i]), j++);
 	else if (temp[i] && !temp[i + 1] && isin("|<>", temp[i]) == 1)
-		(ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
-				temp[i]), j++);
+		(ft_printf_fd(2, ERROR_MESS "`%c'\n", temp[i]), j++);
 	else if (temp[i] && temp[i + 1] && isin("|<>", temp[i]) == 1 && isin("|<>",
 			temp[i + 1]) == 1)
-		(ft_printf_fd(2, "bash: syntax error near unexpected token `%c%c'\n",
-				temp[i], temp[i + 1]), j++);
+		(ft_printf_fd(2, ERROR_MESS "`%c%c'\n", temp[i], temp[i + 1]), j++);
 	return (j);
 }
 
@@ -177,11 +173,11 @@ int	chck2op(char *str)
 		return (0);
 	temp = ft_strtrim(str, " ");
 	if (!temp)
-		return(1);		
+		return (1);
 	i = chck2op_type(str);
 	op = ft_split("<< >> < > |", ' ');
 	if (!op)
-		return(-1);
+		return (-1);
 	if (isconsecutive_opsloop(str, op[i]) == 1)
 		return (free(temp), cleanexit(op), 1);
 	else if (isin("<>|", temp[ft_strlen(temp) - 1]) == 1)
@@ -227,19 +223,19 @@ char	*remove_first_quotes(char *str)
 	del_q = pick_quote(str);
 	temp = copy_until(str, del_q);
 	if (!temp)
-		return(NULL);
+		return (NULL);
 	temp2 = ft_strchr(str, del_q) + 1;
 	temp2 = ft_strchr(temp2, del_q) + 1;
 	if (temp && temp2 && temp[0] && temp2[0])
 	{
 		temp2 = ft_strjoin("Z", temp2);
 		if (!temp2)
-			return(NULL);
+			return (NULL);
 		join = ft_strjoin(temp, temp2);
 		free(temp2);
 	}
 	else if (!temp || !temp[0])
-		join = ft_strdup(temp2);	
+		join = ft_strdup(temp2);
 	else
 	{
 		temp2 = ft_strjoin(temp, "Z");
@@ -258,26 +254,25 @@ char	*remove_all_quotes(char *str)
 	del_q = pick_quote(str);
 	temp = ft_strdup(str);
 	if (!temp)
-		return(NULL);
+		return (NULL);
 	while (count_c(temp, '\'') > 0 || count_c(temp, '\"') > 0)
 	{
 		temp2 = remove_first_quotes(temp);
 		if (!temp2)
-			return (free (temp), NULL);
+			return (free(temp), NULL);
 		if (ft_strchr(temp2, '\'') == NULL && ft_strchr(temp2, '\"') == NULL)
 			return (free(temp), temp2);
 		free(temp);
 		temp = ft_strdup(temp2);
 		free(temp2);
 		if (!temp)
-			return(NULL);
+			return (NULL);
 		del_q = pick_quote(temp);
 		if (count_c(temp, del_q) == 1)
 			return (temp);
 	}
 	return (free(temp), str);
 }
-
 
 int	check_operator(char *str1)
 {

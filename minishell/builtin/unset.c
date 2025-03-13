@@ -8,7 +8,6 @@ int	rmv_str_2d(char ***str2, char *rmv)
 	int		j;
 	int		nitems;
 
-	j = 0;
 	nitems = str_len_2d(*str2);
 	if (!rmv)
 		return (0);
@@ -31,7 +30,6 @@ int	rmv_str_2d(char ***str2, char *rmv)
 				return (cleanexit(t), 1);
 
 		}
-			
                 free(temp);
 		j++;
 	}

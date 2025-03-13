@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/12 17:59:09 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:14:55 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**get_path(char *envp[])
 			j++;
 		if (j == 5)
 		{
-			path1 = ft_split_exe(envp[i] + j, ':');		
+			path1 = ft_split_exe(envp[i] + j, ':');
 			return (path1);
 		}
 		i++;
@@ -77,13 +77,11 @@ int	**ft_add_fd(int **fd, int len)
 	return (new_fd);
 }
 
-
-
 t_data	*init_exe2(t_data *pipex, char ***envp, char **argv, int count)
 {
 	pipex = malloc(sizeof(t_data));
 	if (!pipex)
-		return(NULL);
+		return (NULL);
 	if (str_len_2d(*envp) < 6)
 		no_env_init(envp);
 	pipex->envp = envp;
@@ -106,7 +104,7 @@ t_data	*init_exe(char ***envp, char **argv, int count)
 	i = 1;
 	pipex = init_exe2(pipex, envp, argv, count);
 	if (!pipex)
-		return(NULL);
+		return (NULL);
 	pipex->pid = malloc(count * sizeof(int));
 	if (!pipex->pid)
 		return (free(pipex), NULL);

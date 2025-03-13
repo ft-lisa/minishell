@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:01:02 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 10:04:06 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:13:53 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,39 +97,6 @@ int     check_line(char **line, char ***envp, int error)
         return (1);
     return (0);
 }
-
-// t_list *creat_list(char* line, char ***envp, char **argv)
-// {
-//     int count;
-//     char** content_node;
-//     t_list *command;
-//     int i = 0;
-//     char *temp;
-
-//     content_node = ft_split_ope_bis(line, '|', 0, 0);
-//     free(line);
-//     if (content_node == NULL)
-//         (cleanexit(*envp), free(envp), exit(1));
-//     count = double_strlen(content_node);
-//     command = init_list(count, envp, argv);
-//     if (!command)
-//         return (NULL);
-//     while(content_node[i])
-//     {
-//         temp = content_node[i];
-//         content_node[i] = ft_strtrim(content_node[i], " ");
-//         free(temp);
-//         i++;
-//     }
-//     if (fill_ope_list(command, content_node) == -1)
-//         return(free_list(command), NULL);
-//     if (fill_com_list(command, content_node) == -1)
-//         return(free_list(command), NULL);
-//     del_space(command);
-//     del_quotes(command);
-//     command->data->content = content_node;
-//     return (command);
-// }
 
 char **prepare_content_node(char *line, char ***envp)
 {

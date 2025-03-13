@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:41:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 17:37:35 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:00:22 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	exe_other(t_list *pip)
 	else if (ft_strcmp(str[0], "env") == 0)
 		(cleanexit(str), env1(pip));
 	else if (ft_strcmp(str[0], "echo") == 0)
-		(echo1(pip), ifexit(pip, str));
+		(echo1(pip, 1, 0), ifexit(pip, str));
 	else if (ft_strcmp(str[0], "export") == 0)
 		(export1(pip, str), ifexit(pip, str));
 	else if (ft_strcmp(str[0], "unset") == 0)

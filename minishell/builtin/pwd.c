@@ -20,6 +20,23 @@ char     *pwd2(t_list *pip)
         return (buf);
 }
 
+void     pwd3(t_list *pip, char* buf, char* err, char** str)
+{
+        buf = malloc(4097 * sizeof(char));
+        if (!buf)
+                exit_minishell(pip);
+        err = getcwd(buf, 4096);
+        if (err)
+                printf("%s\n", buf);
+        else
+        {
+                ft_printf_fd(2, "pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+                pip->data->new_exit = 1;
+        }
+        free(buf);
+        ifexit(pip, str);
+}
+
 int     pwd1(t_list *pip)
 {
         char *buf;
@@ -39,18 +56,6 @@ int     pwd1(t_list *pip)
                         return (2);
                 }
         }
-        buf = malloc(4097 * sizeof(char));
-        if (!buf)
-                exit_minishell(pip);
-        err = getcwd(buf, 4096);
-        if (err)
-                printf("%s\n", buf);
-        else
-        {
-                ft_printf_fd(2, "pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
-                pip->data->new_exit = 1;
-        }
-        free(buf);
-        ifexit(pip, str);
+        pwd3(pip, buf, err, str);
         return (0);
 }

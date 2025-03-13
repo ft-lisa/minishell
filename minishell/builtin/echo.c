@@ -68,18 +68,13 @@ int     echoarg(char *str)
         return (1);
 }
 
-int     echo1(t_list *pip)
+int     echo1(t_list *pip, int j, int error)
 {
-        int     i;
-        int     j;
-        int     error;
         char **str;
 
         str = ft_split_exe1(pip->cmd);
         if (!str)
                 return(free_pip(pip), -1);
-        j = 1;
-        error = 0;
         if (str[1] && echoarg(str[1]) == 1)
                 j++;
         while(str[j])
