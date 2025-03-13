@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/12 10:09:29 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:00:40 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	execution(t_list *exe, int error)
 	if (exe)
 	{
 		signal(SIGINT, new);
+		signal(SIGQUIT, SIG_DFL);
 		exe->data->exit1 = error;
 		error = exe1(exe, 1);
 	}
@@ -67,9 +68,10 @@ void	shell_loop(char **env, char **argv, int check)
 	int		error;
 
 	error = 0;
-	signal(SIGQUIT, SIG_IGN);
+	
 	while (1)
 	{
+		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, handler);
 		str = readline("minishell> ");
 		if (!str)
@@ -84,7 +86,7 @@ void	shell_loop(char **env, char **argv, int check)
 				error = 2;
 			continue ;
 		}
-		exe = creat_list(str, &env, argv, 0);
+		exe = create_list(str, &env, argv);
 		error = execution(exe, error);
 	}
 }

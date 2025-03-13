@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/12 16:53:47 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:59:09 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	free_pip(t_list *pip)
 {
 	if (!pip)
 		return ;
-	// ft_printf_fd(2, "errno3 |%d| \n\n", errno);
 	if (errno != 126 && errno != 127)
 		ft_close_all(pip->data->fd);
-	// ft_printf_fd(2, "errno4 |%d| \n\n", errno);
 	cleanexit_int(pip->data->fd);
 	if (pip->data->path)
 		cleanexit(pip->data->path);
@@ -109,13 +107,6 @@ t_data	*init_exe(char ***envp, char **argv, int count)
 	pipex = init_exe2(pipex, envp, argv, count);
 	if (!pipex)
 		return(NULL);
-	// while (i < pipex->n_cmd)
-	// {
-	// 	pipex->fd = ft_add_fd(pipex->fd, i);
-	// 	if (pipe(pipex->fd[i - 1]) == -1)
-	// 		perror("pipe1");
-	// 	i++;
-	// }
 	pipex->pid = malloc(count * sizeof(int));
 	if (!pipex->pid)
 		return (free(pipex), NULL);

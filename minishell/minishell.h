@@ -6,7 +6,7 @@
 /*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/12 15:02:36 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:04:50 by lismarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ t_data	*init_exe(char ***envp, char **argv, int count);
 void	ft_close_all(int **fd);
 int	ft_strrchr(const char *string, int searchedChar);
 char	*recup_path(char *src);
-void for_fork(int i, t_list* pip);
 int	for_t2_and_t3(int stdo, t_list *pip, int t2);
 
 /* pip_struct3 */
@@ -267,7 +266,7 @@ int 	expand_vars(char **cmd, char ***env, int error);
 void init_list2(t_list *list);
 t_list* init_list(int count, char ***envp, char **argv);
 int     check_line(char **line, char ***envp, int error);
-t_list *creat_list(char* line, char ***envp, char **argv, int argc);
+t_list *create_list(char *line, char ***envp, char **argv);
 int	no_env_init(char ***envp);
 
                 /* builtin */

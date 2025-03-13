@@ -46,7 +46,6 @@ int	fill_seven_2(t_list *new, char **split_txt, int k, int i)
 {
 	char	**split;
 
-	printf("fill_2");
 	while (split_txt[i + 1])
 	{
 		if (operator(split_txt[i]) == 0)
