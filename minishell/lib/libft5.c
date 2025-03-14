@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:42:58 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/08 15:32:24 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:31:47 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	open_only_one_quote(char *str)
 		return (1);
 	}
 	else if (count_c(str, '\"') == 1 && count_c(str, '\'') == 0)
+	{
+		ft_printf_fd(2, "bash: syntax error: unclosed quotes\n");
+		return (1);
+	}
+	else if (count_c(str, '\"') == 1 && count_c(str, '\'') == 1)
 	{
 		ft_printf_fd(2, "bash: syntax error: unclosed quotes\n");
 		return (1);

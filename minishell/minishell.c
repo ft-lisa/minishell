@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:11:11 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:44:04 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,21 @@ void	handle_exit(char **env)
 	exit(1);
 }
 
+void print_list(t_list *lst)
+{
+    while (lst)
+    {
+        printf("Command: %s\n", lst->cmd ? lst->cmd : "(null)");
+        printf("Index: %d\n", lst->index);
+        printf("Exe1: %d\n", lst->exe1);
+        printf("Exe2: %d\n", lst->exe2);
+        printf("If File1: %s\n", lst->if_file1 ? lst->if_file1 : "(null)");
+        printf("If File2: %s\n", lst->if_file2 ? lst->if_file2 : "(null)");
+        printf("--------------------\n");
+        lst = lst->next;
+    }
+}
+
 void	shell_loop(char **env, char **argv, int check)
 {
 	char	*str;
@@ -79,6 +94,7 @@ void	shell_loop(char **env, char **argv, int check)
 			continue ;
 		}
 		exe = create_list(str, &env, argv);
+		//print_list(exe);
 		error = execution(exe, error);
 	}
 }
