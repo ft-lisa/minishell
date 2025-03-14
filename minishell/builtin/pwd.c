@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:38:06 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 16:54:45 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:05:53 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*pwd2(t_list *pip)
 	err = getcwd(buf, 4096);
 	if (!err)
 	{
-		ft_printf_fd(2, "chdir: %s", ERROR_DIREC);
+		ft_printf_fd(2, "chdir: %s%s", ERROR_DIREC, ERROR_TORY);
 		free(buf);
 		return (NULL);
 	}
@@ -41,7 +41,7 @@ void	pwd3(t_list *pip, char *buf, char *err, char **str)
 		printf("%s\n", buf);
 	else
 	{
-		ft_printf_fd(2, "pwd: %s", ERROR_DIREC);
+		ft_printf_fd(2, "pwd: %s%s", ERROR_DIREC, ERROR_TORY);
 		pip->data->new_exit = 1;
 	}
 	free(buf);
