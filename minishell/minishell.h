@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:48 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/14 19:10:40 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_pipex
 typedef struct s_list
 {
 	char			*cmd;
+	char			*brutcmd;
 	int				index;
 	int				exe1;
 	int				exe2;

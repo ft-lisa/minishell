@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/14 16:38:40 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/14 20:28:43 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	exit_minishell(t_list *pip)
 	char		**cmd;
 
 	cmd = ft_split_exe1(pip->cmd);
+	if (pip->data->n_cmd == 1)
+		ft_printf_fd(2, "exit\n");
 	if (!cmd[1])
 	{
 		free_pip(pip);
