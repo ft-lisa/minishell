@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pip_struct3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:26:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:19:26 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:17:34 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	type(t_list *pip, int t1, int t2)
 	else if (t2 == 3)
 		type3(pip);
 	ft_close_all(pip->data->fd);
+	if (is_other(pip) == 1)
+		exe_other(pip);
 }
 
 void	ft_errno(void)

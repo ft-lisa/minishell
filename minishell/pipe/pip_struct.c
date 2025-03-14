@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pip_struct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:14:55 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:29:47 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ t_data	*init_exe2(t_data *pipex, char ***envp, char **argv, int count)
 		(free(pipex), exit(1));
 	pipex->n_cmd = count;
 	pipex->path = NULL;
-	return (pipex);
 	pipex->exit1 = 0;
 	pipex->new_exit = 0;
+	return (pipex);
 }
 
 t_data	*init_exe(char ***envp, char **argv, int count)
