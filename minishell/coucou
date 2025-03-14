@@ -1,6 +1,7 @@
 builtin
 coucou
 creat_list
+end
 lib
 Makefile
 minishell

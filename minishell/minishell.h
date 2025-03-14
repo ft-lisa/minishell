@@ -75,6 +75,7 @@ void				new(int signal);
 void				handler(int signal);
 void				her(int signal);
 void				parent_her(int signal);
+void				parent_quit(int signal);
 
 /* minishell */
 

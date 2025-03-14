@@ -43,6 +43,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 
 void	exe2(t_list *pip)
 {
+	signal(SIGQUIT, parent_quit);
 	if (pip->exe1 == 7)
 	{
 		signal(SIGINT, parent_her);
@@ -61,6 +62,7 @@ int	exe1(t_list *pip, int i)
 	t_list	*head;
 
 	head = pip;
+	
 	if (is_other(pip) == 1 && pip->data->n_cmd == 1 && pip->exe1 != 7)
 		exe_build_single(pip, pip->exe1, pip->exe2);
 	else
@@ -77,7 +79,9 @@ int	exe1(t_list *pip, int i)
 		if (pip->data->pid[i] == -1)
 			return (-1);
 		if (pip->data->pid[i] == 0)
+		{
 			(exe_isolate(pip, pip->exe1, pip->exe2));
+		}
 		i++;
 	}
 	ft_close_all(pip->data->fd);

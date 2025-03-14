@@ -95,6 +95,8 @@ char	**ft_split_exe1(char *s)
 	int		i;
 	int		j;
 
+	if(!s)
+		return(NULL);
 	t1 = malloc((splitlen2(s) + 1) * sizeof(char *));
 	if (t1 == NULL)
 		return (NULL);

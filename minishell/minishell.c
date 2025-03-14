@@ -39,7 +39,7 @@ int	execution(t_list *exe, int error)
 	if (exe)
 	{
 		signal(SIGINT, new);
-		signal(SIGQUIT, SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);
 		exe->data->exit1 = error;
 		error = exe1(exe, 1);
 	}

@@ -44,3 +44,11 @@ void	parent_her(int signal)
 	g_sig = signal;
 	return ;
 }
+
+void	parent_quit(int signal)
+{
+	write(1, "Quit (core dumped)\n", 20);
+	rl_on_new_line();
+	//rl_replace_line("", 0);
+	//rl_redisplay();
+}
