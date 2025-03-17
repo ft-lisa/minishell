@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_operator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 10:53:33 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:25:40 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:42:56 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ int	isconsecutive_ops1_index(char *str, char *op)
 
 int	isconsecutive_opsloop_index(char *str, char *op)
 {
-	int		i;
 	char	*temp;
 	int		check;
 	int		len;
 
-	i = 0;
 	len = ft_strlen(str);
 	temp = ft_strstr(str, op);
 	if (!temp || temp[0] == '\0')
@@ -68,8 +66,6 @@ int	chck2op_type(char *str)
 	int	min;
 
 	j = 0;
-	if (!i)
-		return (-1);
 	min = 0;
 	i[0] = isconsecutive_opsloop_index(str, "<<");
 	i[1] = isconsecutive_opsloop_index(str, ">>");
@@ -114,11 +110,9 @@ int	isconsecutive_ops1(char *str, char *op, int j)
 
 int	isconsecutive_opsloop(char *str, char *op)
 {
-	int		i;
 	char	*temp;
 	int		check;
 
-	i = 0;
 	temp = ft_strstr(str, op);
 	if (!temp || temp[0] == '\0')
 		return (0);

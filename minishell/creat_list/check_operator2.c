@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_operator2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:32:35 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 17:27:37 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:38:27 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,7 @@ char	*remove_first_quotes(char *str)
 int	check_operator(char *str1)
 {
 	char	*str;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	str = remove_all_quotes(str1, 'a');
 	if (!str)
 		return (0);

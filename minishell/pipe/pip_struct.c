@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/14 16:29:47 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:54:31 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,16 @@ int	**ft_add_fd(int **fd, int len)
 
 t_data	*init_exe2(t_data *pipex, char ***envp, char **argv, int count)
 {
+	int	i;
+
+	i = 0;
 	pipex = malloc(sizeof(t_data));
 	if (!pipex)
 		return (NULL);
 	if (str_len_2d(*envp) < 6)
-		no_env_init(envp);
+		i = no_env_init(envp);
+	if (i == -1)
+		(free(pipex), exit(1));
 	pipex->envp = envp;
 	pipex->v = argv;
 	pipex->fd = ft_add_fd(NULL, 0);
@@ -99,9 +104,8 @@ t_data	*init_exe2(t_data *pipex, char ***envp, char **argv, int count)
 t_data	*init_exe(char ***envp, char **argv, int count)
 {
 	t_data	*pipex;
-	int		i;
 
-	i = 1;
+	pipex = NULL;
 	pipex = init_exe2(pipex, envp, argv, count);
 	if (!pipex)
 		return (NULL);

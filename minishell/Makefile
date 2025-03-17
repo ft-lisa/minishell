@@ -1,6 +1,6 @@
 # Compiler settings
 CC      := gcc
-CFLAGS  := -g -Werror
+CFLAGS  := -g -Werror -Wall
 LIBS    := -lreadline -lncurses
 
 # Directories

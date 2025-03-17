@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:01:02 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:30:31 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:50:44 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	no_env_init(char ***envp)
 	}
 	add_last_2d(envp, "SHLVL=1");
 	add_last_2d(envp, "_=/usr/bin/env");
+	return (0);
 }
 
 t_list	*create_new_node(t_list *first, t_data *data)

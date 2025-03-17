@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_operator3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:32:58 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 17:27:49 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:38:42 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	*remove_all_quotes(char *str, char del_q)
 {
 	char	*temp;
 	char	*temp2;
-	char	*join;
 
 	del_q = pick_quote(str);
 	temp = ft_strdup(str);

@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:29:39 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 10:39:57 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:47:18 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,9 @@ int	expand(char **cmd, char **env, int error)
 int	expand_vars(char **cmd, char ***env, int error)
 {
 	int		check;
-	int		j;
 	char	*str;
 
 	check = 0;
-	j = 0;
 	str = ft_strdup(*cmd);
 	if (!str)
 		return (-1);

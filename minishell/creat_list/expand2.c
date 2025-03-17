@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:33:46 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 10:36:58 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:47:08 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ size_t	ft_strlen2(const char *c)
 void	skip_heredoc(char *str, int *i)
 {
 	char	*temp;
-	char	*temp2;
 	int		j;
-	int		len1;
-	int		len2;
 
 	j = *i;
 	temp = ft_strstr(str, "<<");
@@ -70,11 +67,9 @@ void	replace_str_2(int index, char **mainstr, char *new, char *after)
 int	replace_str(char **mainstr, char *before, char *after, int index)
 {
 	char	*new;
-	int		i;
 	int		len_a;
 	int		len_b;
 
-	i = 0;
 	len_a = 0;
 	if (after)
 		len_a = ft_strlen(after);

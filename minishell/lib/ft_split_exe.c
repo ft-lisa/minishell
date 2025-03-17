@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_exe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/10 14:56:38 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:59:57 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	if_next_quote(char *s, int start_s, char c, int i)
 	}
 	else if (no_space_until_q(s, start_s, c) == 1)
 	{
-		i = if_quote(s, start_s, c, i);
+		i = if_quote(s, c, i);
 		while (s[i] && s[i] != c && s[i] != '\t')
 			i++;
 		return (i);

@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/17 11:24:01 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:00:06 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ char				**ft_split_exe1(char *s);
 char				**ft_split_exe(char *s, char c);
 int					istokenquotes(char *s, int start_s);
 int					no_space_until_q(char *s, int start_s, char c);
-int					if_quote(char *s, int start_s, char c, int i);
+int					if_quote(char *s, char c, int i);
 int					ft_strcmp(char *s1, char *s2);
 int					open_only_one_quote(char *str);
 char				**ft_split_ope_bis(char const *s, char c, int i, int j);
@@ -259,7 +259,7 @@ int					fill_seven(t_list *new, char *content);
 int					fill_one_three(t_list *new, char *content);
 int					fill_six(t_list *new, char *content);
 int					fill_com_list(t_list *list, char **content);
-int					fill_ope_list(t_list *list, char **content);
+int					fill_ope_list(t_list *list, char **content, int j);
 
 /* expand */
 

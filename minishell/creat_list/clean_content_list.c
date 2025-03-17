@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_content_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:23:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:23:23 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:43:46 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	del_space(t_list *command)
 {
 	t_list	*new;
 	int		i;
-	char	*tmp;
 
 	new = command;
 	while (new)
@@ -46,7 +45,6 @@ void	del_space(t_list *command)
 		{
 			while (new->delim[i] != NULL)
 			{
-				tmp = new->delim[i];
 				new->delim[i] = del_space2(new->delim[i], command);
 				i++;
 			}

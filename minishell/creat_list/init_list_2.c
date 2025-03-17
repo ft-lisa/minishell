@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_list_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:33:30 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:33:36 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:46:05 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	trim_content_node(char **content_node)
 
 int	fill_command_data(t_list *command, char **content_node)
 {
-	if (fill_ope_list(command, content_node) == -1)
+	if (fill_ope_list(command, content_node, 0) == -1)
 		return (free_list(command), -1);
 	if (fill_com_list(command, content_node) == -1)
 		return (free_list(command), -1);

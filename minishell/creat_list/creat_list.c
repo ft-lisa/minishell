@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:25:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 17:20:51 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:45:48 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ char	**split_until(char *str, char c)
 	int		i;
 	int		size;
 	char	**new;
-	int		j;
 
 	i = 0;
-	j = 0;
 	size = 0;
 	new = malloc(3 * sizeof(char *));
 	if (!new)
@@ -77,7 +75,6 @@ int	fill_six_two(char **split_txt, t_list *new)
 int	fill_six(t_list *new, char *content)
 {
 	char	**split_txt;
-	char	**split;
 
 	split_txt = ft_split_txt(content, 0, 0);
 	if (!split_txt)
@@ -97,15 +94,14 @@ int	fill_six(t_list *new, char *content)
 			return (-1);
 	}
 	cleanexit(split_txt);
+	return (0);
 }
 
-int	fill_ope_list(t_list *list, char **content)
+int	fill_ope_list(t_list *list, char **content, int j)
 {
-	int		j;
 	t_list	*new;
 	char	*str;
 
-	j = 0;
 	new = list;
 	while (content[j])
 	{
@@ -126,4 +122,5 @@ int	fill_ope_list(t_list *list, char **content)
 		if (str && strcmp(str, content[j++]) != 0)
 			free(str);
 	}
+	return (0);
 }

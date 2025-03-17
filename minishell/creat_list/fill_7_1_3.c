@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_7_1_3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:33:19 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 17:50:16 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:48:35 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	fill_seven_2(t_list *new, char **split_txt, int k, int i)
 	cleanexit(split);
 	if (!new->cmd)
 		return (-1);
+	return (0);
 }
 
 int	fill_seven_3(t_list *new, char **split_txt, int k, int i)
@@ -56,6 +57,7 @@ int	fill_seven_3(t_list *new, char **split_txt, int k, int i)
 		i++;
 	}
 	new->delim[k++] = NULL;
+	return (0);
 }
 
 int	fill_seven(t_list *new, char *content)
@@ -100,12 +102,12 @@ int	fill_one_three_2(char **split_txt, t_list *new)
 			return (-1);
 	}
 	cleanexit(split);
+	return (0);
 }
 
 int	fill_one_three(t_list *new, char *content)
 {
 	char	**split_txt;
-	char	**split;
 
 	split_txt = ft_split_txt(content, 0, 0);
 	if (!split_txt)
@@ -125,4 +127,5 @@ int	fill_one_three(t_list *new, char *content)
 			return (-1);
 	}
 	cleanexit(split_txt);
+	return (0);
 }

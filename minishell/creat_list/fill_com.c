@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_com.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:33:11 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:33:16 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:50:31 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	fill_com_list_3(char **content, t_list *new, int j)
 		fill_seven(new, content[j]);
 	if (new->exe2 == 1 || new->exe2 == 3)
 		fill_one_three(new, content[j]);
+	return (0);
 }
 
 int	fill_com_list_2(char **content, t_list *new, int j)
@@ -48,11 +49,11 @@ int	fill_com_list_2(char **content, t_list *new, int j)
 	}
 	else
 		return (fill_com_list_3(content, new, j));
+	return (0);
 }
 
 int	fill_com_list(t_list *list, char **content)
 {
-	char	**split;
 	int		j;
 	t_list	*new;
 
@@ -72,4 +73,5 @@ int	fill_com_list(t_list *list, char **content)
 		j++;
 		new = new->next;
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:41:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/14 18:54:10 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:35:41 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	is_other(t_list *pip)
 
 void	exe_other(t_list *pip)
 {
-	char	*buf;
-	int		i;
 	char	**str;
 
 	str = ft_split_exe1(pip->cmd);
@@ -71,6 +69,7 @@ void	exe_build_single(t_list *pip, int t1, int t2)
 {
 	int	stdo;
 
+	stdo = 0;
 	if (is_other(pip) == 1 && ft_strncmp(pip->cmd, "exit", 4) == 0)
 		;
 	else if (t1 == 5)

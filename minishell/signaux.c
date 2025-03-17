@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:43:27 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 10:36:13 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:59:09 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	parent_her(int signal)
 
 void	parent_quit(int signal)
 {
+	signal = signal;
 	write(1, "Quit (core dumped)\n", 20);
 	rl_on_new_line();
 }
