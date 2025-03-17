@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:26:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:05:10 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:35:53 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,13 @@ void	ft_copy(int start_s, int len_s, char const *s, char *t2)
 	}
 }
 
-static char	*t2f(char const *s, int start_s)
+static char	*t2f(char const *s, int start_s, int i)
 {
-	int		i;
 	int		len_s;
 	char	*t2;
 	char	lettre;
 	int		space;
 
-	i = start_s;
 	space = 0;
 	lettre = s[start_s];
 	if (lettre == '<' || lettre == '>')
@@ -98,7 +96,7 @@ char	**ft_split_ope(char const *s)
 	j = 0;
 	while (s[i])
 	{
-		t1[j] = t2f(s, i);
+		t1[j] = t2f(s, i, i);
 		if (t1[j++] == NULL)
 			return (NULL);
 		lettre = s[i];

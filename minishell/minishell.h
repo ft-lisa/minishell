@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/17 12:18:01 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:34:42 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,7 +307,8 @@ char				*process_backslashes(const char *s);
 char				*parcing_export(char *str, size_t key_len);
 int					export_valid(char *str);
 char				*extract_key(char *s);
-int						update_existing(char ***env, char *key, char *new_val, int i);
+int					update_existing(char ***env, char *key,
+						char *new_val, int i);
 int					add_plus(char ***env, char *add);
 void				export1(t_list *pip, char **str);
 char				*m_process_backslashes(const char *s);

@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:51:10 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 12:16:50 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:37:34 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	size_delim(char **content, int j)
 	{
 		if (operator(content[j]) == 7)
 		{
-			;
+			j = j;
 		}
 		num++;
 		j++;

@@ -1,6 +1,6 @@
 # Compiler settings
 CC      := gcc
-CFLAGS  := -g -Werror -Wall -Wextra
+CFLAGS  := -g
 LIBS    := -lreadline -lncurses
 
 # Directories
@@ -67,7 +67,6 @@ CREAT_LIST_SRC = creat_list/check_operator2.c \
                  creat_list/init_list_2.c \
                  creat_list/init_list.c
 
-# Use minishell.c as the main file (ignore exe1.c if present)
 SRC = $(filter-out exe1.c, $(ROOT_SRC)) $(LIB_SRC) $(PRINTF_SRC) $(UTILS_SRC) $(BUILTIN_SRC) $(PIPE_SRC) $(CREAT_LIST_SRC)
 OBJS = $(patsubst %.c, $(TRASH)/%.o, $(SRC))
 
@@ -81,12 +80,12 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBS) -o $(NAME)
 
-# Compile .c files into .o files in .trash
+# Compile .c files into .o files in .trash with dependency files (.d) also in .trash
 $(TRASH)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ -MF $(TRASH)/$*.d
 
-# Clean up object files and executables
+# Clean up object files, dependency files, and executable
 clean:
 	rm -rf $(TRASH)
 
@@ -96,3 +95,9 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+# Include dependency files
+-include $(OBJS:.o=.d)
+
+# valgrind --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=/home/smendez-/Documents/studgit/Main_shell/minishell/readline.supp  -q ./minishell
+

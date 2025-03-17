@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:32:35 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:38:27 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:07:49 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ int	chck2op(char *str)
 
 	if (!str || !str[0])
 		return (0);
-	temp = ft_strtrim(str, " ");
+	temp = ft_strtrim(str, " \t");
 	if (!temp)
 		return (1);
+	if (temp[0] == '|')
+		return (ft_printf_fd(2, "bash:syntax error near unexpected token `|'\n"),
+			free(temp), 1);
 	i = chck2op_type(str);
 	op = ft_split("<< >> < > |", ' ');
 	if (!op)
