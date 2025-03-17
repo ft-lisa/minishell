@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/17 11:59:57 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:14:44 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	len_t2f(int i, int start_s, int inside, char *s)
 	return (i - start_s - count_quotes);
 }
 
-static char	*t2f(char *s, int start_s, char c, int start)
+static char	*t2f(char *s, int start_s, char c)
 {
 	int			i;
 	int			len_s;
@@ -117,7 +117,7 @@ char	**ft_split_exe(char *s, char c)
 			i++;
 		if (!s[i])
 			break ;
-		t1[j] = t2f(s, i, c, i);
+		t1[j] = t2f(s, i, c);
 		if (t1[j++] == NULL)
 			return (cleanexit(t1));
 		i = if_next_quote(s, i, c, i);

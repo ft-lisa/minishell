@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:51:10 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 17:29:11 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:16:50 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int	size_delim(char **content, int j)
 	while (operator(content[j]) == 0 || operator(content[j]) == 7)
 	{
 		if (operator(content[j]) == 7)
+		{
 			;
+		}
 		num++;
 		j++;
 	}

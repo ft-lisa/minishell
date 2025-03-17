@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/17 12:00:06 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:18:01 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,7 +295,7 @@ int					cd1(t_list *pip);
 int					echod(char *envp[], char *p1, int *i);
 int					echo_var2(char *envp[], char *p1);
 int					echoarg(char *str);
-int					echo1(t_list *pip, int j, int error);
+int					echo1(t_list *pip, int j);
 
 /* env */
 

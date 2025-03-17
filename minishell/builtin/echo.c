@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:34:31 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:11:00 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:17:49 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	echoarg(char *str)
 	return (1);
 }
 
-int	echo1(t_list *pip, int j, int error)
+int	echo1(t_list *pip, int j)
 {
 	char	**str;
 

@@ -6,13 +6,13 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/17 10:42:32 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:15:15 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	next_token(char *s, int start_s, char c, int i)
+int	next_token(char *s, int start_s, int i)
 {
 	char	quote;
 	int		isquote;
@@ -47,7 +47,7 @@ static char	*t3f(char *s, int *start_s, char c, int i)
 	int		inside;
 	char	*t2;
 
-	len_s = next_token(s, *start_s, c, *start_s) - *start_s;
+	len_s = next_token(s, *start_s, *start_s) - *start_s;
 	inside = 0;
 	t2 = malloc((len_s + 1) * sizeof(char));
 	if (!t2)
