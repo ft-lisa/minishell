@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_fd4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:30:01 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/05 16:02:53 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:11:35 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,6 @@ int	ft_print_adress(void *ptr)
 
 int	ft_putstr_fd(char *s, int fd, int size)
 {
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (s[i] == '\0')
-			write(fd, "\0", 1);
-		else
-			write(fd, &s[i], 1);
-		i++;
-	}
-	return (i);
+	write(fd, s, size);
+	return (size);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type5_to_7.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:42:54 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/05 17:43:10 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:51:32 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,21 @@ void	type6(t_list *pip)
 	if (access(pip->if_file1, F_OK) == -1)
 	{
 		ft_printf_fd(2, "bash: %s: No such file or directory\n", pip->if_file1);
+		if (is_other(pip) == 1 && pip->data->n_cmd == 1)
+		{
+			pip->data->new_exit = 1;
+			return;
+		}
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
 	if (access(pip->if_file1, R_OK) == -1)
 	{
 		ft_printf_fd(2, "bash: permission denied: %s\n", pip->if_file1);
+		if (is_other(pip) == 1 && pip->data->n_cmd == 1)
+		{
+			pip->data->new_exit = 1;
+			return;
+		}
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
 	open_fd = open(pip->if_file1, O_RDONLY);

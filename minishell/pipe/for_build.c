@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:41:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 12:17:55 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:02:35 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,20 @@ void	exe_build_single(t_list *pip, int t1, int t2)
 		type5(pip);
 	else if (t1 == 6)
 		type6(pip);
-	else if (t1 == 7)
+	else if (t1 == 7 && pip->data->new_exit != 1)
 		type7(pip);
-	if (t2 == 1)
+	if (t2 == 1 && pip->data->new_exit != 1)
 		stdo = for_t2_and_t3(stdo, pip, t2);
-	else if (t2 == 2)
+	else if (t2 == 2 && pip->data->new_exit != 1)
 		type2(pip);
-	else if (t2 == 3)
+	else if (t2 == 3 && pip->data->new_exit != 1)
 		stdo = for_t2_and_t3(stdo, pip, t2);
 	ft_close_all(pip->data->fd);
 	if (t2 == 1 || t2 == 3)
 		if (dup2(stdo, STDOUT_FILENO) == -1 || close(stdo) == -1)
 			return ;
+	if (pip->data->new_exit == 1)
+		return ;
 	if (is_other(pip) == 1)
 		exe_other(pip);
 }

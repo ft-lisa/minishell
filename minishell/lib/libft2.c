@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:36:32 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:06:03 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:14:19 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**strdup_2d(char **s)
 	{
 		t[i] = ft_strdup(s[i]);
 		if (!t[i])
-			return (NULL);
+			return (cleanexit(t), NULL);
 		i++;
 	}
 	t[i] = NULL;

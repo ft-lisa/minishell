@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type1_to_3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:21:09 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:21:32 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:58:11 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ void	type1(t_list *pip)
 		path = recup_path(pip->if_file2);
 		if (access(path, F_OK) == -1)
 		{
-			write(2, "bash: ", 6);
-			write(2, pip->if_file2, strlen(pip->if_file2));
-			write(2, ": No such file or directory\n", 28);
+			ft_printf_fd(2, "bash: %s: No such file or directory\n", pip->if_file2);
+			if (is_other(pip) == 1 && pip->data->n_cmd == 1)
+			{
+				pip->data->new_exit = 1;
+				return;
+			}
 			(free(path), free_pip(pip), exit(EXIT_FAILURE));
 		}
 		free(path);
@@ -32,6 +35,11 @@ void	type1(t_list *pip)
 	if (access(pip->if_file2, F_OK) == 0 && access(pip->if_file2, W_OK) == -1)
 	{
 		ft_printf_fd(2, "bash: permission denied: %s\n", pip->if_file2);
+		if (is_other(pip) == 1 && pip->data->n_cmd == 1)
+		{
+			pip->data->new_exit = 1;
+			return;
+		}
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
 	fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
