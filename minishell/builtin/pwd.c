@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:38:06 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/14 16:05:53 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:26:13 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*pwd2(t_list *pip)
 {
 	char	*buf;
 	char	*err;
-	char	**str;
 
 	buf = malloc(4097 * sizeof(char));
 	if (!buf)
@@ -31,8 +30,11 @@ char	*pwd2(t_list *pip)
 	return (buf);
 }
 
-void	pwd3(t_list *pip, char *buf, char *err, char **str)
+void	pwd3(t_list *pip, char **str)
 {
+	char	*buf;
+	char	*err;
+
 	buf = malloc(4097 * sizeof(char));
 	if (!buf)
 		exit_minishell(pip);
@@ -50,8 +52,6 @@ void	pwd3(t_list *pip, char *buf, char *err, char **str)
 
 int	pwd1(t_list *pip)
 {
-	char	*buf;
-	char	*err;
 	char	**str;
 
 	str = ft_split(pip->cmd, ' ');
@@ -68,6 +68,6 @@ int	pwd1(t_list *pip)
 			return (2);
 		}
 	}
-	pwd3(pip, buf, err, str);
+	pwd3(pip, str);
 	return (0);
 }

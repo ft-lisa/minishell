@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:36:22 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:35:11 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:10:33 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	error_cd(char **str, t_list *pip)
 			ft_printf_fd(2, "bash: cd: Permission denied: %s\n", str[1]);
 		pip->data->new_exit = 1;
 	}
+	return (0);
 }
 
 char	*cd_pwd_2(char *temp, char *path, t_list *pip)
@@ -75,8 +76,10 @@ int	cd_pwd(t_list *pip, char *buf)
 	return (ret);
 }
 
-void	cd2(char *buf, t_list *pip, int ret)
+void	cd2(t_list *pip, int ret)
 {
+	char	*buf;
+
 	buf = get_path_var(*(pip->data->envp), "HOME");
 	if (buf)
 		ret = cd_pwd(pip, buf);
@@ -90,7 +93,6 @@ void	cd2(char *buf, t_list *pip, int ret)
 int	cd1(t_list *pip)
 {
 	char	**str;
-	char	*buf;
 	int		ret;
 
 	str = ft_split(pip->cmd, ' ');
@@ -103,15 +105,13 @@ int	cd1(t_list *pip)
 	}
 	else if (ft_strcmp(str[0], "cd") == 0 && !str[1])
 	{
-		cd2(buf, pip, ret);
+		cd2(pip, 0);
 	}
 	else if (ft_strcmp(str[0], "cd") == 0 && str[1])
 	{
 		ret = cd_pwd(pip, str[1]);
 		if (ret == -1)
-		{
 			error_cd(str, pip);
-		}
 	}
-	ifexit(pip, str);
+	return (ifexit(pip, str), 0);
 }

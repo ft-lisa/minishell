@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:35:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:36:55 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:23:10 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,17 @@ char	*update_existing_2(char ***env, char *key, char *comb, int i)
 	free(comb);
 	free((*env)[i]);
 	(*env)[i] = entry;
+	return ("nope");
 }
 
-static int	update_existing(char ***env, char *key, char *new_val)
+int	update_existing(char ***env, char *key, char *new_val, int i)
 {
-	int		i;
 	size_t	klen;
 	char	*old;
 	char	*comb;
 	char	*entry;
 
 	klen = ft_strlen(key);
-	i = 0;
 	while ((*env)[i])
 	{
 		if (strncmp((*env)[i], key, klen) == 0 && (*env)[i][klen] == '=')
@@ -54,6 +53,7 @@ static int	update_existing(char ***env, char *key, char *new_val)
 		}
 		i++;
 	}
+	return (0);
 }
 
 int	add_plus(char ***env, char *add)
@@ -67,7 +67,7 @@ int	add_plus(char ***env, char *add)
 	if (!key)
 		return (0);
 	new_val = add + (ft_strlen(key) + 2);
-	ret = update_existing(env, key, new_val);
+	ret = update_existing(env, key, new_val, 0);
 	if (ret == 1)
 		return (free(key), 1);
 	if (ret == -1)

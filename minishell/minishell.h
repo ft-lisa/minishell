@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/14 19:10:40 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:24:01 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,8 @@ int					indexto_skip_squotes(char *str, char c, int i,
 						int in_double);
 int					expand(char **cmd, char **env, int error);
 int					expand_vars(char **cmd, char ***env, int error);
+size_t				ft_strlen2(const char *c);
+void				skip_heredoc(char *str, int *i);
 
 /* init_list */
 
@@ -301,11 +303,11 @@ int					env1(t_list *pip);
 
 /* export */
 
-static char			*process_backslashes(const char *s);
+char				*process_backslashes(const char *s);
 char				*parcing_export(char *str, size_t key_len);
 int					export_valid(char *str);
 char				*extract_key(char *s);
-static int			update_existing(char ***env, char *key, char *new_val);
+int						update_existing(char ***env, char *key, char *new_val, int i);
 int					add_plus(char ***env, char *add);
 void				export1(t_list *pip, char **str);
 char				*m_process_backslashes(const char *s);

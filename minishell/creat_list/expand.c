@@ -6,58 +6,17 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:29:39 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/15 13:01:47 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:39:57 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-size_t	ft_strlen2(const char *c)
-{
-	size_t	i;
-
-	i = 0;
-	if (!c)
-		return (0);
-	while (c[i] != '\0')
-		i++;
-	return (i);
-}
-
-void skip_heredoc(char *str, int *i)
-{
-	char *temp;
-	char	*temp2;
-	int	j;
-	int	len1;
-	int	len2;
-
-	j = *i;
-	temp = ft_strstr(str, "<<");
-	if (!temp || !temp[0])
-		return ;
-	if (ft_strncmp(str + j, "<<", 2) != 0)
-		return ;
-	j += 2;
-	while (str[j] && (str[j] == ' ' || str[j] == '\t'))
-		j++;
-	// printf(" str j |%s| test1 |%d| test2 |%d|\n", str + j,ft_strlen2(ft_strstr(str + j, " ")), ft_strlen2(ft_strstr(str + j, "$")));
-	if(ft_strlen2(ft_strstr(str + j, " "))
-		> ft_strlen2(ft_strstr(str + j, "$")))
-		return ;
-	while (str[j] && str[j] != ' ' && str[j] != '\t')
-		j++;
-	*i = j;
-}
-
 int	indexto_skip_squotes(char *str, char c, int i, int in_double)
 {
 	while (str[(i > 0) * (i - 1)] && str[i])
 	{
-		// printf("before str |%s| i|%d|", str, i);
 		skip_heredoc(str, &i);
-		// printf("- after i|%d|\n", i);
 		if (str[i] == '"')
 		{
 			in_double = !in_double;

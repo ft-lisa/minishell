@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:54:58 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 17:17:29 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:13:11 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*process_backslashes(const char *s)
+char	*process_backslashes(const char *s)
 {
 	size_t	i;
 	size_t	j;
@@ -37,9 +37,10 @@ static char	*process_backslashes(const char *s)
 	return (res);
 }
 
-char	*parcing_export_2(char *value, char *key, char *res)
+char	*parcing_export_2(char *value, char *key)
 {
 	char	*tmp;
+	char	*res;
 
 	tmp = process_backslashes(value);
 	free(value);
@@ -61,8 +62,6 @@ char	*parcing_export(char *str, size_t key_len)
 	char	*eq;
 	char	*key;
 	char	*value;
-	char	*tmp;
-	char	*res;
 
 	eq = ft_strchr(str, '=');
 	if (!eq)
@@ -76,7 +75,7 @@ char	*parcing_export(char *str, size_t key_len)
 	value = remove_surrounding_quotes(eq + 1);
 	if (!value)
 		return (free(key), NULL);
-	return (parcing_export_2(value, key, res));
+	return (parcing_export_2(value, key));
 }
 
 int	export_valid(char *str)

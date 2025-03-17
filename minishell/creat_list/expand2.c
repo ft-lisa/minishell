@@ -3,14 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:33:46 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:33:50 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:36:58 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+size_t	ft_strlen2(const char *c)
+{
+	size_t	i;
+
+	i = 0;
+	if (!c)
+		return (0);
+	while (c[i] != '\0')
+		i++;
+	return (i);
+}
+
+void	skip_heredoc(char *str, int *i)
+{
+	char	*temp;
+	char	*temp2;
+	int		j;
+	int		len1;
+	int		len2;
+
+	j = *i;
+	temp = ft_strstr(str, "<<");
+	if (!temp || !temp[0])
+		return ;
+	if (ft_strncmp(str + j, "<<", 2) != 0)
+		return ;
+	j += 2;
+	while (str[j] && (str[j] == ' ' || str[j] == '\t'))
+		j++;
+	if (ft_strlen2(ft_strstr(str + j, " ")) > ft_strlen2(ft_strstr(str + j,
+				"$")))
+		return ;
+	while (str[j] && str[j] != ' ' && str[j] != '\t')
+		j++;
+	*i = j;
+}
 
 void	replace_str_2(int index, char **mainstr, char *new, char *after)
 {

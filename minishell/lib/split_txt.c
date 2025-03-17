@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_txt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:14:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 15:08:20 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:06:55 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static char	*t2f(char const *s, int start_s)
 
 int	split_bis(char const *s, int i)
 {
-	while (s[i] == '|' || s[i] == '<' || s[i] == '>' && s[i])
+	while ((s[i] == '|' || s[i] == '<' || s[i] == '>') && s[i])
 	{
 		if (s[i] == '"' || s[i] == '\'')
 			i = pass_quote_plus(s[i], s, i + 1);

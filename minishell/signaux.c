@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:43:27 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/05 14:50:05 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:36:13 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,4 @@ void	parent_quit(int signal)
 {
 	write(1, "Quit (core dumped)\n", 20);
 	rl_on_new_line();
-	//rl_replace_line("", 0);
-	//rl_redisplay();
 }

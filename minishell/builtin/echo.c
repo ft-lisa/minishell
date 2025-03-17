@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:34:31 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:34:34 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:11:00 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ int	echo_var2(char *envp[], char *p1)
 {
 	int	i;
 	int	k;
-	int	len_p1;
 
 	i = 0;
 	k = 0;
-	len_p1 = ft_strlen(p1);
 	while (p1[i])
 	{
 		if (p1[i] == '$')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_mini.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:37 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/13 15:22:21 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:42:32 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ char	**ft_split_exe1(char *s)
 	int		i;
 	int		j;
 
-	if(!s)
-		return(NULL);
+	if (!s)
+		return (NULL);
 	t1 = malloc((splitlen2(s) + 1) * sizeof(char *));
 	if (t1 == NULL)
 		return (NULL);

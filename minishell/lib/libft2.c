@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:36:32 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:22:46 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:06:03 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ char	**strdup_2d(char **s)
 {
 	char	**t;
 	int		i;
-	int		j;
 	int		nitems;
 
 	i = 0;
-	j = 0;
 	nitems = str_len_2d(s);
 	t = malloc((nitems + 1) * sizeof(char *));
 	if (t == NULL)
@@ -73,11 +71,9 @@ int	isin_2d_equal(char **str, char *check)
 int	isin_2d_index(char **str, char *check)
 {
 	int		j;
-	int		count;
 	char	*temp;
 
 	j = 0;
-	count = 0;
 	temp = ft_strjoin(check, "=");
 	if (!temp)
 		return (1);

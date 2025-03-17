@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_ope.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:26:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 14:36:07 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:05:10 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ static char	*t2f(char const *s, int start_s)
 	space = 0;
 	lettre = s[start_s];
 	if (lettre == '<' || lettre == '>')
+	{
 		while ((s[i] == '<' || s[i] == '>' || s[i] == ' ' || s[i] == 9) && s[i])
 			if (s[i++] == ' ')
 				space++;
+	}
 	else
 		while (s[i] == lettre && s[i])
 			if (s[i++] == ' ')

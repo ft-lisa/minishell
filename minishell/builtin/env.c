@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:34:40 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:34:41 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:11:24 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ int	env1(t_list *pip)
 		pip->data->new_exit = 127;
 		ifexit(pip, str);
 	}
+	return (0);
 }

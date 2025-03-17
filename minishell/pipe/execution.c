@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:21:43 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/14 15:43:48 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:43:44 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 		(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));
 	}
 	execve(get_p, temp2, *(pip->data->envp));
-	// ft_printf_fd(2, "get_p |%s| no_a|%s| temp2|%s| \n", get_p, no_a, temp2[0]);
 	if (get_p[0] && stat(get_p, &st) == 0 && S_ISDIR(st.st_mode))
 		ft_printf_fd(2, "bash: %s: Is a directory\n", no_a);
 	else
@@ -63,7 +62,6 @@ int	exe1(t_list *pip, int i)
 	t_list	*head;
 
 	head = pip;
-	
 	if (is_other(pip) == 1 && pip->data->n_cmd == 1 && pip->exe1 != 7)
 		exe_build_single(pip, pip->exe1, pip->exe2);
 	else
@@ -80,9 +78,7 @@ int	exe1(t_list *pip, int i)
 		if (pip->data->pid[i] == -1)
 			return (-1);
 		if (pip->data->pid[i] == 0)
-		{
-			(exe_isolate(pip, pip->exe1, pip->exe2));
-		}
+			exe_isolate(pip, pip->exe1, pip->exe2);
 		i++;
 	}
 	ft_close_all(pip->data->fd);
