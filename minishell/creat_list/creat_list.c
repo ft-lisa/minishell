@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:25:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:45:48 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:29:45 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	fill_six_two(char **split_txt, t_list *new)
 		if (!new->cmd)
 			return (-1);
 	}
-	return (0);
 	cleanexit(split);
+	return (0);
 }
 
 int	fill_six(t_list *new, char *content)

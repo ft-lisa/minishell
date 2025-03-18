@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/17 12:34:42 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:20:57 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ extern int			g_sig;
 # define ERROR_MESS "bash: syntax error near unexpected token "
 # define ERROR_DIREC "error retrieving current directory: getcwd: cannot "
 # define ERROR_TORY "access parent directories: No such file or directory\n"
+# define ERROR_FIND "bash: %s: No such file or directory\n"
 
 typedef struct s_pipex
 {
@@ -144,7 +145,7 @@ t_data				*init_exe(char ***envp, char **argv, int count);
 void				ft_close_all(int **fd);
 int					ft_strrchr(const char *string, int searchedChar);
 char				*recup_path(char *src);
-int					for_t2_and_t3(int stdo, t_list *pip, int t2);
+int					for_t1_and_t3(int stdo, t_list *pip, int t2);
 
 /* pip_struct3 */
 
@@ -167,16 +168,16 @@ void				exe_other(t_list *pip);
 
 /* type1_to_3 */
 
-void				type1(t_list *pip);
+int					type1(t_list *pip);
 void				type1bis(t_list *pip);
 void				type2(t_list *pip);
-void				type3(t_list *pip);
+int					type3(t_list *pip);
 
 /* type5_to_7 */
 
 void				quit_sigint(t_list *pip);
 void				type7(t_list *pip);
-void				type6(t_list *pip);
+int					type6(t_list *pip);
 void				type5(t_list *pip);
 
 /* lib */

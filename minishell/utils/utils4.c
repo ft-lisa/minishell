@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:51:14 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/06 13:51:29 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:22:13 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	wait_all(int *pid, int len, t_list *pip)
 	i = 0;
 	k = 0;
 	rn = 0;
-	if (is_other(pip) == 1 && pip->data->n_cmd == 1)
+	if (is_other(pip) == 1 && pip->data->n_cmd == 1 && pip->exe1 != 7)
 		return (pip->data->new_exit);
 	if (!pid || !pid[0])
 		return (0);

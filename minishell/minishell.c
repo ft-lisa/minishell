@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 19:58:47 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:27:13 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	handle_exit(char **env)
 	exit(1);
 }
 
-void print_list(t_list *lst)
+/* void print_list(t_list *lst)
 {
     int i;
     while (lst)
@@ -81,7 +81,7 @@ void print_list(t_list *lst)
         printf("--------------------\n");
         lst = lst->next;
     }
-}
+} */
 
 void	shell_loop(char **env, char **argv, int check)
 {
@@ -108,7 +108,6 @@ void	shell_loop(char **env, char **argv, int check)
 			continue ;
 		}
 		exe = create_list(str, &env, argv);
-		//print_list(exe);
 		error = execution(exe, error);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pip_struct4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:39:09 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/13 15:20:05 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:24:47 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ifexit(t_list *pip, char **str)
 	int	exit1;
 
 	cleanexit(str);
-	if (pip->data->n_cmd > 1)
+	if (pip->data->n_cmd > 1 || pip->exe1 == 7)
 	{
 		exit1 = pip->data->new_exit;
 		free_pip(pip);

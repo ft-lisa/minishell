@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:42:54 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 19:51:32 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:20:32 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	type7(t_list *pip)
 		(free_pip(pip), exit(0));
 }
 
-void	type6(t_list *pip)
+int	type6(t_list *pip)
 {
 	int	open_fd;
 
@@ -58,25 +58,19 @@ void	type6(t_list *pip)
 	{
 		ft_printf_fd(2, "bash: %s: No such file or directory\n", pip->if_file1);
 		if (is_other(pip) == 1 && pip->data->n_cmd == 1)
-		{
-			pip->data->new_exit = 1;
-			return;
-		}
+			return (pip->data->new_exit = 1, -2);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
 	if (access(pip->if_file1, R_OK) == -1)
 	{
 		ft_printf_fd(2, "bash: permission denied: %s\n", pip->if_file1);
 		if (is_other(pip) == 1 && pip->data->n_cmd == 1)
-		{
-			pip->data->new_exit = 1;
-			return;
-		}
+			return (pip->data->new_exit = 1, -2);
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
 	open_fd = open(pip->if_file1, O_RDONLY);
 	if (dup2(open_fd, STDIN_FILENO) == -1)
-		(perror("dup2"), exit(EXIT_FAILURE));
+		(perror("dup2"), free_pip(pip), exit(EXIT_FAILURE));
 	close(open_fd);
 }
 
