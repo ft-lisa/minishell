@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:32:35 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 14:07:49 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:41:46 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	check_operator(char *str1)
 
 	str = remove_all_quotes(str1, 'a');
 	if (!str)
-		return (0);
+		(free(str1), exit(EXIT_FAILURE));
 	if (isemptyor_spacetab(str) == 1)
 		return (free(str), 0);
 	if (count_c(str, '\'') % 2 != 0 || count_c(str, '\"') % 2 != 0)

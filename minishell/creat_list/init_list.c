@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:01:02 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/18 15:28:52 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:43:54 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,14 @@ t_list	*create_list(char *line, char ***envp, char **argv)
 
 	content_node = prepare_content_node(line, envp);
 	if (!content_node)
-		return (NULL);
+		(free(line), exit(EXIT_FAILURE));
 	count = double_strlen(content_node);
 	command = init_list(count, envp, argv);
 	if (!command)
-		return (NULL);
+		(free(line), exit(EXIT_FAILURE));
 	trim_content_node(content_node);
 	if (fill_command_data(command, content_node) == -1)
-		return (NULL);
+		(free(line), exit(EXIT_FAILURE));
 	del_space(command);
 	del_quotes(command);
 	command->data->content = content_node;
