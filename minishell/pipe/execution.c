@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:21:43 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 19:29:11 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:45:10 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void	exe2(t_list *pip)
 	}
 	pip->data->fd = ft_add_fd(pip->data->fd, 1);
 	if (pipe(pip->data->fd[0]) == -1)
-		perror("pipe1");
+		(perror("fatal error\n")), free_pip(pip), exit(EXIT_FAILURE);
 	pip->data->pid[0] = fork();
+	if (pip->data->pid[0] == -1)
+		(perror("fatal error\n"), free_pip(pip), exit(errno));
 	if (pip->data->pid[0] == 0)
 		(exe_isolate(pip, pip->exe1, pip->exe2));
 }
@@ -70,13 +72,13 @@ int	exe1(t_list *pip, int i)
 	{
 		pip->data->fd = ft_add_fd(pip->data->fd, i + 1);
 		if (pipe(pip->data->fd[i]) == -1)
-			perror("pipe1");
+			(perror("fatal error\n")), free_pip(pip), exit(EXIT_FAILURE);
 		pip = pip->next;
 		if (pip->exe1 == 7)
 			waitpid(pip->data->pid[pip->index - 2], NULL, 0);
 		pip->data->pid[i] = fork();
 		if (pip->data->pid[i] == -1)
-			return (-1);
+			(perror("fatal error\n"), free_pip(pip), exit(errno));
 		if (pip->data->pid[i] == 0)
 			exe_isolate(pip, pip->exe1, pip->exe2);
 		i++;

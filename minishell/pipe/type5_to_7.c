@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:42:54 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/18 17:20:32 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:47:24 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void	type7(t_list *pip)
 
 	i = 0;
 	if (pipe(mini_pipe) == -1)
-	{
-		perror("minipipe");
-		return ;
-	}
+		(perror("fatal error\n")), free_pip(pip), exit(EXIT_FAILURE);
 	while (pip->delim[i + 1])
 	{
 		ft_until_limiter(pip->delim[i++], 0, mini_pipe);
@@ -43,7 +40,7 @@ void	type7(t_list *pip)
 	if (dup2(mini_pipe[0], STDIN_FILENO) == -1)
 	{
 		perror("dup2 minipipe");
-		exit(EXIT_FAILURE);
+		(free_pip(pip), exit(EXIT_FAILURE));
 	}
 	close(mini_pipe[0]);
 	if (!pip->cmd)
@@ -69,13 +66,12 @@ int	type6(t_list *pip)
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
 	open_fd = open(pip->if_file1, O_RDONLY);
-	if (dup2(open_fd, STDIN_FILENO) == -1)
-		(perror("dup2"), free_pip(pip), exit(EXIT_FAILURE));
+	if (dup2(open_fd, STDIN_FILENO) == -1 || open_fd == -1)
+		(perror("fatal error\n"), free_pip(pip), exit(EXIT_FAILURE));
 	close(open_fd);
 }
-
 void	type5(t_list *pip)
 {
 	if (dup2(pip->data->fd[pip->index - 2][0], STDIN_FILENO) == -1)
-		(perror("dup2 2"), exit(EXIT_FAILURE));
+		(perror("dup2 2"), free_pip(pip), exit(EXIT_FAILURE));
 }

@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:26:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/18 17:12:19 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:51:15 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	for_t1_and_t3(int stdo, t_list *pip, int t2)
 
 	er_file = 0;
 	if (ft_strncmp(pip->cmd, "exit", 4) != 0)
+	{
 		stdo = dup(STDOUT_FILENO);
+		if (stdo == -1)
+			(free_pip(pip), exit(EXIT_FAILURE));
+	}
 	if (stdo == -1)
 		return (stdo);
 	if (t2 == 1)

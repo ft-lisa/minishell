@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:21:09 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/18 17:15:47 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:47:59 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	type1(t_list *pip)
 	}
 	fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (dup2(fd_out, STDOUT_FILENO) == -1 || close(fd_out) == -1)
-		(free_pip(pip), exit(1));
+		(perror("fatal error\n"), free_pip(pip), exit(1));
 }
 
 void	type1bis(t_list *pip)
@@ -87,8 +87,8 @@ void	type1bis(t_list *pip)
 		(free_pip(pip), exit(EXIT_FAILURE));
 	}
 	fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (dup2(fd_out, STDOUT_FILENO) == -1)
-		(free_pip(pip), exit(1));
+	if (dup2(fd_out, STDOUT_FILENO) == -1 || fd_out == -1)
+		(perror("fatal error\n"), free_pip(pip), exit(EXIT_FAILURE));
 	close(fd_out);
 }
 
@@ -124,7 +124,7 @@ int	type3(t_list *pip)
 	}
 	fd_out = open(pip->if_file2, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	if (dup2(fd_out, STDOUT_FILENO) == -1 || close(fd_out) == -1)
-		(free_pip(pip), exit(1));
+		(perror("fatal error\n"), free_pip(pip), exit(EXIT_FAILURE));
 }
 
 /* void	type3(t_list *pip)
