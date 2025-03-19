@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/18 17:20:57 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:49:06 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ int					isconsecutive_opsloop_index(char *str, char *op);
 int					chck2op_type(char *str);
 int					isconsecutive_ops1(char *str, char *op, int j);
 int					isconsecutive_opsloop(char *str, char *op);
-int					chck2op(char *str);
+int					chck2op(char *str, char *str1);
 char				pick_quote(char *str);
 char				*remove_first_quotes(char *str);
 char				*remove_all_quotes(char *str, char del_q);

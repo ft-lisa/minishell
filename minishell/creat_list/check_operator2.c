@@ -6,13 +6,13 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:32:35 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/18 17:41:46 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:48:37 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	chck2op(char *str)
+int	chck2op(char *str, char *str1)
 {
 	char	*temp;
 	char	**op;
@@ -23,7 +23,7 @@ int	chck2op(char *str)
 	temp = ft_strtrim(str, " \t");
 	if (!temp)
 		return (1);
-	if (temp[0] == '|')
+	if (temp[0] == '|' && str1[0] != '\"' && str1[0] != '\'')
 		return (ft_printf_fd(2, "bash:syntax error near unexpected token `|'\n"),
 			free(temp), 1);
 	i = chck2op_type(str);
@@ -107,6 +107,7 @@ char	*remove_first_quotes(char *str)
 int	check_operator(char *str1)
 {
 	char	*str;
+	int		i;
 
 	str = remove_all_quotes(str1, 'a');
 	if (!str)
@@ -118,9 +119,12 @@ int	check_operator(char *str1)
 		ft_printf_fd(2, "bash: syntax error: unclosed quotes\n");
 		return (free(str), 1);
 	}
+	i = 0;
+	while (str1[i] == ' ' || str1[i] == '\t')
+		i++;
 	if (chck1op(str) == 1)
 		return (free(str), 1);
-	else if (chck2op(str) == 1)
+	else if (chck2op(str, str1 + i) == 1)
 		return (free(str), 1);
 	if (ft_strcmp(str1, str) == 0)
 		return (0);

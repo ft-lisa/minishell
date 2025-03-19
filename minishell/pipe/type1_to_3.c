@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:21:09 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/19 11:47:59 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:17:14 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	type1(t_list *pip)
 	}
 	fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (dup2(fd_out, STDOUT_FILENO) == -1 || close(fd_out) == -1)
-		(perror("fatal error\n"), free_pip(pip), exit(1));
+		(write(2, "fatal error\n", 13), free_pip(pip), exit(1));
 }
 
 void	type1bis(t_list *pip)
@@ -88,14 +88,14 @@ void	type1bis(t_list *pip)
 	}
 	fd_out = open(pip->if_file2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (dup2(fd_out, STDOUT_FILENO) == -1 || fd_out == -1)
-		(perror("fatal error\n"), free_pip(pip), exit(EXIT_FAILURE));
+		(write(2, "fatal error\n", 13), free_pip(pip), exit(EXIT_FAILURE));
 	close(fd_out);
 }
 
 void	type2(t_list *pip)
 {
 	if (dup2(pip->data->fd[pip->index - 1][1], STDOUT_FILENO) == -1)
-		(perror("dup2 1"), exit(EXIT_FAILURE));
+		(write(2, "fatal error\n", 13), exit(EXIT_FAILURE));
 }
 
 int	type3(t_list *pip)
@@ -124,7 +124,7 @@ int	type3(t_list *pip)
 	}
 	fd_out = open(pip->if_file2, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	if (dup2(fd_out, STDOUT_FILENO) == -1 || close(fd_out) == -1)
-		(perror("fatal error\n"), free_pip(pip), exit(EXIT_FAILURE));
+		(write(2, "fatal error\n", 13), free_pip(pip), exit(EXIT_FAILURE));
 }
 
 /* void	type3(t_list *pip)

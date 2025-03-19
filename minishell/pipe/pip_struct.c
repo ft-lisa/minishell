@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:10:16 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:54:31 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:59:03 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	free_pip(t_list *pip)
 		return ;
 	if (errno != 126 && errno != 127)
 		ft_close_all(pip->data->fd);
-	cleanexit_int(pip->data->fd);
+	if (pip->data->fd)
+		cleanexit_int(pip->data->fd);
 	if (pip->data->path)
 		cleanexit(pip->data->path);
 	cleanexit(pip->data->content);
