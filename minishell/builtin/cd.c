@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:36:22 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:10:33 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:23:24 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	error_cd(char **str, t_list *pip)
 			str[1][1]);
 		pip->data->new_exit = 2;
 	}
-	if (stat(str[1], &path_stat) == -1)
+	else if (stat(str[1], &path_stat) == -1)
 	{
 		ft_printf_fd(2, "bash: cd: %s: No such file or directory\n", str[1]);
 		pip->data->new_exit = 1;

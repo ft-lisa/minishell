@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:41:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/18 17:09:59 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/21 10:55:32 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_other(t_list *pip)
 		ret = 1;
 	else if (ft_strcmp(str[0], "pwd") == 0)
 		ret = 1;
-	else if (ft_strcmp(str[0], "env") == 0 && is_cmd_2d(pip) == 0)
+	else if (ft_strcmp(str[0], "env") == 0)
 		ret = 1;
 	else if (ft_strcmp(str[0], "echo") == 0)
 		ret = 1;
