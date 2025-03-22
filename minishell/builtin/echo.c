@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:34:31 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 12:17:49 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:46:30 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,10 @@ int	echo1(t_list *pip, int j)
 	str = ft_split_exe1(pip->cmd);
 	if (!str)
 		return (free_pip(pip), -1);
-	if (str[1] && echoarg(str[1]) == 1)
+	while (str[j] && echoarg(str[j]) == 1)
 		j++;
 	while (str[j])
 	{
-		if (str[j] && echoarg(str[j]) == 1)
-		{
-			j++;
-			continue ;
-		}
 		ft_printf_fd(1, "%s", str[j]);
 		j++;
 		if (str[j])

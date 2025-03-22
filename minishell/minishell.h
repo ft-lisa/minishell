@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/19 12:49:06 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/22 18:47:44 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ char				pick_quote(char *str);
 char				*remove_first_quotes(char *str);
 char				*remove_all_quotes(char *str, char del_q);
 int					check_operator(char *str1);
+int					redirect_next_pipe(char *str);
 
 /* clean_content_list */
 

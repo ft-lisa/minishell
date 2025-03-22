@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:37:42 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/22 15:46:08 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/22 18:51:43 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,20 @@ int	add_last_2d(char ***str2, char *add)
 	return (t[i] = NULL, cleanexit(*str2), *str2 = t, free(temp), 0);
 }
 
-char *copy_until(char *str, char c)
+char	*copy_until(char *str, char c)
 {
-    int i = 0;
-    while (str[i] && str[i] != c)
-        i++;
-    char *result = malloc(i + 1);
-    if (!result)
-        return NULL;
-    strncpy(result, str, i);
-    result[i] = '\0';
-    return result;
+	int		i;
+	char	*result;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	result = malloc(i + 1);
+	if (!result)
+		return (NULL);
+	ft_strncpy(result, str, i);
+	result[i] = '\0';
+	return (result);
 }
 
 char	*copy_until_one(char *str, char *c)

@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 10:53:33 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:42:56 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/22 18:46:48 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,16 @@ int	isconsecutive_ops1(char *str, char *op, int j)
 		temp = temp + 1;
 	while (temp[i] && temp[i] == ' ')
 		i++;
-	if (temp[i] && temp[i + 1] && *op == '|' && isin("<>", temp[i + 1]) == 1)
+	if (temp[i] && temp[i + 1] && *op == '|' && isin("<>", temp[i + 1]) == 1
+		&& redirect_next_pipe(temp) == 0)
 		(ft_printf_fd(2, ERROR_MESS "'%c'\n", *op), j++);
 	else if (temp[i] && temp[i + 1] && isin("|<>", temp[i]) == 1 && isin("|<>",
-			temp[i + 1]) == 0)
+			temp[i + 1]) == 0 && redirect_next_pipe(temp) == 0)
 		(ft_printf_fd(2, ERROR_MESS "`%c'\n", temp[i]), j++);
 	else if (temp[i] && !temp[i + 1] && isin("|<>", temp[i]) == 1)
 		(ft_printf_fd(2, ERROR_MESS "`%c'\n", temp[i]), j++);
 	else if (temp[i] && temp[i + 1] && isin("|<>", temp[i]) == 1 && isin("|<>",
-			temp[i + 1]) == 1)
+			temp[i + 1]) == 1 && redirect_next_pipe(temp) == 0)
 		(ft_printf_fd(2, ERROR_MESS "`%c%c'\n", temp[i], temp[i + 1]), j++);
 	return (j);
 }

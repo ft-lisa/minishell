@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:32:58 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:38:42 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/22 18:52:30 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,27 @@ char	*remove_all_quotes(char *str, char del_q)
 			return (temp);
 	}
 	return (free(temp), str);
+}
+
+int	redirect_next_pipe(char *str)
+{
+	int	i;
+
+	i = 1;
+	if (str[0] != '|')
+		return (0);
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+		i++;
+	if (str[i] == '<')
+	{
+		i++;
+		if (str[i] == '<')
+			i++;
+		while (str[i] && str[i] != ' ' && str[i] != '\t')
+			i++;
+		if (str[i])
+			return (1);
+	}
+	else
+		return (0);
 }
