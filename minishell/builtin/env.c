@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:34:40 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/21 10:55:16 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/22 14:53:42 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ int	env1(t_list *pip)
 	{
 		i = 0;
 		while ((*(pip->data->envp))[i])
-			printf("%s\n", (*(pip->data->envp))[i++]);
+		{
+			if (isin((*(pip->data->envp))[i], '='))
+				printf("%s\n", (*(pip->data->envp))[i]);
+			i++;
+		}
 		ifexit(pip, str);
 	}
 	else

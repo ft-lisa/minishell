@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   libft6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lismarti <lismarti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:37:42 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/10 18:25:50 by lismarti         ###   ########.fr       */
+/*   Updated: 2025/03/22 15:46:08 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static int	isin_env(char **str, char *temp)
+{
+	int		j;
+	int		count;
+	int		size;
+
+	j = 0;
+	count = 0;
+	if (!temp)
+		return (1);
+	while (str[j])
+	{
+		size = ft_strlen(temp);
+		if (ft_strncmp(str[j], temp, size) == 0 && (str[j][size] == '=')
+			|| str[j][size] == '\0')
+			count++;
+		j++;
+	}
+	if (count == 0)
+		return (0);
+	return (1);
+}
 
 int	add_last_2d(char ***str2, char *add)
 {
@@ -23,7 +46,7 @@ int	add_last_2d(char ***str2, char *add)
 	temp = copy_until(add, '=');
 	if (!temp)
 		return (1);
-	if (isin_2d_equal((*str2), temp) == 1)
+	if (isin_env((*str2), temp) == 1)
 		rmv_str_2d(str2, temp);
 	nitems = str_len_2d(*str2);
 	t = malloc((nitems + 2) * sizeof(char *));
@@ -41,30 +64,17 @@ int	add_last_2d(char ***str2, char *add)
 	return (t[i] = NULL, cleanexit(*str2), *str2 = t, free(temp), 0);
 }
 
-char	*copy_until(char *str, char c)
+char *copy_until(char *str, char c)
 {
-	int		i;
-	int		size;
-	char	*new;
-
-	i = 0;
-	size = 0;
-	while (str[size])
-		if (str[size++] == c)
-			break ;
-	if (str[size] == '\0')
-		return (ft_strdup(str));
-	size = (size > 0) * (size - 1);
-	new = malloc((size + 1) * sizeof(char));
-	if (!new)
-		return (NULL);
-	while (i < size)
-	{
-		new[i] = str[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
+    int i = 0;
+    while (str[i] && str[i] != c)
+        i++;
+    char *result = malloc(i + 1);
+    if (!result)
+        return NULL;
+    strncpy(result, str, i);
+    result[i] = '\0';
+    return result;
 }
 
 char	*copy_until_one(char *str, char *c)

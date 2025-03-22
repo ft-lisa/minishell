@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:54:58 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:13:11 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/22 15:44:01 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	export_valid(char *str)
 	char	**temp;
 	int		r;
 
-	if (str[0] >= '0' && str[0] <= '9')
+	if ((str[0] >= '0' && str[0] <= '9') || str[0] == '=')
 		return (0);
 	if (str[0] == '-' && str[1])
 		return (3);

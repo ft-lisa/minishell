@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:35:23 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:23:10 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/22 15:52:38 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,14 @@ void	export1(t_list *pip, char **str)
 
 	i = 1;
 	if (!str[1])
+	{
 		while ((*(pip->data->envp))[i])
-			ft_printf_fd(1, "%s\n", (*(pip->data->envp))[i++]);
+		{
+			if (isin((*(pip->data->envp))[i], '='))
+				printf("%s\n", (*(pip->data->envp))[i]);
+			i++;
+		}
+	}
 	else
 	{
 		while (str[i])
