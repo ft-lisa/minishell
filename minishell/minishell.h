@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:13:53 by smendez-          #+#    #+#             */
-/*   Updated: 2025/03/24 10:35:48 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:57:20 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void				ft_until_limiter(char *delimiter, int verbose,
 
 /* search_if_build */
 int					is_other(t_list *pip);
+int					is_o(char *str);
 void				exe_other(t_list *pip);
 
 /* type1_to_3 */

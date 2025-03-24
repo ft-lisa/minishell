@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:21:43 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/19 14:14:50 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 11:05:31 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exe_isolate(t_list *pip, int t1, int t2)
 	if (!no_a)
 		(free_pip(pip), exit(1));
 	get_p = get_path_command(pip->data->path, no_a, 0, -1);
-	if ((!get_p || !get_p[0] || !no_a[0]) && pip->data->path)
+	if ((!get_p || !get_p[0] || !no_a[0] || is_o(no_a)) && pip->data->path)
 	{
 		ft_printf_fd(2, "bash: %s: command not found\n", temp2[0]);
 		(cleanexit(temp2), free_pip(pip), free(no_a), free(get_p), exit(127));

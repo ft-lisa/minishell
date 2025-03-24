@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/18 16:27:13 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 11:05:53 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,21 @@ void	handle_exit(char **env)
         printf("--------------------\n");
         lst = lst->next;
     }
+}
+
+
+void print_split(char **str)
+{
+	int i = 0;
+
+	if (!str)
+		return;
+	printf("SPLIT _________________\n");
+	while (str[i])
+	{
+		printf("[%d]: %s\n", i, str[i]);
+		i++;
+	}
 } */
 
 void	shell_loop(char **env, char **argv, int check)

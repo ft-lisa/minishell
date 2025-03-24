@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:41:55 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/21 10:55:32 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 11:04:10 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@ int	is_other(t_list *pip)
 	else if (ft_strcmp(str[0], "unset") == 0)
 		ret = 1;
 	cleanexit(str);
+	return (ret);
+}
+
+int	is_o(char *str)
+{
+	int		ret;
+
+	ret = 0;
+	if (isemptyor_spacetab(str) == 1)
+		return (0);
+	if (ft_strcmp(str, "cd") == 0)
+		ret = 1;
+	else if (ft_strcmp(str, "pwd") == 0)
+		ret = 1;
+	else if (ft_strcmp(str, "env") == 0)
+		ret = 1;
+	else if (ft_strcmp(str, "echo") == 0)
+		ret = 1;
+	else if (ft_strcmp(str, "exit") == 0)
+		ret = 1;
+	else if (ft_strcmp(str, "export") == 0)
+		ret = 1;
+	else if (ft_strcmp(str, "unset") == 0)
+		ret = 1;
 	return (ret);
 }
 
