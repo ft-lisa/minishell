@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:34:56 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:33:59 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:52:42 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	unset_valid(char *str)
 {
 	int	r;
 
+	if (!str[0])
+		return (0);
 	if (str[0] >= '0' && str[0] <= '9')
 		return (0);
 	if (str[0] == '-' && str[1])
