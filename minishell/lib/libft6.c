@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:37:42 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/24 10:36:20 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 11:38:16 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	isin_env(char **str, char *temp)
 	while (str[j])
 	{
 		size = ft_strlen(temp);
-		if (ft_strncmp(str[j], temp, size) == 0 && (str[j][size] == '=')
-			|| str[j][size] == '\0')
+		if (ft_strncmp(str[j], temp, size) == 0 && (ft_strlen(str[j]) >= size)
+			&& ((str[j][size] == '=') || str[j][size] == '\0'))
 			count++;
 		j++;
 	}
