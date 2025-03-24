@@ -22,6 +22,7 @@ LIB_SRC = lib/ft_itoa.c \
           lib/libft4.c \
           lib/libft5.c \
           lib/libft6.c \
+          lib/libft7.c \
           lib/split_ope_bis.c \
           lib/split_txt.c \
           lib/trim.c

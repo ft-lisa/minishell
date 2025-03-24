@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:29:39 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/17 11:47:18 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 10:36:05 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,12 @@ int	expand(char **cmd, char **env, int error)
 	i = indexto_skip_squotes(*cmd, '$', 0, 0);
 	if (i == -1 || (*cmd)[i] == '\0')
 		return (1);
-	var = copy_until_alnum_under(*cmd + i + 1);
+	if ((*cmd)[i + 1] > 47 && (*cmd)[i + 1] < 58)
+	{
+		var = copy_until_diff_num(*cmd + i + 1);
+	}
+	else
+		var = copy_until_alnum_under(*cmd + i + 1);
 	if (!var)
 		return (-1);
 	if (ft_strncmp(var, "?", 1) == 0)
