@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/24 11:05:53 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:08:31 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,47 +56,47 @@ void	handle_exit(char **env)
 	exit(1);
 }
 
-/* void print_list(t_list *lst)
-{
-    int i;
-    while (lst)
-    {
-        i = 0;
-        printf("Command: |%s|\n", lst->cmd ? lst->cmd : "(null)");
-        printf("Nbr commands: |%d|\n", lst->data->n_cmd);
-        printf("Index: %d\n", lst->index);
-        printf("Exe1: %d\n", lst->exe1);
-        printf("Exe2: %d\n", lst->exe2);
-        printf("If File1: |%s|\n", lst->if_file1 ? lst->if_file1 : "(null)");
-        printf("If File2: |%s|\n", lst->if_file2 ? lst->if_file2 : "(null)");
-        if(lst->delim)
-        {
-            while(lst->delim[i] != NULL)
-            {
-                printf("If delim: |%s|\n", lst->delim[i] ? lst->delim[i] : "(null)");
-                i++;
-            }            
-        }
+// void print_list(t_list *lst)
+// {
+//     int i;
+//     while (lst)
+//     {
+//         i = 0;
+//         printf("Command: |%s|\n", lst->cmd ? lst->cmd : "(null)");
+//         printf("Nbr commands: |%d|\n", lst->data->n_cmd);
+//         printf("Index: %d\n", lst->index);
+//         printf("Exe1: %d\n", lst->exe1);
+//         printf("Exe2: %d\n", lst->exe2);
+//         printf("If File1: |%s|\n", lst->if_file1 ? lst->if_file1 : "(null)");
+//         printf("If File2: |%s|\n", lst->if_file2 ? lst->if_file2 : "(null)");
+//         if(lst->delim)
+//         {
+//             while(lst->delim[i] != NULL)
+//             {
+//                 printf("If delim: |%s|\n", lst->delim[i] ? lst->delim[i] : "(null)");
+//                 i++;
+//             }            
+//         }
 
-        printf("--------------------\n");
-        lst = lst->next;
-    }
-}
+//         printf("--------------------\n");
+//         lst = lst->next;
+//     }
+// }
 
 
-void print_split(char **str)
-{
-	int i = 0;
+// void print_split(char **str)
+// {
+// 	int i = 0;
 
-	if (!str)
-		return;
-	printf("SPLIT _________________\n");
-	while (str[i])
-	{
-		printf("[%d]: %s\n", i, str[i]);
-		i++;
-	}
-} */
+// 	if (!str)
+// 		return;
+// 	printf("SPLIT _________________\n");
+// 	while (str[i])
+// 	{
+// 		printf("[%d]: %s\n", i, str[i]);
+// 		i++;
+// 	}
+// }
 
 void	shell_loop(char **env, char **argv, int check)
 {

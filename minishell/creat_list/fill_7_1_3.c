@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:33:19 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/18 15:29:11 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 12:59:15 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	fill_one_three_2(char **split_txt, t_list *new)
 		return (-1);
 	if (split[1])
 	{
-		if (new->cmd) //problematique? sinon leaks
+		if (new->cmd)
 			free(new->cmd);
 		new->cmd = ft_strdup(split[1]);
 		if (!new->cmd)
@@ -121,7 +121,7 @@ int	fill_one_three(t_list *new, char *content)
 	}
 	else
 	{
-		new->cmd = ft_strdup(split_txt[0]); // et ici?
+		new->cmd = ft_strdup(split_txt[0]);
 		if (!new->cmd)
 			return (-1);
 		new->if_file2 = ft_strdup(split_txt[double_strlen(split_txt) - 1]);

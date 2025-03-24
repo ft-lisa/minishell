@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:37:42 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/24 11:38:16 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:09:23 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,24 @@ char	*copy_until_one(char *str, char *c)
 char	*copy_until_alnum_under(char *str)
 {
 	int		i;
+	char	*result;
+
+	i = 0;
+	if (str[0] == '?')
+		return (ft_strdup(str));
+	while (str[i] && (ft_isalnum(str[i]) == 1 || str[i] == '_'))
+		i++;
+	result = malloc(i + 1);
+	if (!result)
+		return (NULL);
+	ft_strncpy(result, str, i);
+	result[i] = '\0';
+	return (result);
+}
+
+/* char	*copy_until_alnum_under(char *str)
+{
+	int		i;
 	int		size;
 	char	*new;
 
@@ -132,4 +150,4 @@ char	*copy_until_alnum_under(char *str)
 	}
 	new[i] = '\0';
 	return (new);
-}
+} */

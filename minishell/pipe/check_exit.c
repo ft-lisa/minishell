@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:09:29 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/15 13:43:28 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:13:49 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	check_exit(char **str, t_list *pip)
 		return (1);
 	if (!ft_isalldigit(str[1]))
 	{
+		ft_printf_fd(2, "exit\n");
 		ft_printf_fd(2, "bash: exit: %s: numeric argument required\n", str[1]);
 		exit_minishell_error(pip);
 	}

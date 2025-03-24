@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:33:30 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/18 15:28:44 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:02:54 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	check_line(char **line, char ***envp, int error)
 		return (2);
 	if (expand_vars(line, envp, error) == -1)
 		return (1);
+	if (open_only_one_quote(*line) == 1)
+		return (free(*line), 1);
 	if (isemptyor_spacetab(*line) == 1)
 		return (1);
 	return (0);
