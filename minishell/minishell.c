@@ -6,7 +6,7 @@
 /*   By: smendez- <smendez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:29:21 by lismarti          #+#    #+#             */
-/*   Updated: 2025/03/24 15:27:32 by smendez-         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:46:44 by smendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,52 +50,10 @@ int	execution(t_list *exe, int error)
 
 void	handle_exit(char **env)
 {
-	ft_printf_fd(1, "exit\n"); // take in mind
+	ft_printf_fd(1, "exit\n");
 	rl_clear_history();
 	cleanexit(env);
 	exit(1);
-}
-
-void print_list(t_list *lst)
-{
-    int i;
-    while (lst)
-    {
-        i = 0;
-        printf("Command: |%s|\n", lst->cmd ? lst->cmd : "(null)");
-        printf("Nbr commands: |%d|\n", lst->data->n_cmd);
-        printf("Index: %d\n", lst->index);
-        printf("Exe1: %d\n", lst->exe1);
-        printf("Exe2: %d\n", lst->exe2);
-        printf("If File1: |%s|\n", lst->if_file1 ? lst->if_file1 : "(null)");
-        printf("If File2: |%s|\n", lst->if_file2 ? lst->if_file2 : "(null)");
-        if(lst->delim)
-        {
-            while(lst->delim[i] != NULL)
-            {
-                printf("If delim: |%s|\n", lst->delim[i] ? lst->delim[i] : "(null)");
-                i++;
-            }            
-        }
-
-        printf("--------------------\n");
-        lst = lst->next;
-    }
-}
-
-
-void print_split(char **str)
-{
-	int i = 0;
-
-	if (!str)
-		return;
-	printf("SPLIT _________________\n");
-	while (str[i])
-	{
-		printf("[%d]: %s\n", i, str[i]);
-		i++;
-	}
 }
 
 void	shell_loop(char **env, char **argv, int check)
@@ -123,7 +81,6 @@ void	shell_loop(char **env, char **argv, int check)
 			continue ;
 		}
 		exe = create_list(str, &env, argv);
-		// print_list(exe);
 		error = execution(exe, error);
 	}
 }
@@ -135,6 +92,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (1);
 	env = strdup_2d(envp);
+	signal(SIGTSTP, SIG_IGN);
 	if (env == NULL)
 		exit(1);
 	shell_loop(env, argv, 0);
